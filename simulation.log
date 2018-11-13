@@ -1,0 +1,212 @@
+TicksPerSecond :  10000000000 
+
+  0   1   -50.0
+  1   0   -50.0
+  1   4   -50.0
+  4   1   -50.0
+  1   7   -50.0
+  7   1   -50.0
+  1   2   -50.0
+  2   1   -50.0
+  4   5   -50.0
+  5   4   -50.0
+0:0:10.000000000 DEBUG (0): [33mNode Booted:[0m curdepth = 000  ,  parentID= 0
+0:0:10.000000000 DEBUG (1): [33mNode Booted:[0m curdepth = 255  ,  parentID= 65535
+0:0:10.000000000 DEBUG (2): [33mNode Booted:[0m curdepth = 255  ,  parentID= 65535
+0:0:10.000000000 DEBUG (3): [33mNode Booted:[0m curdepth = 255  ,  parentID= 65535
+0:0:10.000000000 DEBUG (4): [33mNode Booted:[0m curdepth = 255  ,  parentID= 65535
+0:0:10.000000000 DEBUG (5): [33mNode Booted:[0m curdepth = 255  ,  parentID= 65535
+0:0:10.000000000 DEBUG (6): [33mNode Booted:[0m curdepth = 255  ,  parentID= 65535
+0:0:10.000000000 DEBUG (7): [33mNode Booted:[0m curdepth = 255  ,  parentID= 65535
+0:0:10.000000010 DEBUG (0): RadioControl.StartDone():[33m Radio initialized successfully!!![0m
+0:0:10.000000010 DEBUG (1): RadioControl.StartDone():[33m Radio initialized successfully!!![0m
+0:0:10.000000010 DEBUG (2): RadioControl.StartDone():[33m Radio initialized successfully!!![0m
+0:0:10.000000010 DEBUG (3): RadioControl.StartDone():[33m Radio initialized successfully!!![0m
+0:0:10.000000010 DEBUG (4): RadioControl.StartDone():[33m Radio initialized successfully!!![0m
+0:0:10.000000010 DEBUG (5): RadioControl.StartDone():[33m Radio initialized successfully!!![0m
+0:0:10.000000010 DEBUG (6): RadioControl.StartDone():[33m Radio initialized successfully!!![0m
+0:0:10.000000010 DEBUG (7): RadioControl.StartDone():[33m Radio initialized successfully!!![0m
+0:0:10.195312510 DEBUG (0): RoutingMsgTimer fired! -----------------------------------------------------------------
+0:0:10.195312510 DEBUG (0): RoutingMsgTimer.fired(): radioBusy = [32mFalse [0m
+0:0:10.195312510 DEBUG (0): [36m
+0:0:10.195312510 DEBUG (0): ######################################################################################## 
+0:0:10.195312510 DEBUG (0): ###################################   ROUND   001    ################################### 
+0:0:10.195312510 DEBUG (0): ########################################################################################[0m
+0:0:10.195312510 DEBUG (0): 
+0:0:10.195312510 DEBUG (0): RoutingMsgTimer.fired(): Sending RoutingMsg... 
+0:0:10.195312510 DEBUG (0): RoutingMsgTimer.fired(): [32mRoutingMsg enqueued successfully in SendingQueue!!![0m
+0:0:10.195312510 DEBUG (0): RoutingMsgTimer.fired(): [32mSendTask() posted!![0m
+0:0:10.195312520 DEBUG (0): sendRoutingTask(): Send [32mSuccessful [0m
+0:0:10.202636696 DEBUG (1): RoutingReceive.receive(): Something received!!!  from 0 - Original source 0 
+0:0:10.202636696 DEBUG (1): RoutingReceive.receive(): RoutingMsg enqueue [32mSuccessful [0m
+0:0:10.202636706 DEBUG (1): ReceiveRoutingTask(): Function called with packet length =3 
+0:0:10.202636706 DEBUG (1): receiveRoutingTask(): Routing Message Packet -> senderID= 0 , senderDepth= 0 
+0:0:10.202636706 DEBUG (1): receiveRoutingTask(): [34mNode routed -> Parent = 0, Depth = 1[0m
+0:0:10.202636706 DEBUG (1): receiveRoutingTask():NotifyParentMsg sending to node= 0... 
+0:0:10.202636706 DEBUG (1): receiveRoutingTask(): NotifyParentMsg enqueue [32mSuccessful[0m
+0:0:10.202636706 DEBUG (1): receiveRoutingTask(): Call RoutingMsgTimer to route childs[0m
+0:0:10.202636716 DEBUG (1): sendNotifyTask(): mlen = 5  senderID= 1 
+0:0:10.202636716 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:0:10.202804541 DEBUG (0): RoutingAMSend.sendDone(): A Routing package sent... [32mTrue [0m
+0:0:10.209716752 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:0:10.209716752 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:0:10.209716762 DEBUG (0): ReceiveNotifyTask(): len=5 
+0:0:10.209716762 DEBUG (0): NotifyParentMsg received from 1 !!! 
+0:0:10.209884598 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:0:10.209884598 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:0:10.397460947 DEBUG (1): RoutingMsgTimer fired! -----------------------------------------------------------------
+0:0:10.397460947 DEBUG (1): RoutingMsgTimer.fired(): radioBusy = [32mFalse [0m
+0:0:10.397460947 DEBUG (1): RoutingMsgTimer.fired(): Sending RoutingMsg... 
+0:0:10.397460947 DEBUG (1): RoutingMsgTimer.fired(): [32mRoutingMsg enqueued successfully in SendingQueue!!![0m
+0:0:10.397460947 DEBUG (1): RoutingMsgTimer.fired(): [32mSendTask() posted!![0m
+0:0:10.397460957 DEBUG (1): sendRoutingTask(): Send [32mSuccessful [0m
+0:0:10.406265227 DEBUG (2): RoutingReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:0:10.406265227 DEBUG (2): RoutingReceive.receive(): RoutingMsg enqueue [32mSuccessful [0m
+0:0:10.406265227 DEBUG (7): RoutingReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:0:10.406265227 DEBUG (7): RoutingReceive.receive(): RoutingMsg enqueue [32mSuccessful [0m
+0:0:10.406265227 DEBUG (4): RoutingReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:0:10.406265227 DEBUG (4): RoutingReceive.receive(): RoutingMsg enqueue [32mSuccessful [0m
+0:0:10.406265227 DEBUG (0): RoutingReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:0:10.406265227 DEBUG (0): RoutingReceive.receive(): RoutingMsg enqueue [32mSuccessful [0m
+0:0:10.406265237 DEBUG (2): ReceiveRoutingTask(): Function called with packet length =3 
+0:0:10.406265237 DEBUG (2): receiveRoutingTask(): Routing Message Packet -> senderID= 1 , senderDepth= 1 
+0:0:10.406265237 DEBUG (2): receiveRoutingTask(): [34mNode routed -> Parent = 1, Depth = 2[0m
+0:0:10.406265237 DEBUG (2): receiveRoutingTask():NotifyParentMsg sending to node= 1... 
+0:0:10.406265237 DEBUG (2): receiveRoutingTask(): NotifyParentMsg enqueue [32mSuccessful[0m
+0:0:10.406265237 DEBUG (2): receiveRoutingTask(): Call RoutingMsgTimer to route childs[0m
+0:0:10.406265237 DEBUG (7): ReceiveRoutingTask(): Function called with packet length =3 
+0:0:10.406265237 DEBUG (7): receiveRoutingTask(): Routing Message Packet -> senderID= 1 , senderDepth= 1 
+0:0:10.406265237 DEBUG (7): receiveRoutingTask(): [34mNode routed -> Parent = 1, Depth = 2[0m
+0:0:10.406265237 DEBUG (7): receiveRoutingTask():NotifyParentMsg sending to node= 1... 
+0:0:10.406265237 DEBUG (7): receiveRoutingTask(): NotifyParentMsg enqueue [32mSuccessful[0m
+0:0:10.406265237 DEBUG (7): receiveRoutingTask(): Call RoutingMsgTimer to route childs[0m
+0:0:10.406265237 DEBUG (4): ReceiveRoutingTask(): Function called with packet length =3 
+0:0:10.406265237 DEBUG (4): receiveRoutingTask(): Routing Message Packet -> senderID= 1 , senderDepth= 1 
+0:0:10.406265237 DEBUG (4): receiveRoutingTask(): [34mNode routed -> Parent = 1, Depth = 2[0m
+0:0:10.406265237 DEBUG (4): receiveRoutingTask():NotifyParentMsg sending to node= 1... 
+0:0:10.406265237 DEBUG (4): receiveRoutingTask(): NotifyParentMsg enqueue [32mSuccessful[0m
+0:0:10.406265237 DEBUG (4): receiveRoutingTask(): Call RoutingMsgTimer to route childs[0m
+0:0:10.406265237 DEBUG (0): ReceiveRoutingTask(): Function called with packet length =3 
+0:0:10.406265237 DEBUG (0): receiveRoutingTask(): Routing Message Packet -> senderID= 1 , senderDepth= 1 
+0:0:10.406265247 DEBUG (2): sendNotifyTask(): mlen = 5  senderID= 2 
+0:0:10.406265247 DEBUG (2): sendNotifyTask(): [32mSend Success!!![0m
+0:0:10.406265247 DEBUG (7): sendNotifyTask(): mlen = 5  senderID= 7 
+0:0:10.406265247 DEBUG (7): sendNotifyTask(): [32mSend Success!!![0m
+0:0:10.406265247 DEBUG (4): sendNotifyTask(): mlen = 5  senderID= 4 
+0:0:10.406265247 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:0:10.406433073 DEBUG (1): RoutingAMSend.sendDone(): A Routing package sent... [32mTrue [0m
+0:0:10.408615087 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 7 - Original source 7 
+0:0:10.408615087 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:0:10.408615097 DEBUG (1): ReceiveNotifyTask(): len=5 
+0:0:10.408615097 DEBUG (1): NotifyParentMsg received from 7 !!! 
+0:0:10.408615097 DEBUG (1): Forwarding NotifyParentMsg from senderID= 7  to parentID=0 
+0:0:10.408615097 DEBUG (1): receiveNotifyTask(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:0:10.408615107 DEBUG (1): sendNotifyTask(): mlen = 5  senderID= 7 
+0:0:10.408615107 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:0:10.408782933 DEBUG (7): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:0:10.408782933 DEBUG (7): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:0:10.410232509 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 2 - Original source 2 
+0:0:10.410232509 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:0:10.410232519 DEBUG (1): ReceiveNotifyTask(): len=5 
+0:0:10.410232519 DEBUG (1): NotifyParentMsg received from 2 !!! 
+0:0:10.410232519 DEBUG (1): Forwarding NotifyParentMsg from senderID= 2  to parentID=0 
+0:0:10.410232519 DEBUG (1): receiveNotifyTask(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:0:10.410232529 DEBUG (1): sendNotifyTask(): mlen = 5  senderID= 2 
+0:0:10.410232529 DEBUG (1): sendNotifyTask(): [31mSend Failed!!![0m
+0:0:10.410232529 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:0:10.410400355 DEBUG (2): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:0:10.410400355 DEBUG (2): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:0:10.412155125 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 2 - Original source 2 
+0:0:10.412155125 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:0:10.412155135 DEBUG (0): ReceiveNotifyTask(): len=5 
+0:0:10.412155135 DEBUG (0): NotifyParentMsg received from 2 !!! 
+0:0:10.412322971 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:0:10.412322971 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:0:10.415115293 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:0:10.415115293 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:0:10.415115303 DEBUG (1): ReceiveNotifyTask(): len=5 
+0:0:10.415115303 DEBUG (1): NotifyParentMsg received from 4 !!! 
+0:0:10.415115303 DEBUG (1): Forwarding NotifyParentMsg from senderID= 4  to parentID=0 
+0:0:10.415115303 DEBUG (1): receiveNotifyTask(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:0:10.415115313 DEBUG (1): sendNotifyTask(): mlen = 5  senderID= 4 
+0:0:10.415115313 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:0:10.415283139 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:0:10.415283139 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:0:10.416824287 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 4 - Original source 1 
+0:0:10.416824287 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:0:10.416824297 DEBUG (0): ReceiveNotifyTask(): len=5 
+0:0:10.416824297 DEBUG (0): NotifyParentMsg received from 4 !!! 
+0:0:10.416992133 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:0:10.416992133 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:0:10.601562510 DEBUG (2): RoutingMsgTimer fired! -----------------------------------------------------------------
+0:0:10.601562510 DEBUG (2): RoutingMsgTimer.fired(): radioBusy = [32mFalse [0m
+0:0:10.601562510 DEBUG (2): RoutingMsgTimer.fired(): Sending RoutingMsg... 
+0:0:10.601562510 DEBUG (2): RoutingMsgTimer.fired(): [32mRoutingMsg enqueued successfully in SendingQueue!!![0m
+0:0:10.601562510 DEBUG (2): RoutingMsgTimer.fired(): [32mSendTask() posted!![0m
+0:0:10.601562510 DEBUG (4): RoutingMsgTimer fired! -----------------------------------------------------------------
+0:0:10.601562510 DEBUG (4): RoutingMsgTimer.fired(): radioBusy = [32mFalse [0m
+0:0:10.601562510 DEBUG (4): RoutingMsgTimer.fired(): Sending RoutingMsg... 
+0:0:10.601562510 DEBUG (4): RoutingMsgTimer.fired(): [32mRoutingMsg enqueued successfully in SendingQueue!!![0m
+0:0:10.601562510 DEBUG (4): RoutingMsgTimer.fired(): [32mSendTask() posted!![0m
+0:0:10.601562510 DEBUG (7): RoutingMsgTimer fired! -----------------------------------------------------------------
+0:0:10.601562510 DEBUG (7): RoutingMsgTimer.fired(): radioBusy = [32mFalse [0m
+0:0:10.601562510 DEBUG (7): RoutingMsgTimer.fired(): Sending RoutingMsg... 
+0:0:10.601562510 DEBUG (7): RoutingMsgTimer.fired(): [32mRoutingMsg enqueued successfully in SendingQueue!!![0m
+0:0:10.601562510 DEBUG (7): RoutingMsgTimer.fired(): [32mSendTask() posted!![0m
+0:0:10.601562520 DEBUG (2): sendRoutingTask(): Send [32mSuccessful [0m
+0:0:10.601562520 DEBUG (4): sendRoutingTask(): Send [32mSuccessful [0m
+0:0:10.601562520 DEBUG (7): sendRoutingTask(): Send [32mSuccessful [0m
+0:0:10.605270384 DEBUG (7): RoutingAMSend.sendDone(): A Routing package sent... [32mTrue [0m
+0:0:10.605606075 DEBUG (2): RoutingAMSend.sendDone(): A Routing package sent... [32mTrue [0m
+0:0:10.606918324 DEBUG (5): RoutingReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:0:10.606918324 DEBUG (5): RoutingReceive.receive(): RoutingMsg enqueue [32mSuccessful [0m
+0:0:10.606918324 DEBUG (1): RoutingReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:0:10.606918324 DEBUG (1): RoutingReceive.receive(): RoutingMsg enqueue [32mSuccessful [0m
+0:0:10.606918334 DEBUG (5): ReceiveRoutingTask(): Function called with packet length =3 
+0:0:10.606918334 DEBUG (5): receiveRoutingTask(): Routing Message Packet -> senderID= 4 , senderDepth= 2 
+0:0:10.606918334 DEBUG (5): receiveRoutingTask(): [34mNode routed -> Parent = 4, Depth = 3[0m
+0:0:10.606918334 DEBUG (5): receiveRoutingTask():NotifyParentMsg sending to node= 4... 
+0:0:10.606918334 DEBUG (5): receiveRoutingTask(): NotifyParentMsg enqueue [32mSuccessful[0m
+0:0:10.606918334 DEBUG (5): receiveRoutingTask(): Call RoutingMsgTimer to route childs[0m
+0:0:10.606918334 DEBUG (1): ReceiveRoutingTask(): Function called with packet length =3 
+0:0:10.606918334 DEBUG (1): receiveRoutingTask(): Routing Message Packet -> senderID= 4 , senderDepth= 2 
+0:0:10.606918344 DEBUG (5): sendNotifyTask(): mlen = 5  senderID= 5 
+0:0:10.606918344 DEBUG (5): sendNotifyTask(): [32mSend Success!!![0m
+0:0:10.607086169 DEBUG (4): RoutingAMSend.sendDone(): A Routing package sent... [32mTrue [0m
+0:0:10.609497064 DEBUG (4): NotifyReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:0:10.609497064 DEBUG (4): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:0:10.609497074 DEBUG (4): ReceiveNotifyTask(): len=5 
+0:0:10.609497074 DEBUG (4): NotifyParentMsg received from 5 !!! 
+0:0:10.609497074 DEBUG (4): Forwarding NotifyParentMsg from senderID= 5  to parentID=1 
+0:0:10.609497074 DEBUG (4): receiveNotifyTask(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:0:10.609497084 DEBUG (4): sendNotifyTask(): mlen = 5  senderID= 5 
+0:0:10.609497084 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:0:10.609664910 DEBUG (5): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:0:10.609664910 DEBUG (5): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:0:10.618041956 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 5 - Original source 4 
+0:0:10.618041956 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:0:10.618041966 DEBUG (1): ReceiveNotifyTask(): len=5 
+0:0:10.618041966 DEBUG (1): NotifyParentMsg received from 5 !!! 
+0:0:10.618041966 DEBUG (1): Forwarding NotifyParentMsg from senderID= 5  to parentID=0 
+0:0:10.618041966 DEBUG (1): receiveNotifyTask(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:0:10.618041976 DEBUG (1): sendNotifyTask(): mlen = 5  senderID= 5 
+0:0:10.618041976 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:0:10.618209802 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:0:10.618209802 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:0:10.625900206 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 5 - Original source 1 
+0:0:10.625900206 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:0:10.625900216 DEBUG (0): ReceiveNotifyTask(): len=5 
+0:0:10.625900216 DEBUG (0): NotifyParentMsg received from 5 !!! 
+0:0:10.626068052 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:0:10.626068052 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:0:10.801757823 DEBUG (5): RoutingMsgTimer fired! -----------------------------------------------------------------
+0:0:10.801757823 DEBUG (5): RoutingMsgTimer.fired(): radioBusy = [32mFalse [0m
+0:0:10.801757823 DEBUG (5): RoutingMsgTimer.fired(): Sending RoutingMsg... 
+0:0:10.801757823 DEBUG (5): RoutingMsgTimer.fired(): [32mRoutingMsg enqueued successfully in SendingQueue!!![0m
+0:0:10.801757823 DEBUG (5): RoutingMsgTimer.fired(): [32mSendTask() posted!![0m
+0:0:10.801757833 DEBUG (5): sendRoutingTask(): Send [32mSuccessful [0m
+0:0:10.804626468 DEBUG (4): RoutingReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:0:10.804626468 DEBUG (4): RoutingReceive.receive(): RoutingMsg enqueue [32mSuccessful [0m
+0:0:10.804626478 DEBUG (4): ReceiveRoutingTask(): Function called with packet length =3 
+0:0:10.804626478 DEBUG (4): receiveRoutingTask(): Routing Message Packet -> senderID= 5 , senderDepth= 3 
+0:0:10.804794314 DEBUG (5): RoutingAMSend.sendDone(): A Routing package sent... [32mTrue [0m

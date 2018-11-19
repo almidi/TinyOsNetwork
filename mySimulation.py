@@ -21,12 +21,12 @@ t.addChannel("Measure",f)
 t.addChannel("Root",f)
 
 
-for i in range(0,8):
+for i in range(0,10):
 	m=t.getNode(i)
 	m.bootAtTime(10*t.ticksPerSecond() + i)
 
 
-topo = open("topology.txt", "r")
+topo = open("topology2.txt", "r")
 
 if topo is None:
 	print "Topology file not opened!!! \n"

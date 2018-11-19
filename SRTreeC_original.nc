@@ -220,8 +220,8 @@ implementation
 			printfflush();
 #endif
 			
-			//call RoutingMsgTimer.startOneShot(TIMER_PERIOD_MILLI);
-			//call RoutingMsgTimer.startPeriodic(TIMER_PERIOD_MILLI);
+			//call RoutingMsgTimer.startOneShot(MAX_DEPTH);
+			//call RoutingMsgTimer.startPeriodic(MAX_DEPTH);
 			//call LostTaskTimer.startPeriodic(SEND_CHECK_MILLIS);
 			if (TOS_NODE_ID==0)
 			{
@@ -256,7 +256,7 @@ implementation
 			printf("Serial initialized successfully! \n");
 			printfflush();
 #endif
-			//call RoutingMsgTimer.startPeriodic(TIMER_PERIOD_MILLI);
+			//call RoutingMsgTimer.startPeriodic(MAX_DEPTH);
 		}
 		else
 		{
@@ -324,7 +324,7 @@ implementation
 			dbg("SRTreeC", "#######   ROUND   %u    ############## \n", roundCounter);
 			dbg("SRTreeC", "#####################################\n");
 			
-			call RoutingMsgTimer.startOneShot(TIMER_PERIOD_MILLI);
+			call RoutingMsgTimer.startOneShot(MAX_DEPTH);
 		}
 		
 		if(call RoutingSendQueue.full())
@@ -782,7 +782,7 @@ implementation
 			
 			//if(TOS_NODE_ID >0)
 			//{
-				//call RoutingMsgTimer.startOneShot(TIMER_PERIOD_MILLI);
+				//call RoutingMsgTimer.startOneShot(MAX_DEPTH);
 			//}
 			//
 			

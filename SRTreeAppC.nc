@@ -8,12 +8,11 @@ implementation{
 	components DelugeC;
 #endif
 
-#ifdef PRINTFDBG_MODE
-		components PrintfC;
-#endif
 	components MainC, ActiveMessageC;
 	components new TimerMilliC() as RoutingMsgTimerC;
 	components new TimerMilliC() as LostTaskTimerC;
+	components new TimerMilliC() as EpochTimerC;
+	components new TimerMilliC() as SlotTimerC;
 	
 	components new AMSenderC(AM_ROUTINGMSG) as RoutingSenderC;
 	components new AMReceiverC(AM_ROUTINGMSG) as RoutingReceiverC;
@@ -24,6 +23,8 @@ implementation{
 	components new PacketQueueC(RECEIVER_QUEUE_SIZE) as RoutingReceiveQueueC;
 	components new PacketQueueC(SENDER_QUEUE_SIZE) as NotifySendQueueC;
 	components new PacketQueueC(RECEIVER_QUEUE_SIZE) as NotifyReceiveQueueC;
+
+	components RandomMlcgC as RandomC;
 	
 	SRTreeC.Boot->MainC.Boot;
 	
@@ -31,7 +32,10 @@ implementation{
 	
 	SRTreeC.RoutingMsgTimer->RoutingMsgTimerC;
 	SRTreeC.LostTaskTimer->LostTaskTimerC;
-	
+	SRTreeC.EpochTimer->EpochTimerC;
+	SRTreeC.SlotTimer->SlotTimerC;
+
+
 	SRTreeC.RoutingPacket->RoutingSenderC.Packet;
 	SRTreeC.RoutingAMPacket->RoutingSenderC.AMPacket;
 	SRTreeC.RoutingAMSend->RoutingSenderC.AMSend;
@@ -46,5 +50,8 @@ implementation{
 	SRTreeC.RoutingReceiveQueue->RoutingReceiveQueueC;
 	SRTreeC.NotifySendQueue->NotifySendQueueC;
 	SRTreeC.NotifyReceiveQueue->NotifyReceiveQueueC;
+
+	SRTreeC.RandomGenerator -> RandomC;
+	SRTreeC.GeneratorSeed -> RandomC.SeedInit;
 	
 }

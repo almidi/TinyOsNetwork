@@ -28,6 +28,8 @@ module SRTreeC
 
 	uses interface Timer<TMilli> as RoutingMsgTimer;
 	uses interface Timer<TMilli> as LostTaskTimer;
+	uses interface Timer<TMilli> as EpochTimer;
+	uses interface Timer<TMilli> as SlotTimer;
 
 	uses interface Receive as RoutingReceive;
 	uses interface Receive as NotifyReceive;
@@ -37,13 +39,16 @@ module SRTreeC
 
 	uses interface PacketQueue as NotifySendQueue;
 	uses interface PacketQueue as NotifyReceiveQueue;
+
+	uses interface Random as RandomGenerator;
+	uses interface ParameterInit<uint16_t> as GeneratorSeed;
 }
 
 //Implement Network
 
 implementation {
 	// Epochs
-	uint16_t  roundCounter;
+	uint16_t  epochCounter;
 
 	// Def Message Types
 	// Messages for routing the network
@@ -59,11 +64,21 @@ implementation {
 
 	uint8_t curdepth;
 	uint16_t parentID;
+	uint32_t offset_milli;
+
+
+	uint32_t SUM;
+	uint32_t COUNT;
+	uint32_t MAX;
+
 
 	task void sendRoutingTask();
 	task void sendNotifyTask();
 	task void receiveRoutingTask();
 	task void receiveNotifyTask();
+	task void startEpoch();
+	task void enqueueData();
+	task void rootResults();
 
 	// Set States
 	void setLostRoutingSendTask(bool state) {
@@ -123,7 +138,12 @@ implementation {
 		call RadioControl.start();
 
 		//epoch counter
-		roundCounter = 0;
+		epochCounter = 0;
+
+		//init values
+		SUM = 0;
+		COUNT = 1;
+		MAX = 0;
 
 		// If Root Node
 		if (TOS_NODE_ID == 0) {
@@ -135,6 +155,10 @@ implementation {
 			curdepth = -1;
 			parentID = -1;		
 		}
+
+		//Init RandomGenerator
+		call GeneratorSeed.init(TOS_NODE_ID);
+
 		dbg("Boot", "%sNode Booted:%s curdepth = %03d  ,  parentID= %d\n",KYEL, KNRM, curdepth , parentID);
 	}
 
@@ -143,8 +167,8 @@ implementation {
 		if (err == SUCCESS) {
 			dbg("Radio" , "RadioControl.StartDone():%s Radio initialized successfully!!!%s\n",KYEL,KNRM);
 
-			//call RoutingMsgTimer.startOneShot(TIMER_PERIOD_MILLI);
-			//call RoutingMsgTimer.startPeriodic(TIMER_PERIOD_MILLI);
+			//call RoutingMsgTimer.startOneShot(MAX_DEPTH);
+			//call RoutingMsgTimer.startPeriodic(MAX_DEPTH);
 			//call LostTaskTimer.startPeriodic(SEND_CHECK_MILLIS);
 
 			// Start Routing (on first epoch only)
@@ -159,7 +183,7 @@ implementation {
 
 	// Radio Stopped
 	event void RadioControl.stopDone(error_t err) {
-		dbg("Radio", "%sRadioControl.stopDone(): Radio stopped!%s\n",KYEL,KNRM);	
+		dbg("Radio", "RadioControl.stopDone():%s Radio stopped!%s\n",KYEL,KNRM);	
 	}
 
 	// Timer for lost tasks TODO: Unused
@@ -196,16 +220,13 @@ implementation {
 		dbg("Routing", "RoutingMsgTimer.fired(): radioBusy = %s %s\n", (RoutingSendBusy) ? "\x1B[31mTrue" : "\x1B[32mFalse",KNRM);
 		
 		if (TOS_NODE_ID == 0) {
-			roundCounter += 1;
 
 			// add some color to your life
 			dbg("SRTreeC","%s\n",KCYN);
 			dbg("SRTreeC", "######################################################################################## \n");
-			dbg("SRTreeC", "###################################   ROUND   %03u    ################################### \n", roundCounter);
+			dbg("SRTreeC", "################################   Initialize Routing   ################################ \n");
 			dbg("SRTreeC", "########################################################################################%s\n",KNRM);
 			dbg("SRTreeC","\n");
-
-			// call RoutingMsgTimer.startOneShot(TIMER_PERIOD_MILLI);
 		}
 
 
@@ -250,7 +271,59 @@ implementation {
 		} else {
 			dbg("Routing", "RoutingMsgTimer.fired(): %sRoutingMsg failed to be enqueued in SendingQueue!!!%s\n",KRED,KNRM);
 		}
+
+		//Start your epoch
+		post startEpoch();
 	}
+
+	// Timer for epoch periods
+	event void EpochTimer.fired() {
+		uint32_t rand_off;
+		uint32_t measurement;
+
+
+
+
+		epochCounter++ ;
+		dbg("Timing", "EpochTimer.fired(): %s######################################################## EPOCH %d %s\n",KCYN,epochCounter,KNRM);
+
+		//random offset granularity (how many possible sub-slots)
+		#define granularity 50
+
+		// Calculate a small random offset 
+		rand_off = (call RandomGenerator.rand32() % granularity)*((EPOCH_PERIOD_MILLI/MAX_DEPTH)/granularity);
+		// dbg("Timing", "EpochTimer.fired(): offset_milli+rand_off = %d \n",offset_milli+rand_off);
+
+
+		//Restart Timer
+		call EpochTimer.startOneShot(EPOCH_PERIOD_MILLI);
+		//(Re)start Slot Timer
+		call SlotTimer.startOneShot(offset_milli-rand_off);
+
+		//Produce new Measurement
+		measurement = call RandomGenerator.rand16() % 50;
+		dbg("Measure", "EpochTimer.fired(): %sMeasured %d %s\n",KMAG,measurement,KNRM);
+
+		//initialize values
+		SUM = measurement;
+		COUNT = 1;
+		MAX = measurement;
+
+	}
+
+		// Timer for lost tasks TODO: Unused
+
+
+	event void SlotTimer.fired() {
+		dbg("Timing", "SlotTimer.fired(): %sTime to Send Data %s\n",KYEL,KNRM);
+		
+		if (TOS_NODE_ID == 0){
+			post rootResults();
+		} else{
+			post enqueueData();
+		}
+	}
+
 
 	// Routing Message Sent
 	event void RoutingAMSend.sendDone(message_t * msg , error_t err) {
@@ -439,12 +512,8 @@ implementation {
 		dbg("Routing", "ReceiveRoutingTask(): Function called with packet length =%u \n", len);
 		
 		// Processing Radio Packet
-
-
 		if (len == sizeof(RoutingMsg)) {
 			
-
-			NotifyParentMsg* m;
 			RoutingMsg * mpkt = (RoutingMsg*) (call RoutingPacket.getPayload(&radioRoutingRecPkt, len));
 
 			dbg("Routing" , "receiveRoutingTask(): Routing Message Packet -> senderID= %d , senderDepth= %d \n",mpkt->senderID , mpkt->depth);
@@ -454,84 +523,68 @@ implementation {
 				parentID = call RoutingAMPacket.source(&radioRoutingRecPkt);
 				// Calculate current depth
 				curdepth = mpkt->depth + 1;
-
 				dbg("Routing" , "receiveRoutingTask(): %sNode routed -> Parent = %d, Depth = %d%s\n",KBLU, parentID, curdepth, KNRM);
-
-				// Notify the parent about your adoption
-				m = (NotifyParentMsg *) (call NotifyPacket.getPayload(&tmp, sizeof(NotifyParentMsg)));
-				m->senderID = TOS_NODE_ID;
-				m->depth = curdepth;
-				m->parentID = parentID;
-				dbg("Routing" , "receiveRoutingTask():NotifyParentMsg sending to node= %d... \n", parentID);
-				call NotifyAMPacket.setDestination(&tmp, parentID);
-				call NotifyPacket.setPayloadLength(&tmp, sizeof(NotifyParentMsg));
-
-				//Enqueue message
-				enqueueDone = call NotifySendQueue.enqueue(tmp);
-				dbg("Routing", "receiveRoutingTask(): NotifyParentMsg enqueue %s%s\n",(enqueueDone == SUCCESS) ? "\x1B[32mSuccessful" : "\x1B[31mFailed",KNRM);
- 				if (enqueueDone == SUCCESS && call NotifySendQueue.size() == 1) {
-					post sendNotifyTask();
-				}
-
-				// Route your childs
-				dbg("Routing", "receiveRoutingTask(): Call RoutingMsgTimer to route childs%s\n",KNRM);
+				// Route your children
+				dbg("Routing", "receiveRoutingTask(): Call RoutingMsgTimer to route children%s\n",KNRM);
 				if (TOS_NODE_ID != 0) {
 					call RoutingMsgTimer.startOneShot(TIMER_FAST_PERIOD);
 				}
+
 
 			// If Node Not orphan see if new parent is better (closer, with more money, etc.)
-			}else if(curdepth > mpkt->depth + 1){
-				dbg("Routing" , "receiveRoutingTask(): %sFound Better Parent%s\n" ,KBLU ,KNRM);
-				oldparentID = parentID;
-
-				// Sender is the parent
-				parentID = call RoutingAMPacket.source(&radioRoutingRecPkt);
-				// Calculate current depth
-				curdepth = mpkt->depth + 1;
-
-				dbg("Routing" , "receiveRoutingTask(): %sNode rerouted -> Parent = %d, Depth = %d%s\n",KBLU, parentID, curdepth, KNRM);
-
-				// Notify New Parent About his adoption
-				dbg("Routing" , "receiveRoutingTask(): NotifyParentMsg sending to node= %d... \n", oldparentID);
-				if ( (oldparentID < 65535) || (oldparentID > 0) || (oldparentID == parentID)) {
-					m = (NotifyParentMsg *) (call NotifyPacket.getPayload(&tmp, sizeof(NotifyParentMsg)));
-					m->senderID = TOS_NODE_ID;
-					m->depth = curdepth;
-					m->parentID = parentID;
-
-					call NotifyAMPacket.setDestination(&tmp, oldparentID);
-					//call NotifyAMPacket.setType(&tmp,AM_NOTIFYPARENTMSG);
-					call NotifyPacket.setPayloadLength(&tmp, sizeof(NotifyParentMsg));
-
-					if (call NotifySendQueue.enqueue(tmp) == SUCCESS) {
-						dbg("Routing", "receiveRoutingTask(): NotifyParentMsg enqueued in SendingQueue successfully!!!\n");
-						if (call NotifySendQueue.size() == 1) {
-							post sendNotifyTask();
-						}
-					}
-				}
-
-				// Notify Old Parent About your change
-				m = (NotifyParentMsg *) (call NotifyPacket.getPayload(&tmp, sizeof(NotifyParentMsg)));
-				m->senderID = TOS_NODE_ID;
-				m->depth = curdepth;
-				m->parentID = parentID;
-				dbg("Routing" , "receiveRoutingTask(): NotifyParentMsg sending to node= %d... \n", parentID);
-				call NotifyAMPacket.setDestination(&tmp, parentID);
-				call NotifyPacket.setPayloadLength(&tmp, sizeof(NotifyParentMsg));
-
-				if (call NotifySendQueue.enqueue(tmp) == SUCCESS) {
-					dbg("Routing", "receiveRoutingTask(): NotifyParentMsg enqueued in SendingQueue successfully!!! \n");
-					if (call NotifySendQueue.size() == 1) {
-						post sendNotifyTask();
-					}
-				}
-
-				// Reroute your childs
-				if (TOS_NODE_ID != 0) {
-					call RoutingMsgTimer.startOneShot(TIMER_FAST_PERIOD);
-				}		
 			}
+			// else if(curdepth > mpkt->depth + 1){
+			// 	dbg("Routing" , "receiveRoutingTask(): %sFound Better Parent%s\n" ,KBLU ,KNRM);
+			// 	oldparentID = parentID;
+
+			// 	// Sender is the parent
+			// 	parentID = call RoutingAMPacket.source(&radioRoutingRecPkt);
+			// 	// Calculate current depth
+			// 	curdepth = mpkt->depth + 1;
+
+			// 	dbg("Routing" , "receiveRoutingTask(): %sNode rerouted -> Parent = %d, Depth = %d%s\n",KBLU, parentID, curdepth, KNRM);
+
+			// 	// Notify New Parent About his adoption
+			// 	dbg("Routing" , "receiveRoutingTask(): NotifyParentMsg sending to node= %d... \n", oldparentID);
+			// 	if ( (oldparentID < 65535) || (oldparentID > 0) || (oldparentID == parentID)) {
+			// 		m = (NotifyParentMsg *) (call NotifyPacket.getPayload(&tmp, sizeof(NotifyParentMsg)));
+			// 		m->senderID = TOS_NODE_ID;
+			// 		m->depth = curdepth;
+			// 		m->parentID = parentID;
+
+			// 		call NotifyAMPacket.setDestination(&tmp, oldparentID);
+			// 		//call NotifyAMPacket.setType(&tmp,AM_NOTIFYPARENTMSG);
+			// 		call NotifyPacket.setPayloadLength(&tmp, sizeof(NotifyParentMsg));
+
+			// 		if (call NotifySendQueue.enqueue(tmp) == SUCCESS) {
+			// 			dbg("Routing", "receiveRoutingTask(): NotifyParentMsg enqueued in SendingQueue successfully!!!\n");
+			// 			if (call NotifySendQueue.size() == 1) {
+			// 				post sendNotifyTask();
+			// 			}
+			// 		}
+			// 	}
+
+			// 	// Notify Old Parent About your change
+			// 	m = (NotifyParentMsg *) (call NotifyPacket.getPayload(&tmp, sizeof(NotifyParentMsg)));
+			// 	m->senderID = TOS_NODE_ID;
+			// 	m->depth = curdepth;
+			// 	m->parentID = parentID;
+			// 	dbg("Routing" , "receiveRoutingTask(): NotifyParentMsg sending to node= %d... \n", parentID);
+			// 	call NotifyAMPacket.setDestination(&tmp, parentID);
+			// 	call NotifyPacket.setPayloadLength(&tmp, sizeof(NotifyParentMsg));
+
+			// 	if (call NotifySendQueue.enqueue(tmp) == SUCCESS) {
+			// 		dbg("Routing", "receiveRoutingTask(): NotifyParentMsg enqueued in SendingQueue successfully!!! \n");
+			// 		if (call NotifySendQueue.size() == 1) {
+			// 			post sendNotifyTask();
+			// 		}
+			// 	}
+
+			// 	// Reroute your childs
+			// 	if (TOS_NODE_ID != 0) {
+			// 		call RoutingMsgTimer.startOneShot(TIMER_FAST_PERIOD);
+			// 	}		
+			// }
 		} else {
 			dbg("Routing", "receiveRoutingTask(): %sEmpty message%s\n",KRED,KNRM);
 			setLostRoutingRecTask(TRUE);
@@ -549,52 +602,100 @@ implementation {
 
 		len = call NotifyPacket.payloadLength(&radioNotifyRecPkt);
 
-		dbg("SRTreeC", "ReceiveNotifyTask(): len=%u \n", len);
+		dbg("NotifyParentMsg", "ReceiveNotifyTask(): len=%u \n", len);
 		if (len == sizeof(NotifyParentMsg)) {
-			// an to parentID== TOS_NODE_ID tote
-			// tha proothei to minima pros tin riza xoris broadcast
-			// kai tha ananeonei ton tyxon pinaka paidion..
-			// allios tha diagrafei to paidi apo ton pinaka paidion
-
 			NotifyParentMsg* mr = (NotifyParentMsg*) (call NotifyPacket.getPayload(&radioNotifyRecPkt, len));
 
-			dbg("SRTreeC" , "NotifyParentMsg received from %d !!! \n", mr->senderID);
+			dbg("NotifyParentMsg" , "NotifyParentMsg received from %d !!! \n", mr->senderID);
+			// If packet is for me
 			if ( mr->parentID == TOS_NODE_ID) {
-				// tote prosthiki stin lista ton paidion.
-
-			} else {
-				// apla diagrafei ton komvo apo paidi tou..
-
+				SUM += mr->SUM;
+				COUNT += mr-> COUNT;
+				MAX = ((mr->MAX) > MAX) ? mr->MAX : MAX  ;
 			}
-			if ( TOS_NODE_ID == 0) {
 
-			} else {
-				NotifyParentMsg* m;
-				memcpy(&tmp, &radioNotifyRecPkt, sizeof(message_t));
 
-				m = (NotifyParentMsg *) (call NotifyPacket.getPayload(&tmp, sizeof(NotifyParentMsg)));
-				//m->senderID=mr->senderID;
-				//m->depth = mr->depth;
-				//m->parentID = mr->parentID;
+			// else {
 
-				dbg("SRTreeC" , "Forwarding NotifyParentMsg from senderID= %d  to parentID=%d \n" , m->senderID, parentID);
-				call NotifyAMPacket.setDestination(&tmp, parentID);
-				call NotifyPacket.setPayloadLength(&tmp, sizeof(NotifyParentMsg));
+			// }
+			// if ( TOS_NODE_ID == 0) {
 
-				if (call NotifySendQueue.enqueue(tmp) == SUCCESS) {
-					dbg("SRTreeC", "receiveNotifyTask(): NotifyParentMsg enqueued in SendingQueue successfully!!!\n");
-					if (call NotifySendQueue.size() == 1) {
-						post sendNotifyTask();
-					}
-				}
+			// } else {
+			// 	NotifyParentMsg* m;
+			// 	memcpy(&tmp, &radioNotifyRecPkt, sizeof(message_t));
 
-			}
+			// 	m = (NotifyParentMsg *) (call NotifyPacket.getPayload(&tmp, sizeof(NotifyParentMsg)));
+			// 	//m->senderID=mr->senderID;
+			// 	//m->depth = mr->depth;
+			// 	//m->parentID = mr->parentID;
+
+			// 	dbg("NotifyParentMsg" , "Forwarding NotifyParentMsg from senderID= %d  to parentID=%d \n" , m->senderID, parentID);
+			// 	call NotifyAMPacket.setDestination(&tmp, parentID);
+			// 	call NotifyPacket.setPayloadLength(&tmp, sizeof(NotifyParentMsg));
+
+			// 	if (call NotifySendQueue.enqueue(tmp) == SUCCESS) {
+			// 		dbg("NotifyParentMsg", "receiveNotifyTask(): NotifyParentMsg enqueued in SendingQueue successfully!!!\n");
+			// 		if (call NotifySendQueue.size() == 1) {
+			// 			post sendNotifyTask();
+			// 		}
+			// 	}
+
+			// }
 
 		} else {
-			dbg("SRTreeC", "receiveNotifyTask():Empty message!!! \n");
+			dbg("NotifyParentMsg", "receiveNotifyTask():Empty message!!! \n");
 			setLostNotifyRecTask(TRUE);
 			return;
 		}
+	}
+
+	task void startEpoch(){
+		//Start Epoch Timer
+		call EpochTimer.startOneShot(TIMER_FAST_PERIOD);
+		//Calculate offset milli (for sending measurements)
+		offset_milli = EPOCH_PERIOD_MILLI / MAX_DEPTH;
+		offset_milli = offset_milli*(MAX_DEPTH - curdepth);
+
+		dbg("Timing", "startEpoch(): %sStarted Epoch Timer. Offset Milli = %d%s\n",KCYN,offset_milli, KNRM);
+	}
+
+	// Enqueues data on a notification message Q and calls sendNotifyTask()
+	task void enqueueData(){
+		message_t tmp;
+		NotifyParentMsg* m;
+
+		m = (NotifyParentMsg *) (call NotifyPacket.getPayload(&tmp, sizeof(NotifyParentMsg)));
+		m->senderID = TOS_NODE_ID;
+		m->depth = curdepth;
+		m->parentID = parentID;
+		m->SUM = SUM;
+		m->COUNT = COUNT;
+		m->MAX = MAX;
+
+		call NotifyAMPacket.setDestination(&tmp, parentID);
+		//call NotifyAMPacket.setType(&tmp,AM_NOTIFYPARENTMSG);
+		call NotifyPacket.setPayloadLength(&tmp, sizeof(NotifyParentMsg));
+
+		if (call NotifySendQueue.enqueue(tmp) == SUCCESS) {
+			dbg("NotifyParentMsg", "enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!\n");
+			if (call NotifySendQueue.size() == 1) {
+				post sendNotifyTask();
+			}
+		}
+	
+	}
+
+	//Makes final calculations and presents root data
+	task void rootResults(){
+		uint32_t AVG = SUM/COUNT;
+
+		dbg("Root", "\n");
+		dbg("Root", "rootResults(): %s################################################### ROOT RESULTS FOR EPOCH %d ###################################################s\n",KBLU,epochCounter,KNRM);
+		dbg("Root", "rootResults(): %s############  SUM   : %s%d %s\n",KBLU,KMAG,SUM ,KNRM);
+		dbg("Root", "rootResults(): %s############  COUNT : %s%d %s\n",KBLU,KMAG,COUNT ,KNRM);
+		dbg("Root", "rootResults(): %s############  AVG   : %s%d %s\n",KBLU,KMAG,AVG ,KNRM);
+		dbg("Root", "rootResults(): %s############  MAX   : %s%d %s\n\n",KBLU,KMAG,MAX ,KNRM);
+
 
 	}
 }

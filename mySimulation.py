@@ -6,7 +6,7 @@ import random
 
 t=Tossim([])
 f=sys.stdout #open('./logfile.txt','w')
-SIM_END_TIME= 10000 * t.ticksPerSecond()
+SIM_END_TIME= 910 * t.ticksPerSecond()
 
 print "TicksPerSecond : ", t.ticksPerSecond(),"\n"
 
@@ -15,7 +15,11 @@ t.addChannel("Routing",f)
 t.addChannel("NotifyParentMsg",f)
 t.addChannel("Radio",f)
 t.addChannel("SRTreeC",f)
-# t.addChannel("PacketQueueC",f)
+#t.addChannel("PacketQueueC",f)
+t.addChannel("Timing",f)
+t.addChannel("Measure",f)
+t.addChannel("Root",f)
+
 
 for i in range(0,8):
 	m=t.getNode(i)

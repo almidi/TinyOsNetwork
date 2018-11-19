@@ -1,0 +1,1157 @@
+TicksPerSecond :  10000000000 
+
+  0   1   -50.0
+  1   0   -50.0
+  1   4   -50.0
+  4   1   -50.0
+  1   7   -50.0
+  7   1   -50.0
+  1   2   -50.0
+  2   1   -50.0
+  4   5   -50.0
+  5   4   -50.0
+0:0:10.000000000 DEBUG (0): [33mNode Booted:[0m curdepth = 000  ,  parentID= 0
+0:0:10.000000000 DEBUG (1): [33mNode Booted:[0m curdepth = 255  ,  parentID= 65535
+0:0:10.000000000 DEBUG (2): [33mNode Booted:[0m curdepth = 255  ,  parentID= 65535
+0:0:10.000000000 DEBUG (3): [33mNode Booted:[0m curdepth = 255  ,  parentID= 65535
+0:0:10.000000000 DEBUG (4): [33mNode Booted:[0m curdepth = 255  ,  parentID= 65535
+0:0:10.000000000 DEBUG (5): [33mNode Booted:[0m curdepth = 255  ,  parentID= 65535
+0:0:10.000000000 DEBUG (6): [33mNode Booted:[0m curdepth = 255  ,  parentID= 65535
+0:0:10.000000000 DEBUG (7): [33mNode Booted:[0m curdepth = 255  ,  parentID= 65535
+0:0:10.000000010 DEBUG (0): RadioControl.StartDone():[33m Radio initialized successfully!!![0m
+0:0:10.000000010 DEBUG (1): RadioControl.StartDone():[33m Radio initialized successfully!!![0m
+0:0:10.000000010 DEBUG (2): RadioControl.StartDone():[33m Radio initialized successfully!!![0m
+0:0:10.000000010 DEBUG (3): RadioControl.StartDone():[33m Radio initialized successfully!!![0m
+0:0:10.000000010 DEBUG (4): RadioControl.StartDone():[33m Radio initialized successfully!!![0m
+0:0:10.000000010 DEBUG (5): RadioControl.StartDone():[33m Radio initialized successfully!!![0m
+0:0:10.000000010 DEBUG (6): RadioControl.StartDone():[33m Radio initialized successfully!!![0m
+0:0:10.000000010 DEBUG (7): RadioControl.StartDone():[33m Radio initialized successfully!!![0m
+0:0:10.195312510 DEBUG (0): RoutingMsgTimer fired! -----------------------------------------------------------------
+0:0:10.195312510 DEBUG (0): RoutingMsgTimer.fired(): radioBusy = [32mFalse [0m
+0:0:10.195312510 DEBUG (0): [36m
+0:0:10.195312510 DEBUG (0): ######################################################################################## 
+0:0:10.195312510 DEBUG (0): ################################   Initialize Routing   ################################ 
+0:0:10.195312510 DEBUG (0): ########################################################################################[0m
+0:0:10.195312510 DEBUG (0): 
+0:0:10.195312510 DEBUG (0): RoutingMsgTimer.fired(): Sending RoutingMsg... 
+0:0:10.195312510 DEBUG (0): RoutingMsgTimer.fired(): [32mRoutingMsg enqueued successfully in SendingQueue!!![0m
+0:0:10.195312510 DEBUG (0): RoutingMsgTimer.fired(): [32mSendTask() posted!![0m
+0:0:10.195312520 DEBUG (0): sendRoutingTask(): Send [32mSuccessful [0m
+0:0:10.195312530 DEBUG (0): startEpoch(): [36mStarted Epoch Timer. Offset Milli = 61440[0m
+0:0:10.202712989 DEBUG (1): RoutingReceive.receive(): Something received!!!  from 0 - Original source 0 
+0:0:10.202712989 DEBUG (1): RoutingReceive.receive(): RoutingMsg enqueue [32mSuccessful [0m
+0:0:10.202712999 DEBUG (1): ReceiveRoutingTask(): Function called with packet length =3 
+0:0:10.202712999 DEBUG (1): receiveRoutingTask(): Routing Message Packet -> senderID= 0 , senderDepth= 0 
+0:0:10.202712999 DEBUG (1): receiveRoutingTask(): [34mNode routed -> Parent = 0, Depth = 1[0m
+0:0:10.202712999 DEBUG (1): receiveRoutingTask(): Call RoutingMsgTimer to route children[0m
+0:0:10.202880835 DEBUG (0): RoutingAMSend.sendDone(): A Routing package sent... [32mTrue [0m
+0:0:10.390625010 DEBUG (0): EpochTimer.fired(): [36m######################################################## EPOCH 1 [0m
+0:0:10.390625010 DEBUG (0): EpochTimer.fired(): [35mMeasured 39 [0m
+0:0:10.397460947 DEBUG (1): RoutingMsgTimer fired! -----------------------------------------------------------------
+0:0:10.397460947 DEBUG (1): RoutingMsgTimer.fired(): radioBusy = [32mFalse [0m
+0:0:10.397460947 DEBUG (1): RoutingMsgTimer.fired(): Sending RoutingMsg... 
+0:0:10.397460947 DEBUG (1): RoutingMsgTimer.fired(): [32mRoutingMsg enqueued successfully in SendingQueue!!![0m
+0:0:10.397460947 DEBUG (1): RoutingMsgTimer.fired(): [32mSendTask() posted!![0m
+0:0:10.397460957 DEBUG (1): sendRoutingTask(): Send [32mSuccessful [0m
+0:0:10.397460967 DEBUG (1): startEpoch(): [36mStarted Epoch Timer. Offset Milli = 51200[0m
+0:0:10.406311003 DEBUG (2): RoutingReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:0:10.406311003 DEBUG (2): RoutingReceive.receive(): RoutingMsg enqueue [32mSuccessful [0m
+0:0:10.406311003 DEBUG (7): RoutingReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:0:10.406311003 DEBUG (7): RoutingReceive.receive(): RoutingMsg enqueue [32mSuccessful [0m
+0:0:10.406311003 DEBUG (4): RoutingReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:0:10.406311003 DEBUG (4): RoutingReceive.receive(): RoutingMsg enqueue [32mSuccessful [0m
+0:0:10.406311003 DEBUG (0): RoutingReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:0:10.406311003 DEBUG (0): RoutingReceive.receive(): RoutingMsg enqueue [32mSuccessful [0m
+0:0:10.406311013 DEBUG (2): ReceiveRoutingTask(): Function called with packet length =3 
+0:0:10.406311013 DEBUG (2): receiveRoutingTask(): Routing Message Packet -> senderID= 1 , senderDepth= 1 
+0:0:10.406311013 DEBUG (2): receiveRoutingTask(): [34mNode routed -> Parent = 1, Depth = 2[0m
+0:0:10.406311013 DEBUG (2): receiveRoutingTask(): Call RoutingMsgTimer to route children[0m
+0:0:10.406311013 DEBUG (7): ReceiveRoutingTask(): Function called with packet length =3 
+0:0:10.406311013 DEBUG (7): receiveRoutingTask(): Routing Message Packet -> senderID= 1 , senderDepth= 1 
+0:0:10.406311013 DEBUG (7): receiveRoutingTask(): [34mNode routed -> Parent = 1, Depth = 2[0m
+0:0:10.406311013 DEBUG (7): receiveRoutingTask(): Call RoutingMsgTimer to route children[0m
+0:0:10.406311013 DEBUG (4): ReceiveRoutingTask(): Function called with packet length =3 
+0:0:10.406311013 DEBUG (4): receiveRoutingTask(): Routing Message Packet -> senderID= 1 , senderDepth= 1 
+0:0:10.406311013 DEBUG (4): receiveRoutingTask(): [34mNode routed -> Parent = 1, Depth = 2[0m
+0:0:10.406311013 DEBUG (4): receiveRoutingTask(): Call RoutingMsgTimer to route children[0m
+0:0:10.406311013 DEBUG (0): ReceiveRoutingTask(): Function called with packet length =3 
+0:0:10.406311013 DEBUG (0): receiveRoutingTask(): Routing Message Packet -> senderID= 1 , senderDepth= 1 
+0:0:10.406478849 DEBUG (1): RoutingAMSend.sendDone(): A Routing package sent... [32mTrue [0m
+0:0:10.592773447 DEBUG (1): EpochTimer.fired(): [36m######################################################## EPOCH 1 [0m
+0:0:10.592773447 DEBUG (1): EpochTimer.fired(): [35mMeasured 28 [0m
+0:0:10.601562510 DEBUG (2): RoutingMsgTimer fired! -----------------------------------------------------------------
+0:0:10.601562510 DEBUG (2): RoutingMsgTimer.fired(): radioBusy = [32mFalse [0m
+0:0:10.601562510 DEBUG (2): RoutingMsgTimer.fired(): Sending RoutingMsg... 
+0:0:10.601562510 DEBUG (2): RoutingMsgTimer.fired(): [32mRoutingMsg enqueued successfully in SendingQueue!!![0m
+0:0:10.601562510 DEBUG (2): RoutingMsgTimer.fired(): [32mSendTask() posted!![0m
+0:0:10.601562510 DEBUG (4): RoutingMsgTimer fired! -----------------------------------------------------------------
+0:0:10.601562510 DEBUG (4): RoutingMsgTimer.fired(): radioBusy = [32mFalse [0m
+0:0:10.601562510 DEBUG (4): RoutingMsgTimer.fired(): Sending RoutingMsg... 
+0:0:10.601562510 DEBUG (4): RoutingMsgTimer.fired(): [32mRoutingMsg enqueued successfully in SendingQueue!!![0m
+0:0:10.601562510 DEBUG (4): RoutingMsgTimer.fired(): [32mSendTask() posted!![0m
+0:0:10.601562510 DEBUG (7): RoutingMsgTimer fired! -----------------------------------------------------------------
+0:0:10.601562510 DEBUG (7): RoutingMsgTimer.fired(): radioBusy = [32mFalse [0m
+0:0:10.601562510 DEBUG (7): RoutingMsgTimer.fired(): Sending RoutingMsg... 
+0:0:10.601562510 DEBUG (7): RoutingMsgTimer.fired(): [32mRoutingMsg enqueued successfully in SendingQueue!!![0m
+0:0:10.601562510 DEBUG (7): RoutingMsgTimer.fired(): [32mSendTask() posted!![0m
+0:0:10.601562520 DEBUG (2): sendRoutingTask(): Send [32mSuccessful [0m
+0:0:10.601562520 DEBUG (4): sendRoutingTask(): Send [32mSuccessful [0m
+0:0:10.601562520 DEBUG (7): sendRoutingTask(): Send [32mSuccessful [0m
+0:0:10.601562530 DEBUG (2): startEpoch(): [36mStarted Epoch Timer. Offset Milli = 40960[0m
+0:0:10.601562530 DEBUG (4): startEpoch(): [36mStarted Epoch Timer. Offset Milli = 40960[0m
+0:0:10.601562530 DEBUG (7): startEpoch(): [36mStarted Epoch Timer. Offset Milli = 40960[0m
+0:0:10.604553225 DEBUG (1): RoutingReceive.receive(): Something received!!!  from 2 - Original source 2 
+0:0:10.604553225 DEBUG (1): RoutingReceive.receive(): RoutingMsg enqueue [32mSuccessful [0m
+0:0:10.604553235 DEBUG (1): ReceiveRoutingTask(): Function called with packet length =3 
+0:0:10.604553235 DEBUG (1): receiveRoutingTask(): Routing Message Packet -> senderID= 2 , senderDepth= 2 
+0:0:10.604721071 DEBUG (2): RoutingAMSend.sendDone(): A Routing package sent... [32mTrue [0m
+0:0:10.611053432 DEBUG (7): RoutingAMSend.sendDone(): A Routing package sent... [32mTrue [0m
+0:0:10.611663779 DEBUG (5): RoutingReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:0:10.611663779 DEBUG (5): RoutingReceive.receive(): RoutingMsg enqueue [32mSuccessful [0m
+0:0:10.611663789 DEBUG (5): ReceiveRoutingTask(): Function called with packet length =3 
+0:0:10.611663789 DEBUG (5): receiveRoutingTask(): Routing Message Packet -> senderID= 4 , senderDepth= 2 
+0:0:10.611663789 DEBUG (5): receiveRoutingTask(): [34mNode routed -> Parent = 4, Depth = 3[0m
+0:0:10.611663789 DEBUG (5): receiveRoutingTask(): Call RoutingMsgTimer to route children[0m
+0:0:10.611831625 DEBUG (4): RoutingAMSend.sendDone(): A Routing package sent... [32mTrue [0m
+0:0:10.796875010 DEBUG (2): EpochTimer.fired(): [36m######################################################## EPOCH 1 [0m
+0:0:10.796875010 DEBUG (2): EpochTimer.fired(): [35mMeasured 17 [0m
+0:0:10.796875010 DEBUG (4): EpochTimer.fired(): [36m######################################################## EPOCH 1 [0m
+0:0:10.796875010 DEBUG (4): EpochTimer.fired(): [35mMeasured 9 [0m
+0:0:10.796875010 DEBUG (7): EpochTimer.fired(): [36m######################################################## EPOCH 1 [0m
+0:0:10.796875010 DEBUG (7): EpochTimer.fired(): [35mMeasured 27 [0m
+0:0:10.806640635 DEBUG (5): RoutingMsgTimer fired! -----------------------------------------------------------------
+0:0:10.806640635 DEBUG (5): RoutingMsgTimer.fired(): radioBusy = [32mFalse [0m
+0:0:10.806640635 DEBUG (5): RoutingMsgTimer.fired(): Sending RoutingMsg... 
+0:0:10.806640635 DEBUG (5): RoutingMsgTimer.fired(): [32mRoutingMsg enqueued successfully in SendingQueue!!![0m
+0:0:10.806640635 DEBUG (5): RoutingMsgTimer.fired(): [32mSendTask() posted!![0m
+0:0:10.806640645 DEBUG (5): sendRoutingTask(): Send [32mSuccessful [0m
+0:0:10.806640655 DEBUG (5): startEpoch(): [36mStarted Epoch Timer. Offset Milli = 30720[0m
+0:0:10.816085780 DEBUG (4): RoutingReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:0:10.816085780 DEBUG (4): RoutingReceive.receive(): RoutingMsg enqueue [32mSuccessful [0m
+0:0:10.816085790 DEBUG (4): ReceiveRoutingTask(): Function called with packet length =3 
+0:0:10.816085790 DEBUG (4): receiveRoutingTask(): Routing Message Packet -> senderID= 5 , senderDepth= 3 
+0:0:10.816253626 DEBUG (5): RoutingAMSend.sendDone(): A Routing package sent... [32mTrue [0m
+0:0:11.001953135 DEBUG (5): EpochTimer.fired(): [36m######################################################## EPOCH 1 [0m
+0:0:11.001953135 DEBUG (5): EpochTimer.fired(): [35mMeasured 48 [0m
+0:0:32.634765635 DEBUG (5): SlotTimer.fired(): [33mTime to Send Data [0m
+0:0:32.634765645 DEBUG (5): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:0:32.634765665 DEBUG (5): sendNotifyTask(): mlen = 17  senderID= 5 
+0:0:32.634765665 DEBUG (5): sendNotifyTask(): [32mSend Success!!![0m
+0:0:32.637405420 DEBUG (4): NotifyReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:0:32.637405420 DEBUG (4): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:0:32.637405430 DEBUG (4): ReceiveNotifyTask(): len=17 
+0:0:32.637405430 DEBUG (4): NotifyParentMsg received from 5 !!! 
+0:0:32.637573266 DEBUG (5): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:0:32.637573266 DEBUG (5): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:0:43.824218760 DEBUG (4): SlotTimer.fired(): [33mTime to Send Data [0m
+0:0:43.824218770 DEBUG (4): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:0:43.824218790 DEBUG (4): sendNotifyTask(): mlen = 17  senderID= 4 
+0:0:43.824218790 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:0:43.835205054 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:0:43.835205054 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:0:43.835205064 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:0:43.835205064 DEBUG (1): NotifyParentMsg received from 4 !!! 
+0:0:43.835372900 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:0:43.835372900 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:0:46.613281260 DEBUG (2): SlotTimer.fired(): [33mTime to Send Data [0m
+0:0:46.613281270 DEBUG (2): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:0:46.613281290 DEBUG (2): sendNotifyTask(): mlen = 17  senderID= 2 
+0:0:46.613281290 DEBUG (2): sendNotifyTask(): [32mSend Success!!![0m
+0:0:46.616027856 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 2 - Original source 2 
+0:0:46.616027856 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:0:46.616027866 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:0:46.616027866 DEBUG (1): NotifyParentMsg received from 2 !!! 
+0:0:46.616195701 DEBUG (2): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:0:46.616195701 DEBUG (2): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:0:49.601562510 DEBUG (7): SlotTimer.fired(): [33mTime to Send Data [0m
+0:0:49.601562520 DEBUG (7): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:0:49.601562540 DEBUG (7): sendNotifyTask(): mlen = 17  senderID= 7 
+0:0:49.601562540 DEBUG (7): sendNotifyTask(): [32mSend Success!!![0m
+0:0:49.608612060 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 7 - Original source 7 
+0:0:49.608612060 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:0:49.608612070 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:0:49.608612070 DEBUG (1): NotifyParentMsg received from 7 !!! 
+0:0:49.608779905 DEBUG (7): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:0:49.608779905 DEBUG (7): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:0:57.803710947 DEBUG (1): SlotTimer.fired(): [33mTime to Send Data [0m
+0:0:57.803710957 DEBUG (1): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:0:57.803710977 DEBUG (1): sendNotifyTask(): mlen = 17  senderID= 1 
+0:0:57.803710977 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:0:57.812835680 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:0:57.812835680 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:0:57.812835690 DEBUG (0): ReceiveNotifyTask(): len=17 
+0:0:57.812835690 DEBUG (0): NotifyParentMsg received from 1 !!! 
+0:0:57.813003525 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:0:57.813003525 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:1:8.996093760 DEBUG (0): SlotTimer.fired(): [33mTime to Send Data [0m
+0:1:8.996093770 DEBUG (0): 
+0:1:8.996093770 DEBUG (0): rootResults(): [34m################################################### ROOT RESULTS FOR EPOCH 1 ###################################################s
+0:1:8.996093770 DEBUG (0): rootResults(): [34m############  SUM   : [35m168 [0m
+0:1:8.996093770 DEBUG (0): rootResults(): [34m############  COUNT : [35m6 [0m
+0:1:8.996093770 DEBUG (0): rootResults(): [34m############  AVG   : [35m28 [0m
+0:1:8.996093770 DEBUG (0): rootResults(): [34m############  MAX   : [35m48 [0m
+
+0:1:10.390625010 DEBUG (0): EpochTimer.fired(): [36m######################################################## EPOCH 2 [0m
+0:1:10.390625010 DEBUG (0): EpochTimer.fired(): [35mMeasured 14 [0m
+0:1:10.592773447 DEBUG (1): EpochTimer.fired(): [36m######################################################## EPOCH 2 [0m
+0:1:10.592773447 DEBUG (1): EpochTimer.fired(): [35mMeasured 28 [0m
+0:1:10.796875010 DEBUG (2): EpochTimer.fired(): [36m######################################################## EPOCH 2 [0m
+0:1:10.796875010 DEBUG (2): EpochTimer.fired(): [35mMeasured 43 [0m
+0:1:10.796875010 DEBUG (4): EpochTimer.fired(): [36m######################################################## EPOCH 2 [0m
+0:1:10.796875010 DEBUG (4): EpochTimer.fired(): [35mMeasured 22 [0m
+0:1:10.796875010 DEBUG (7): EpochTimer.fired(): [36m######################################################## EPOCH 2 [0m
+0:1:10.796875010 DEBUG (7): EpochTimer.fired(): [35mMeasured 15 [0m
+0:1:11.001953135 DEBUG (5): EpochTimer.fired(): [36m######################################################## EPOCH 2 [0m
+0:1:11.001953135 DEBUG (5): EpochTimer.fired(): [35mMeasured 36 [0m
+0:1:41.001953135 DEBUG (5): SlotTimer.fired(): [33mTime to Send Data [0m
+0:1:41.001953145 DEBUG (5): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:1:41.001953165 DEBUG (5): sendNotifyTask(): mlen = 17  senderID= 5 
+0:1:41.001953165 DEBUG (5): sendNotifyTask(): [32mSend Success!!![0m
+0:1:41.010147087 DEBUG (4): NotifyReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:1:41.010147087 DEBUG (4): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:1:41.010147097 DEBUG (4): ReceiveNotifyTask(): len=17 
+0:1:41.010147097 DEBUG (4): NotifyParentMsg received from 5 !!! 
+0:1:41.010314933 DEBUG (5): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:1:41.010314933 DEBUG (5): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:1:45.816406260 DEBUG (2): SlotTimer.fired(): [33mTime to Send Data [0m
+0:1:45.816406270 DEBUG (2): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:1:45.816406290 DEBUG (2): sendNotifyTask(): mlen = 17  senderID= 2 
+0:1:45.816406290 DEBUG (2): sendNotifyTask(): [32mSend Success!!![0m
+0:1:45.818573025 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 2 - Original source 2 
+0:1:45.818573025 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:1:45.818573035 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:1:45.818573035 DEBUG (1): NotifyParentMsg received from 2 !!! 
+0:1:45.818740871 DEBUG (2): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:1:45.818740871 DEBUG (2): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:1:46.015625010 DEBUG (4): SlotTimer.fired(): [33mTime to Send Data [0m
+0:1:46.015625020 DEBUG (4): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:1:46.015625040 DEBUG (4): sendNotifyTask(): mlen = 17  senderID= 4 
+0:1:46.015625040 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:1:46.025100693 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:1:46.025100693 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:1:46.025100703 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:1:46.025100703 DEBUG (1): NotifyParentMsg received from 4 !!! 
+0:1:46.025268538 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:1:46.025268538 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:1:50.398437510 DEBUG (7): SlotTimer.fired(): [33mTime to Send Data [0m
+0:1:50.398437520 DEBUG (7): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:1:50.398437540 DEBUG (7): sendNotifyTask(): mlen = 17  senderID= 7 
+0:1:50.398437540 DEBUG (7): sendNotifyTask(): [32mSend Success!!![0m
+0:1:50.402450578 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 7 - Original source 7 
+0:1:50.402450578 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:1:50.402450588 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:1:50.402450588 DEBUG (1): NotifyParentMsg received from 7 !!! 
+0:1:50.402618424 DEBUG (7): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:1:50.402618424 DEBUG (7): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:1:50.831054697 DEBUG (1): SlotTimer.fired(): [33mTime to Send Data [0m
+0:1:50.831054707 DEBUG (1): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:1:50.831054727 DEBUG (1): sendNotifyTask(): mlen = 17  senderID= 1 
+0:1:50.831054727 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:1:50.841476419 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:1:50.841476419 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:1:50.841476429 DEBUG (0): ReceiveNotifyTask(): len=17 
+0:1:50.841476429 DEBUG (0): NotifyParentMsg received from 1 !!! 
+0:1:50.841644265 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:1:50.841644265 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:2:5.808593760 DEBUG (0): SlotTimer.fired(): [33mTime to Send Data [0m
+0:2:5.808593770 DEBUG (0): 
+0:2:5.808593770 DEBUG (0): rootResults(): [34m################################################### ROOT RESULTS FOR EPOCH 2 ###################################################s
+0:2:5.808593770 DEBUG (0): rootResults(): [34m############  SUM   : [35m158 [0m
+0:2:5.808593770 DEBUG (0): rootResults(): [34m############  COUNT : [35m6 [0m
+0:2:5.808593770 DEBUG (0): rootResults(): [34m############  AVG   : [35m26 [0m
+0:2:5.808593770 DEBUG (0): rootResults(): [34m############  MAX   : [35m43 [0m
+
+0:2:10.390625010 DEBUG (0): EpochTimer.fired(): [36m######################################################## EPOCH 3 [0m
+0:2:10.390625010 DEBUG (0): EpochTimer.fired(): [35mMeasured 8 [0m
+0:2:10.592773447 DEBUG (1): EpochTimer.fired(): [36m######################################################## EPOCH 3 [0m
+0:2:10.592773447 DEBUG (1): EpochTimer.fired(): [35mMeasured 30 [0m
+0:2:10.796875010 DEBUG (2): EpochTimer.fired(): [36m######################################################## EPOCH 3 [0m
+0:2:10.796875010 DEBUG (2): EpochTimer.fired(): [35mMeasured 2 [0m
+0:2:10.796875010 DEBUG (4): EpochTimer.fired(): [36m######################################################## EPOCH 3 [0m
+0:2:10.796875010 DEBUG (4): EpochTimer.fired(): [35mMeasured 47 [0m
+0:2:10.796875010 DEBUG (7): EpochTimer.fired(): [36m######################################################## EPOCH 3 [0m
+0:2:10.796875010 DEBUG (7): EpochTimer.fired(): [35mMeasured 49 [0m
+0:2:11.001953135 DEBUG (5): EpochTimer.fired(): [36m######################################################## EPOCH 3 [0m
+0:2:11.001953135 DEBUG (5): EpochTimer.fired(): [35mMeasured 19 [0m
+0:2:33.232421885 DEBUG (5): SlotTimer.fired(): [33mTime to Send Data [0m
+0:2:33.232421895 DEBUG (5): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:2:33.232421915 DEBUG (5): sendNotifyTask(): mlen = 17  senderID= 5 
+0:2:33.232421915 DEBUG (5): sendNotifyTask(): [32mSend Success!!![0m
+0:2:33.242950418 DEBUG (4): NotifyReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:2:33.242950418 DEBUG (4): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:2:33.242950428 DEBUG (4): ReceiveNotifyTask(): len=17 
+0:2:33.242950428 DEBUG (4): NotifyParentMsg received from 5 !!! 
+0:2:33.243118264 DEBUG (5): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:2:33.243118264 DEBUG (5): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:2:42.230468760 DEBUG (2): SlotTimer.fired(): [33mTime to Send Data [0m
+0:2:42.230468770 DEBUG (2): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:2:42.230468790 DEBUG (2): sendNotifyTask(): mlen = 17  senderID= 2 
+0:2:42.230468790 DEBUG (2): sendNotifyTask(): [32mSend Success!!![0m
+0:2:42.238311762 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 2 - Original source 2 
+0:2:42.238311762 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:2:42.238311772 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:2:42.238311772 DEBUG (1): NotifyParentMsg received from 2 !!! 
+0:2:42.238479607 DEBUG (2): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:2:42.238479607 DEBUG (2): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:2:49.601562510 DEBUG (4): SlotTimer.fired(): [33mTime to Send Data [0m
+0:2:49.601562520 DEBUG (4): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:2:49.601562540 DEBUG (4): sendNotifyTask(): mlen = 17  senderID= 4 
+0:2:49.601562540 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:2:49.606735239 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:2:49.606735239 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:2:49.606735249 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:2:49.606735249 DEBUG (1): NotifyParentMsg received from 4 !!! 
+0:2:49.606903085 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:2:49.606903085 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:2:50.398437510 DEBUG (7): SlotTimer.fired(): [33mTime to Send Data [0m
+0:2:50.398437520 DEBUG (7): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:2:50.398437540 DEBUG (7): sendNotifyTask(): mlen = 17  senderID= 7 
+0:2:50.398437540 DEBUG (7): sendNotifyTask(): [32mSend Success!!![0m
+0:2:50.403549205 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 7 - Original source 7 
+0:2:50.403549205 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:2:50.403549215 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:2:50.403549215 DEBUG (1): NotifyParentMsg received from 7 !!! 
+0:2:50.403717050 DEBUG (7): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:2:50.403717050 DEBUG (7): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:2:58.002929697 DEBUG (1): SlotTimer.fired(): [33mTime to Send Data [0m
+0:2:58.002929707 DEBUG (1): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:2:58.002929727 DEBUG (1): sendNotifyTask(): mlen = 17  senderID= 1 
+0:2:58.002929727 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:2:58.006485004 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:2:58.006485004 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:2:58.006485014 DEBUG (0): ReceiveNotifyTask(): len=17 
+0:2:58.006485014 DEBUG (0): NotifyParentMsg received from 1 !!! 
+0:2:58.006652850 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:2:58.006652850 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:3:4.414062510 DEBUG (0): SlotTimer.fired(): [33mTime to Send Data [0m
+0:3:4.414062520 DEBUG (0): 
+0:3:4.414062520 DEBUG (0): rootResults(): [34m################################################### ROOT RESULTS FOR EPOCH 3 ###################################################s
+0:3:4.414062520 DEBUG (0): rootResults(): [34m############  SUM   : [35m155 [0m
+0:3:4.414062520 DEBUG (0): rootResults(): [34m############  COUNT : [35m6 [0m
+0:3:4.414062520 DEBUG (0): rootResults(): [34m############  AVG   : [35m25 [0m
+0:3:4.414062520 DEBUG (0): rootResults(): [34m############  MAX   : [35m49 [0m
+
+0:3:10.390625010 DEBUG (0): EpochTimer.fired(): [36m######################################################## EPOCH 4 [0m
+0:3:10.390625010 DEBUG (0): EpochTimer.fired(): [35mMeasured 8 [0m
+0:3:10.592773447 DEBUG (1): EpochTimer.fired(): [36m######################################################## EPOCH 4 [0m
+0:3:10.592773447 DEBUG (1): EpochTimer.fired(): [35mMeasured 17 [0m
+0:3:10.796875010 DEBUG (2): EpochTimer.fired(): [36m######################################################## EPOCH 4 [0m
+0:3:10.796875010 DEBUG (2): EpochTimer.fired(): [35mMeasured 26 [0m
+0:3:10.796875010 DEBUG (4): EpochTimer.fired(): [36m######################################################## EPOCH 4 [0m
+0:3:10.796875010 DEBUG (4): EpochTimer.fired(): [35mMeasured 43 [0m
+0:3:10.796875010 DEBUG (7): EpochTimer.fired(): [36m######################################################## EPOCH 4 [0m
+0:3:10.796875010 DEBUG (7): EpochTimer.fired(): [35mMeasured 19 [0m
+0:3:11.001953135 DEBUG (5): EpochTimer.fired(): [36m######################################################## EPOCH 4 [0m
+0:3:11.001953135 DEBUG (5): EpochTimer.fired(): [35mMeasured 2 [0m
+0:3:38.212890635 DEBUG (5): SlotTimer.fired(): [33mTime to Send Data [0m
+0:3:38.212890645 DEBUG (5): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:3:38.212890665 DEBUG (5): sendNotifyTask(): mlen = 17  senderID= 5 
+0:3:38.212890665 DEBUG (5): sendNotifyTask(): [32mSend Success!!![0m
+0:3:38.216751116 DEBUG (4): NotifyReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:3:38.216751116 DEBUG (4): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:3:38.216751126 DEBUG (4): ReceiveNotifyTask(): len=17 
+0:3:38.216751126 DEBUG (4): NotifyParentMsg received from 5 !!! 
+0:3:38.216918962 DEBUG (5): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:3:38.216918962 DEBUG (5): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:3:44.421875010 DEBUG (2): SlotTimer.fired(): [33mTime to Send Data [0m
+0:3:44.421875020 DEBUG (2): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:3:44.421875040 DEBUG (2): sendNotifyTask(): mlen = 17  senderID= 2 
+0:3:44.421875040 DEBUG (2): sendNotifyTask(): [32mSend Success!!![0m
+0:3:44.429901116 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 2 - Original source 2 
+0:3:44.429901116 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:3:44.429901126 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:3:44.429901126 DEBUG (1): NotifyParentMsg received from 2 !!! 
+0:3:44.430068962 DEBUG (2): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:3:44.430068962 DEBUG (2): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:3:46.812500010 DEBUG (4): SlotTimer.fired(): [33mTime to Send Data [0m
+0:3:46.812500020 DEBUG (4): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:3:46.812500040 DEBUG (4): sendNotifyTask(): mlen = 17  senderID= 4 
+0:3:46.812500040 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:3:46.816360491 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:3:46.816360491 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:3:46.816360501 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:3:46.816360501 DEBUG (1): NotifyParentMsg received from 4 !!! 
+0:3:46.816528337 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:3:46.816528337 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:3:50.398437510 DEBUG (7): SlotTimer.fired(): [33mTime to Send Data [0m
+0:3:50.398437520 DEBUG (7): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:3:50.398437540 DEBUG (7): sendNotifyTask(): mlen = 17  senderID= 7 
+0:3:50.398437540 DEBUG (7): sendNotifyTask(): [32mSend Success!!![0m
+0:3:50.402511613 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 7 - Original source 7 
+0:3:50.402511613 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:3:50.402511623 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:3:50.402511623 DEBUG (1): NotifyParentMsg received from 7 !!! 
+0:3:50.402679459 DEBUG (7): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:3:50.402679459 DEBUG (7): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:3:53.022460947 DEBUG (1): SlotTimer.fired(): [33mTime to Send Data [0m
+0:3:53.022460957 DEBUG (1): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:3:53.022460977 DEBUG (1): sendNotifyTask(): mlen = 17  senderID= 1 
+0:3:53.022460977 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:3:53.028167731 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:3:53.028167731 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:4:1.625000010 DEBUG (0): SlotTimer.fired(): [33mTime to Send Data [0m
+0:4:1.625000020 DEBUG (0): 
+0:4:1.625000020 DEBUG (0): rootResults(): [34m################################################### ROOT RESULTS FOR EPOCH 4 ###################################################s
+0:4:1.625000020 DEBUG (0): rootResults(): [34m############  SUM   : [35m8 [0m
+0:4:1.625000020 DEBUG (0): rootResults(): [34m############  COUNT : [35m1 [0m
+0:4:1.625000020 DEBUG (0): rootResults(): [34m############  AVG   : [35m8 [0m
+0:4:1.625000020 DEBUG (0): rootResults(): [34m############  MAX   : [35m8 [0m
+
+0:4:10.390625010 DEBUG (0): EpochTimer.fired(): [36m######################################################## EPOCH 5 [0m
+0:4:10.390625010 DEBUG (0): EpochTimer.fired(): [35mMeasured 1 [0m
+0:4:10.592773447 DEBUG (1): EpochTimer.fired(): [36m######################################################## EPOCH 5 [0m
+0:4:10.592773447 DEBUG (1): EpochTimer.fired(): [35mMeasured 3 [0m
+0:4:10.796875010 DEBUG (2): EpochTimer.fired(): [36m######################################################## EPOCH 5 [0m
+0:4:10.796875010 DEBUG (2): EpochTimer.fired(): [35mMeasured 5 [0m
+0:4:10.796875010 DEBUG (4): EpochTimer.fired(): [36m######################################################## EPOCH 5 [0m
+0:4:10.796875010 DEBUG (4): EpochTimer.fired(): [35mMeasured 9 [0m
+0:4:10.796875010 DEBUG (7): EpochTimer.fired(): [36m######################################################## EPOCH 5 [0m
+0:4:10.796875010 DEBUG (7): EpochTimer.fired(): [35mMeasured 15 [0m
+0:4:11.001953135 DEBUG (5): EpochTimer.fired(): [36m######################################################## EPOCH 5 [0m
+0:4:11.001953135 DEBUG (5): EpochTimer.fired(): [35mMeasured 11 [0m
+0:4:41.001953135 DEBUG (5): SlotTimer.fired(): [33mTime to Send Data [0m
+0:4:41.001953145 DEBUG (5): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:4:41.001953165 DEBUG (5): sendNotifyTask(): mlen = 17  senderID= 5 
+0:4:41.001953165 DEBUG (5): sendNotifyTask(): [32mSend Success!!![0m
+0:4:41.008621217 DEBUG (4): NotifyReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:4:41.008621217 DEBUG (4): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:4:41.008621227 DEBUG (4): ReceiveNotifyTask(): len=17 
+0:4:41.008621227 DEBUG (4): NotifyParentMsg received from 5 !!! 
+0:4:41.008789063 DEBUG (5): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:4:41.008789063 DEBUG (5): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:4:41.035156260 DEBUG (7): SlotTimer.fired(): [33mTime to Send Data [0m
+0:4:41.035156270 DEBUG (7): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:4:41.035156290 DEBUG (7): sendNotifyTask(): mlen = 17  senderID= 7 
+0:4:41.035156290 DEBUG (7): sendNotifyTask(): [32mSend Success!!![0m
+0:4:41.044235217 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 7 - Original source 7 
+0:4:41.044235217 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:4:41.044235227 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:4:41.044235227 DEBUG (1): NotifyParentMsg received from 7 !!! 
+0:4:41.044403062 DEBUG (7): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:4:41.044403062 DEBUG (7): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:4:45.816406260 DEBUG (2): SlotTimer.fired(): [33mTime to Send Data [0m
+0:4:45.816406270 DEBUG (2): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:4:45.816406290 DEBUG (2): sendNotifyTask(): mlen = 17  senderID= 2 
+0:4:45.816406290 DEBUG (2): sendNotifyTask(): [32mSend Success!!![0m
+0:4:45.820098895 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 2 - Original source 2 
+0:4:45.820098895 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:4:45.820098905 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:4:45.820098905 DEBUG (1): NotifyParentMsg received from 2 !!! 
+0:4:45.820266741 DEBUG (2): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:4:45.820266741 DEBUG (2): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:4:46.015625010 DEBUG (4): SlotTimer.fired(): [33mTime to Send Data [0m
+0:4:46.015625020 DEBUG (4): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:4:46.015625040 DEBUG (4): sendNotifyTask(): mlen = 17  senderID= 4 
+0:4:46.015625040 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:4:46.023162838 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:4:46.023162838 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:4:46.023162848 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:4:46.023162848 DEBUG (1): NotifyParentMsg received from 4 !!! 
+0:4:46.023330683 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:4:46.023330683 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:4:50.831054697 DEBUG (1): SlotTimer.fired(): [33mTime to Send Data [0m
+0:4:50.831054707 DEBUG (1): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:4:50.831054727 DEBUG (1): sendNotifyTask(): mlen = 17  senderID= 1 
+0:4:50.831054727 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:4:50.836990361 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:4:50.836990361 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:4:50.836990371 DEBUG (0): ReceiveNotifyTask(): len=17 
+0:4:50.836990371 DEBUG (0): NotifyParentMsg received from 1 !!! 
+0:4:50.837158207 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:4:50.837158207 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:5:5.808593760 DEBUG (0): SlotTimer.fired(): [33mTime to Send Data [0m
+0:5:5.808593770 DEBUG (0): 
+0:5:5.808593770 DEBUG (0): rootResults(): [34m################################################### ROOT RESULTS FOR EPOCH 5 ###################################################s
+0:5:5.808593770 DEBUG (0): rootResults(): [34m############  SUM   : [35m44 [0m
+0:5:5.808593770 DEBUG (0): rootResults(): [34m############  COUNT : [35m6 [0m
+0:5:5.808593770 DEBUG (0): rootResults(): [34m############  AVG   : [35m7 [0m
+0:5:5.808593770 DEBUG (0): rootResults(): [34m############  MAX   : [35m15 [0m
+
+0:5:10.390625010 DEBUG (0): EpochTimer.fired(): [36m######################################################## EPOCH 6 [0m
+0:5:10.390625010 DEBUG (0): EpochTimer.fired(): [35mMeasured 45 [0m
+0:5:10.592773447 DEBUG (1): EpochTimer.fired(): [36m######################################################## EPOCH 6 [0m
+0:5:10.592773447 DEBUG (1): EpochTimer.fired(): [35mMeasured 41 [0m
+0:5:10.796875010 DEBUG (2): EpochTimer.fired(): [36m######################################################## EPOCH 6 [0m
+0:5:10.796875010 DEBUG (2): EpochTimer.fired(): [35mMeasured 36 [0m
+0:5:10.796875010 DEBUG (4): EpochTimer.fired(): [36m######################################################## EPOCH 6 [0m
+0:5:10.796875010 DEBUG (4): EpochTimer.fired(): [35mMeasured 41 [0m
+0:5:10.796875010 DEBUG (7): EpochTimer.fired(): [36m######################################################## EPOCH 6 [0m
+0:5:10.796875010 DEBUG (7): EpochTimer.fired(): [35mMeasured 28 [0m
+0:5:11.001953135 DEBUG (5): EpochTimer.fired(): [36m######################################################## EPOCH 6 [0m
+0:5:11.001953135 DEBUG (5): EpochTimer.fired(): [35mMeasured 37 [0m
+0:5:31.837890635 DEBUG (5): SlotTimer.fired(): [33mTime to Send Data [0m
+0:5:31.837890645 DEBUG (5): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:5:31.837890665 DEBUG (5): sendNotifyTask(): mlen = 17  senderID= 5 
+0:5:31.837890665 DEBUG (5): sendNotifyTask(): [32mSend Success!!![0m
+0:5:31.849075292 DEBUG (4): NotifyReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:5:31.849075292 DEBUG (4): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:5:31.849075302 DEBUG (4): ReceiveNotifyTask(): len=17 
+0:5:31.849075302 DEBUG (4): NotifyParentMsg received from 5 !!! 
+0:5:31.849243138 DEBUG (5): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:5:31.849243138 DEBUG (5): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:5:45.019531260 DEBUG (7): SlotTimer.fired(): [33mTime to Send Data [0m
+0:5:45.019531270 DEBUG (7): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:5:45.019531290 DEBUG (7): sendNotifyTask(): mlen = 17  senderID= 7 
+0:5:45.019531290 DEBUG (7): sendNotifyTask(): [32mSend Success!!![0m
+0:5:45.029815654 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 7 - Original source 7 
+0:5:45.029815654 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:5:45.029815664 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:5:45.029815664 DEBUG (1): NotifyParentMsg received from 7 !!! 
+0:5:45.029983500 DEBUG (7): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:5:45.029983500 DEBUG (7): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:5:46.214843760 DEBUG (2): SlotTimer.fired(): [33mTime to Send Data [0m
+0:5:46.214843770 DEBUG (2): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:5:46.214843790 DEBUG (2): sendNotifyTask(): mlen = 17  senderID= 2 
+0:5:46.214843790 DEBUG (2): sendNotifyTask(): [32mSend Success!!![0m
+0:5:46.223495473 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 2 - Original source 2 
+0:5:46.223495473 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:5:46.223495483 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:5:46.223495483 DEBUG (1): NotifyParentMsg received from 2 !!! 
+0:5:46.223663318 DEBUG (2): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:5:46.223663318 DEBUG (2): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:5:50.199218760 DEBUG (4): SlotTimer.fired(): [33mTime to Send Data [0m
+0:5:50.199218770 DEBUG (4): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:5:50.199218790 DEBUG (4): sendNotifyTask(): mlen = 17  senderID= 4 
+0:5:50.199218790 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:5:50.209274273 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:5:50.209274273 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:5:50.209274283 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:5:50.209274283 DEBUG (1): NotifyParentMsg received from 4 !!! 
+0:5:50.209442119 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:5:50.209442119 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:5:54.616210947 DEBUG (1): SlotTimer.fired(): [33mTime to Send Data [0m
+0:5:54.616210957 DEBUG (1): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:5:54.616210977 DEBUG (1): sendNotifyTask(): mlen = 17  senderID= 1 
+0:5:54.616210977 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:5:54.623794551 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:5:54.623794551 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:5:54.623794561 DEBUG (0): ReceiveNotifyTask(): len=17 
+0:5:54.623794561 DEBUG (0): NotifyParentMsg received from 1 !!! 
+0:5:54.623962397 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:5:54.623962397 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:6:2.421875010 DEBUG (0): SlotTimer.fired(): [33mTime to Send Data [0m
+0:6:2.421875020 DEBUG (0): 
+0:6:2.421875020 DEBUG (0): rootResults(): [34m################################################### ROOT RESULTS FOR EPOCH 6 ###################################################s
+0:6:2.421875020 DEBUG (0): rootResults(): [34m############  SUM   : [35m228 [0m
+0:6:2.421875020 DEBUG (0): rootResults(): [34m############  COUNT : [35m6 [0m
+0:6:2.421875020 DEBUG (0): rootResults(): [34m############  AVG   : [35m38 [0m
+0:6:2.421875020 DEBUG (0): rootResults(): [34m############  MAX   : [35m45 [0m
+
+0:6:10.390625010 DEBUG (0): EpochTimer.fired(): [36m######################################################## EPOCH 7 [0m
+0:6:10.390625010 DEBUG (0): EpochTimer.fired(): [35mMeasured 40 [0m
+0:6:10.592773447 DEBUG (1): EpochTimer.fired(): [36m######################################################## EPOCH 7 [0m
+0:6:10.592773447 DEBUG (1): EpochTimer.fired(): [35mMeasured 44 [0m
+0:6:10.796875010 DEBUG (2): EpochTimer.fired(): [36m######################################################## EPOCH 7 [0m
+0:6:10.796875010 DEBUG (2): EpochTimer.fired(): [35mMeasured 48 [0m
+0:6:10.796875010 DEBUG (4): EpochTimer.fired(): [36m######################################################## EPOCH 7 [0m
+0:6:10.796875010 DEBUG (4): EpochTimer.fired(): [35mMeasured 6 [0m
+0:6:10.796875010 DEBUG (7): EpochTimer.fired(): [36m######################################################## EPOCH 7 [0m
+0:6:10.796875010 DEBUG (7): EpochTimer.fired(): [35mMeasured 4 [0m
+0:6:11.001953135 DEBUG (5): EpochTimer.fired(): [36m######################################################## EPOCH 7 [0m
+0:6:11.001953135 DEBUG (5): EpochTimer.fired(): [35mMeasured 10 [0m
+0:6:38.212890635 DEBUG (5): SlotTimer.fired(): [33mTime to Send Data [0m
+0:6:38.212890645 DEBUG (5): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:6:38.212890665 DEBUG (5): sendNotifyTask(): mlen = 17  senderID= 5 
+0:6:38.212890665 DEBUG (5): sendNotifyTask(): [32mSend Success!!![0m
+0:6:38.222396835 DEBUG (4): NotifyReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:6:38.222396835 DEBUG (4): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:6:38.222396845 DEBUG (4): ReceiveNotifyTask(): len=17 
+0:6:38.222396845 DEBUG (4): NotifyParentMsg received from 5 !!! 
+0:6:38.222564681 DEBUG (5): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:6:38.222564681 DEBUG (5): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:6:44.421875010 DEBUG (2): SlotTimer.fired(): [33mTime to Send Data [0m
+0:6:44.421875020 DEBUG (2): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:6:44.421875040 DEBUG (2): sendNotifyTask(): mlen = 17  senderID= 2 
+0:6:44.421875040 DEBUG (2): sendNotifyTask(): [32mSend Success!!![0m
+0:6:44.431381210 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 2 - Original source 2 
+0:6:44.431381210 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:6:44.431381220 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:6:44.431381220 DEBUG (1): NotifyParentMsg received from 2 !!! 
+0:6:44.431549056 DEBUG (2): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:6:44.431549056 DEBUG (2): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:6:46.414062510 DEBUG (4): SlotTimer.fired(): [33mTime to Send Data [0m
+0:6:46.414062520 DEBUG (4): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:6:46.414062540 DEBUG (4): sendNotifyTask(): mlen = 17  senderID= 4 
+0:6:46.414062540 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:6:46.424270610 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:6:46.424270610 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:6:46.424270620 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:6:46.424270620 DEBUG (1): NotifyParentMsg received from 4 !!! 
+0:6:46.424438456 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:6:46.424438456 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:6:50.000000010 DEBUG (7): SlotTimer.fired(): [33mTime to Send Data [0m
+0:6:50.000000020 DEBUG (7): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:6:50.000000040 DEBUG (7): sendNotifyTask(): mlen = 17  senderID= 7 
+0:6:50.000000040 DEBUG (7): sendNotifyTask(): [32mSend Success!!![0m
+0:6:50.011337254 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 7 - Original source 7 
+0:6:50.011337254 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:6:50.011337264 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:6:50.011337264 DEBUG (1): NotifyParentMsg received from 7 !!! 
+0:6:50.011505100 DEBUG (7): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:6:50.011505100 DEBUG (7): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:6:53.221679697 DEBUG (1): SlotTimer.fired(): [33mTime to Send Data [0m
+0:6:53.221679707 DEBUG (1): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:6:53.221679727 DEBUG (1): sendNotifyTask(): mlen = 17  senderID= 1 
+0:6:53.221679727 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:6:53.231246932 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:6:53.231246932 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:6:53.231246942 DEBUG (0): ReceiveNotifyTask(): len=17 
+0:6:53.231246942 DEBUG (0): NotifyParentMsg received from 1 !!! 
+0:6:53.231414778 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:6:53.231414778 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:7:2.023437510 DEBUG (0): SlotTimer.fired(): [33mTime to Send Data [0m
+0:7:2.023437520 DEBUG (0): 
+0:7:2.023437520 DEBUG (0): rootResults(): [34m################################################### ROOT RESULTS FOR EPOCH 7 ###################################################s
+0:7:2.023437520 DEBUG (0): rootResults(): [34m############  SUM   : [35m152 [0m
+0:7:2.023437520 DEBUG (0): rootResults(): [34m############  COUNT : [35m6 [0m
+0:7:2.023437520 DEBUG (0): rootResults(): [34m############  AVG   : [35m25 [0m
+0:7:2.023437520 DEBUG (0): rootResults(): [34m############  MAX   : [35m48 [0m
+
+0:7:10.390625010 DEBUG (0): EpochTimer.fired(): [36m######################################################## EPOCH 8 [0m
+0:7:10.390625010 DEBUG (0): EpochTimer.fired(): [35mMeasured 1 [0m
+0:7:10.592773447 DEBUG (1): EpochTimer.fired(): [36m######################################################## EPOCH 8 [0m
+0:7:10.592773447 DEBUG (1): EpochTimer.fired(): [35mMeasured 3 [0m
+0:7:10.796875010 DEBUG (2): EpochTimer.fired(): [36m######################################################## EPOCH 8 [0m
+0:7:10.796875010 DEBUG (2): EpochTimer.fired(): [35mMeasured 4 [0m
+0:7:10.796875010 DEBUG (4): EpochTimer.fired(): [36m######################################################## EPOCH 8 [0m
+0:7:10.796875010 DEBUG (4): EpochTimer.fired(): [35mMeasured 21 [0m
+0:7:10.796875010 DEBUG (7): EpochTimer.fired(): [36m######################################################## EPOCH 8 [0m
+0:7:10.796875010 DEBUG (7): EpochTimer.fired(): [35mMeasured 26 [0m
+0:7:11.001953135 DEBUG (5): EpochTimer.fired(): [36m######################################################## EPOCH 8 [0m
+0:7:11.001953135 DEBUG (5): EpochTimer.fired(): [35mMeasured 23 [0m
+0:7:36.619140635 DEBUG (5): SlotTimer.fired(): [33mTime to Send Data [0m
+0:7:36.619140645 DEBUG (5): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:7:36.619140665 DEBUG (5): sendNotifyTask(): mlen = 17  senderID= 5 
+0:7:36.619140665 DEBUG (5): sendNotifyTask(): [32mSend Success!!![0m
+0:7:36.626754756 DEBUG (4): NotifyReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:7:36.626754756 DEBUG (4): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:7:36.626754766 DEBUG (4): ReceiveNotifyTask(): len=17 
+0:7:36.626754766 DEBUG (4): NotifyParentMsg received from 5 !!! 
+0:7:36.626922602 DEBUG (5): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:7:36.626922602 DEBUG (5): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:7:41.632812510 DEBUG (7): SlotTimer.fired(): [33mTime to Send Data [0m
+0:7:41.632812520 DEBUG (7): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:7:41.632812540 DEBUG (7): sendNotifyTask(): mlen = 17  senderID= 7 
+0:7:41.632812540 DEBUG (7): sendNotifyTask(): [32mSend Success!!![0m
+0:7:41.636703509 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 7 - Original source 7 
+0:7:41.636703509 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:7:41.636703519 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:7:41.636703519 DEBUG (1): NotifyParentMsg received from 7 !!! 
+0:7:41.636871354 DEBUG (7): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:7:41.636871354 DEBUG (7): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:7:43.824218760 DEBUG (4): SlotTimer.fired(): [33mTime to Send Data [0m
+0:7:43.824218770 DEBUG (4): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:7:43.824218790 DEBUG (4): sendNotifyTask(): mlen = 17  senderID= 4 
+0:7:43.824218790 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:7:43.830596927 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:7:43.830596927 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:7:43.830596937 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:7:43.830596937 DEBUG (1): NotifyParentMsg received from 4 !!! 
+0:7:43.830764772 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:7:43.830764772 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:7:48.605468760 DEBUG (2): SlotTimer.fired(): [33mTime to Send Data [0m
+0:7:48.605468770 DEBUG (2): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:7:48.605468790 DEBUG (2): sendNotifyTask(): mlen = 17  senderID= 2 
+0:7:48.605468790 DEBUG (2): sendNotifyTask(): [32mSend Success!!![0m
+0:7:48.613708488 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 2 - Original source 2 
+0:7:48.613708488 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:7:48.613708498 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:7:48.613708498 DEBUG (1): NotifyParentMsg received from 2 !!! 
+0:7:48.613876333 DEBUG (2): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:7:48.613876333 DEBUG (2): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:7:55.811523447 DEBUG (1): SlotTimer.fired(): [33mTime to Send Data [0m
+0:7:55.811523457 DEBUG (1): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:7:55.811523477 DEBUG (1): sendNotifyTask(): mlen = 17  senderID= 1 
+0:7:55.811523477 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:7:55.815338152 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:7:55.815338152 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:7:55.815338162 DEBUG (0): ReceiveNotifyTask(): len=17 
+0:7:55.815338162 DEBUG (0): NotifyParentMsg received from 1 !!! 
+0:7:55.815505998 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:7:55.815505998 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:8:3.019531260 DEBUG (0): SlotTimer.fired(): [33mTime to Send Data [0m
+0:8:3.019531270 DEBUG (0): 
+0:8:3.019531270 DEBUG (0): rootResults(): [34m################################################### ROOT RESULTS FOR EPOCH 8 ###################################################s
+0:8:3.019531270 DEBUG (0): rootResults(): [34m############  SUM   : [35m78 [0m
+0:8:3.019531270 DEBUG (0): rootResults(): [34m############  COUNT : [35m6 [0m
+0:8:3.019531270 DEBUG (0): rootResults(): [34m############  AVG   : [35m13 [0m
+0:8:3.019531270 DEBUG (0): rootResults(): [34m############  MAX   : [35m26 [0m
+
+0:8:10.390625010 DEBUG (0): EpochTimer.fired(): [36m######################################################## EPOCH 9 [0m
+0:8:10.390625010 DEBUG (0): EpochTimer.fired(): [35mMeasured 7 [0m
+0:8:10.592773447 DEBUG (1): EpochTimer.fired(): [36m######################################################## EPOCH 9 [0m
+0:8:10.592773447 DEBUG (1): EpochTimer.fired(): [35mMeasured 14 [0m
+0:8:10.796875010 DEBUG (2): EpochTimer.fired(): [36m######################################################## EPOCH 9 [0m
+0:8:10.796875010 DEBUG (2): EpochTimer.fired(): [35mMeasured 21 [0m
+0:8:10.796875010 DEBUG (4): EpochTimer.fired(): [36m######################################################## EPOCH 9 [0m
+0:8:10.796875010 DEBUG (4): EpochTimer.fired(): [35mMeasured 49 [0m
+0:8:10.796875010 DEBUG (7): EpochTimer.fired(): [36m######################################################## EPOCH 9 [0m
+0:8:10.796875010 DEBUG (7): EpochTimer.fired(): [35mMeasured 34 [0m
+0:8:11.001953135 DEBUG (5): EpochTimer.fired(): [36m######################################################## EPOCH 9 [0m
+0:8:11.001953135 DEBUG (5): EpochTimer.fired(): [35mMeasured 6 [0m
+0:8:36.220703135 DEBUG (5): SlotTimer.fired(): [33mTime to Send Data [0m
+0:8:36.220703145 DEBUG (5): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:8:36.220703165 DEBUG (5): sendNotifyTask(): mlen = 17  senderID= 5 
+0:8:36.220703165 DEBUG (5): sendNotifyTask(): [32mSend Success!!![0m
+0:8:36.226058969 DEBUG (4): NotifyReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:8:36.226058969 DEBUG (4): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:8:36.226058979 DEBUG (4): ReceiveNotifyTask(): len=17 
+0:8:36.226058979 DEBUG (4): NotifyParentMsg received from 5 !!! 
+0:8:36.226226814 DEBUG (5): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:8:36.226226814 DEBUG (5): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:8:42.031250010 DEBUG (4): SlotTimer.fired(): [33mTime to Send Data [0m
+0:8:42.031250020 DEBUG (4): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:8:42.031250040 DEBUG (4): sendNotifyTask(): mlen = 17  senderID= 4 
+0:8:42.031250040 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:8:42.034957904 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:8:42.034957904 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:8:42.034957914 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:8:42.034957914 DEBUG (1): NotifyParentMsg received from 4 !!! 
+0:8:42.035125750 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:8:42.035125750 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:8:43.425781260 DEBUG (2): SlotTimer.fired(): [33mTime to Send Data [0m
+0:8:43.425781270 DEBUG (2): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:8:43.425781290 DEBUG (2): sendNotifyTask(): mlen = 17  senderID= 2 
+0:8:43.425781290 DEBUG (2): sendNotifyTask(): [32mSend Success!!![0m
+0:8:43.437164280 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 2 - Original source 2 
+0:8:43.437164280 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:8:43.437164290 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:8:43.437164290 DEBUG (1): NotifyParentMsg received from 2 !!! 
+0:8:43.437332126 DEBUG (2): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:8:43.437332126 DEBUG (2): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:8:44.621093760 DEBUG (7): SlotTimer.fired(): [33mTime to Send Data [0m
+0:8:44.621093770 DEBUG (7): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:8:44.621093790 DEBUG (7): sendNotifyTask(): mlen = 17  senderID= 7 
+0:8:44.621093790 DEBUG (7): sendNotifyTask(): [32mSend Success!!![0m
+0:8:44.626953131 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 7 - Original source 7 
+0:8:44.626953131 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:8:44.626953141 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:8:44.626953141 DEBUG (1): NotifyParentMsg received from 7 !!! 
+0:8:44.627120977 DEBUG (7): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:8:44.627120977 DEBUG (7): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:8:59.198242197 DEBUG (1): SlotTimer.fired(): [33mTime to Send Data [0m
+0:8:59.198242207 DEBUG (1): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:8:59.198242227 DEBUG (1): sendNotifyTask(): mlen = 17  senderID= 1 
+0:8:59.198242227 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:8:59.202316300 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:8:59.202316300 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:8:59.202316310 DEBUG (0): ReceiveNotifyTask(): len=17 
+0:8:59.202316310 DEBUG (0): NotifyParentMsg received from 1 !!! 
+0:8:59.202484146 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:8:59.202484146 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:9:5.011718760 DEBUG (0): SlotTimer.fired(): [33mTime to Send Data [0m
+0:9:5.011718770 DEBUG (0): 
+0:9:5.011718770 DEBUG (0): rootResults(): [34m################################################### ROOT RESULTS FOR EPOCH 9 ###################################################s
+0:9:5.011718770 DEBUG (0): rootResults(): [34m############  SUM   : [35m131 [0m
+0:9:5.011718770 DEBUG (0): rootResults(): [34m############  COUNT : [35m6 [0m
+0:9:5.011718770 DEBUG (0): rootResults(): [34m############  AVG   : [35m21 [0m
+0:9:5.011718770 DEBUG (0): rootResults(): [34m############  MAX   : [35m49 [0m
+
+0:9:10.390625010 DEBUG (0): EpochTimer.fired(): [36m######################################################## EPOCH 10 [0m
+0:9:10.390625010 DEBUG (0): EpochTimer.fired(): [35mMeasured 22 [0m
+0:9:10.592773447 DEBUG (1): EpochTimer.fired(): [36m######################################################## EPOCH 10 [0m
+0:9:10.592773447 DEBUG (1): EpochTimer.fired(): [35mMeasured 44 [0m
+0:9:10.796875010 DEBUG (2): EpochTimer.fired(): [36m######################################################## EPOCH 10 [0m
+0:9:10.796875010 DEBUG (2): EpochTimer.fired(): [35mMeasured 16 [0m
+0:9:10.796875010 DEBUG (4): EpochTimer.fired(): [36m######################################################## EPOCH 10 [0m
+0:9:10.796875010 DEBUG (4): EpochTimer.fired(): [35mMeasured 24 [0m
+0:9:10.796875010 DEBUG (7): EpochTimer.fired(): [36m######################################################## EPOCH 10 [0m
+0:9:10.796875010 DEBUG (7): EpochTimer.fired(): [35mMeasured 4 [0m
+0:9:11.001953135 DEBUG (5): EpochTimer.fired(): [36m######################################################## EPOCH 10 [0m
+0:9:11.001953135 DEBUG (5): EpochTimer.fired(): [35mMeasured 46 [0m
+0:9:31.837890635 DEBUG (5): SlotTimer.fired(): [33mTime to Send Data [0m
+0:9:31.837890645 DEBUG (5): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:9:31.837890665 DEBUG (5): sendNotifyTask(): mlen = 17  senderID= 5 
+0:9:31.837890665 DEBUG (5): sendNotifyTask(): [32mSend Success!!![0m
+0:9:31.840225246 DEBUG (4): NotifyReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:9:31.840225246 DEBUG (4): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:9:31.840225256 DEBUG (4): ReceiveNotifyTask(): len=17 
+0:9:31.840225256 DEBUG (4): NotifyParentMsg received from 5 !!! 
+0:9:31.840393092 DEBUG (5): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:9:31.840393092 DEBUG (5): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:9:45.019531260 DEBUG (7): SlotTimer.fired(): [33mTime to Send Data [0m
+0:9:45.019531270 DEBUG (7): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:9:45.019531290 DEBUG (7): sendNotifyTask(): mlen = 17  senderID= 7 
+0:9:45.019531290 DEBUG (7): sendNotifyTask(): [32mSend Success!!![0m
+0:9:45.028274525 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 7 - Original source 7 
+0:9:45.028274525 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:9:45.028274535 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:9:45.028274535 DEBUG (1): NotifyParentMsg received from 7 !!! 
+0:9:45.028442371 DEBUG (7): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:9:45.028442371 DEBUG (7): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:9:46.214843760 DEBUG (2): SlotTimer.fired(): [33mTime to Send Data [0m
+0:9:46.214843770 DEBUG (2): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:9:46.214843790 DEBUG (2): sendNotifyTask(): mlen = 17  senderID= 2 
+0:9:46.214843790 DEBUG (2): sendNotifyTask(): [32mSend Success!!![0m
+0:9:46.219329848 DEBUG (2): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:9:46.219329848 DEBUG (2): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:9:50.199218760 DEBUG (4): SlotTimer.fired(): [33mTime to Send Data [0m
+0:9:50.199218770 DEBUG (4): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:9:50.199218790 DEBUG (4): sendNotifyTask(): mlen = 17  senderID= 4 
+0:9:50.199218790 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:9:50.207595816 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:9:50.207595816 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:9:50.207595826 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:9:50.207595826 DEBUG (1): NotifyParentMsg received from 4 !!! 
+0:9:50.207763662 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:9:50.207763662 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:9:54.616210947 DEBUG (1): SlotTimer.fired(): [33mTime to Send Data [0m
+0:9:54.616210957 DEBUG (1): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:9:54.616210977 DEBUG (1): sendNotifyTask(): mlen = 17  senderID= 1 
+0:9:54.616210977 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:9:54.623626705 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:9:54.623626705 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:9:54.623626715 DEBUG (0): ReceiveNotifyTask(): len=17 
+0:9:54.623626715 DEBUG (0): NotifyParentMsg received from 1 !!! 
+0:9:54.623794551 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:9:54.623794551 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:10:2.421875010 DEBUG (0): SlotTimer.fired(): [33mTime to Send Data [0m
+0:10:2.421875020 DEBUG (0): 
+0:10:2.421875020 DEBUG (0): rootResults(): [34m################################################### ROOT RESULTS FOR EPOCH 10 ###################################################s
+0:10:2.421875020 DEBUG (0): rootResults(): [34m############  SUM   : [35m140 [0m
+0:10:2.421875020 DEBUG (0): rootResults(): [34m############  COUNT : [35m5 [0m
+0:10:2.421875020 DEBUG (0): rootResults(): [34m############  AVG   : [35m28 [0m
+0:10:2.421875020 DEBUG (0): rootResults(): [34m############  MAX   : [35m46 [0m
+
+0:10:10.390625010 DEBUG (0): EpochTimer.fired(): [36m######################################################## EPOCH 11 [0m
+0:10:10.390625010 DEBUG (0): EpochTimer.fired(): [35mMeasured 25 [0m
+0:10:10.592773447 DEBUG (1): EpochTimer.fired(): [36m######################################################## EPOCH 11 [0m
+0:10:10.592773447 DEBUG (1): EpochTimer.fired(): [35mMeasured 1 [0m
+0:10:10.796875010 DEBUG (2): EpochTimer.fired(): [36m######################################################## EPOCH 11 [0m
+0:10:10.796875010 DEBUG (2): EpochTimer.fired(): [35mMeasured 27 [0m
+0:10:10.796875010 DEBUG (4): EpochTimer.fired(): [36m######################################################## EPOCH 11 [0m
+0:10:10.796875010 DEBUG (4): EpochTimer.fired(): [35mMeasured 28 [0m
+0:10:10.796875010 DEBUG (7): EpochTimer.fired(): [36m######################################################## EPOCH 11 [0m
+0:10:10.796875010 DEBUG (7): EpochTimer.fired(): [35mMeasured 19 [0m
+0:10:11.001953135 DEBUG (5): EpochTimer.fired(): [36m######################################################## EPOCH 11 [0m
+0:10:11.001953135 DEBUG (5): EpochTimer.fired(): [35mMeasured 18 [0m
+0:10:36.220703135 DEBUG (5): SlotTimer.fired(): [33mTime to Send Data [0m
+0:10:36.220703145 DEBUG (5): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:10:36.220703165 DEBUG (5): sendNotifyTask(): mlen = 17  senderID= 5 
+0:10:36.220703165 DEBUG (5): sendNotifyTask(): [32mSend Success!!![0m
+0:10:36.226135262 DEBUG (4): NotifyReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:10:36.226135262 DEBUG (4): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:10:36.226135272 DEBUG (4): ReceiveNotifyTask(): len=17 
+0:10:36.226135272 DEBUG (4): NotifyParentMsg received from 5 !!! 
+0:10:36.226303108 DEBUG (5): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:10:36.226303108 DEBUG (5): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:10:44.222656260 DEBUG (7): SlotTimer.fired(): [33mTime to Send Data [0m
+0:10:44.222656270 DEBUG (7): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:10:44.222656290 DEBUG (7): sendNotifyTask(): mlen = 17  senderID= 7 
+0:10:44.222656290 DEBUG (7): sendNotifyTask(): [32mSend Success!!![0m
+0:10:44.234069798 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 7 - Original source 7 
+0:10:44.234069798 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:10:44.234069808 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:10:44.234069808 DEBUG (1): NotifyParentMsg received from 7 !!! 
+0:10:44.234237644 DEBUG (7): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:10:44.234237644 DEBUG (7): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:10:46.613281260 DEBUG (4): SlotTimer.fired(): [33mTime to Send Data [0m
+0:10:46.613281270 DEBUG (4): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:10:46.613281290 DEBUG (4): sendNotifyTask(): mlen = 17  senderID= 4 
+0:10:46.613281290 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:10:46.624740574 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:10:46.624740574 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:10:46.624740584 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:10:46.624740584 DEBUG (1): NotifyParentMsg received from 4 !!! 
+0:10:46.624908419 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:10:46.624908419 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:10:48.406250010 DEBUG (2): SlotTimer.fired(): [33mTime to Send Data [0m
+0:10:48.406250020 DEBUG (2): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:10:48.406250040 DEBUG (2): sendNotifyTask(): mlen = 17  senderID= 2 
+0:10:48.406250040 DEBUG (2): sendNotifyTask(): [32mSend Success!!![0m
+0:10:48.415725692 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 2 - Original source 2 
+0:10:48.415725692 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:10:48.415725702 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:10:48.415725702 DEBUG (1): NotifyParentMsg received from 2 !!! 
+0:10:48.415893538 DEBUG (2): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:10:48.415893538 DEBUG (2): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:10:59.397460947 DEBUG (1): SlotTimer.fired(): [33mTime to Send Data [0m
+0:10:59.397460957 DEBUG (1): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:10:59.397460977 DEBUG (1): sendNotifyTask(): mlen = 17  senderID= 1 
+0:10:59.397460977 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:10:59.403396611 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:10:59.403396611 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:10:59.403396621 DEBUG (0): ReceiveNotifyTask(): len=17 
+0:10:59.403396621 DEBUG (0): NotifyParentMsg received from 1 !!! 
+0:10:59.403564457 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:10:59.403564457 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:11:9.792968760 DEBUG (0): SlotTimer.fired(): [33mTime to Send Data [0m
+0:11:9.792968770 DEBUG (0): 
+0:11:9.792968770 DEBUG (0): rootResults(): [34m################################################### ROOT RESULTS FOR EPOCH 11 ###################################################s
+0:11:9.792968770 DEBUG (0): rootResults(): [34m############  SUM   : [35m118 [0m
+0:11:9.792968770 DEBUG (0): rootResults(): [34m############  COUNT : [35m6 [0m
+0:11:9.792968770 DEBUG (0): rootResults(): [34m############  AVG   : [35m19 [0m
+0:11:9.792968770 DEBUG (0): rootResults(): [34m############  MAX   : [35m28 [0m
+
+0:11:10.390625010 DEBUG (0): EpochTimer.fired(): [36m######################################################## EPOCH 12 [0m
+0:11:10.390625010 DEBUG (0): EpochTimer.fired(): [35mMeasured 39 [0m
+0:11:10.592773447 DEBUG (1): EpochTimer.fired(): [36m######################################################## EPOCH 12 [0m
+0:11:10.592773447 DEBUG (1): EpochTimer.fired(): [35mMeasured 43 [0m
+0:11:10.796875010 DEBUG (2): EpochTimer.fired(): [36m######################################################## EPOCH 12 [0m
+0:11:10.796875010 DEBUG (2): EpochTimer.fired(): [35mMeasured 33 [0m
+0:11:10.796875010 DEBUG (4): EpochTimer.fired(): [36m######################################################## EPOCH 12 [0m
+0:11:10.796875010 DEBUG (4): EpochTimer.fired(): [35mMeasured 27 [0m
+0:11:10.796875010 DEBUG (7): EpochTimer.fired(): [36m######################################################## EPOCH 12 [0m
+0:11:10.796875010 DEBUG (7): EpochTimer.fired(): [35mMeasured 25 [0m
+0:11:11.001953135 DEBUG (5): EpochTimer.fired(): [36m######################################################## EPOCH 12 [0m
+0:11:11.001953135 DEBUG (5): EpochTimer.fired(): [35mMeasured 31 [0m
+0:11:38.412109385 DEBUG (5): SlotTimer.fired(): [33mTime to Send Data [0m
+0:11:38.412109395 DEBUG (5): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:11:38.412109415 DEBUG (5): sendNotifyTask(): mlen = 17  senderID= 5 
+0:11:38.412109415 DEBUG (5): sendNotifyTask(): [32mSend Success!!![0m
+0:11:38.423263525 DEBUG (4): NotifyReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:11:38.423263525 DEBUG (4): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:11:38.423263535 DEBUG (4): ReceiveNotifyTask(): len=17 
+0:11:38.423263535 DEBUG (4): NotifyParentMsg received from 5 !!! 
+0:11:38.423431370 DEBUG (5): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:11:38.423431370 DEBUG (5): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:11:44.023437510 DEBUG (7): SlotTimer.fired(): [33mTime to Send Data [0m
+0:11:44.023437520 DEBUG (7): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:11:44.023437540 DEBUG (7): sendNotifyTask(): mlen = 17  senderID= 7 
+0:11:44.023437540 DEBUG (7): sendNotifyTask(): [32mSend Success!!![0m
+0:11:44.031768790 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 7 - Original source 7 
+0:11:44.031768790 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:11:44.031768800 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:11:44.031768800 DEBUG (1): NotifyParentMsg received from 7 !!! 
+0:11:44.031936636 DEBUG (7): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:11:44.031936636 DEBUG (7): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:11:44.820312510 DEBUG (2): SlotTimer.fired(): [33mTime to Send Data [0m
+0:11:44.820312520 DEBUG (2): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:11:44.820312540 DEBUG (2): sendNotifyTask(): mlen = 17  senderID= 2 
+0:11:44.820312540 DEBUG (2): sendNotifyTask(): [32mSend Success!!![0m
+0:11:44.831817600 DEBUG (2): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:11:44.831817600 DEBUG (2): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:11:50.597656260 DEBUG (4): SlotTimer.fired(): [33mTime to Send Data [0m
+0:11:50.597656270 DEBUG (4): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:11:50.597656290 DEBUG (4): sendNotifyTask(): mlen = 17  senderID= 4 
+0:11:50.597656290 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:11:50.600585960 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:11:50.600585960 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:11:50.600585970 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:11:50.600585970 DEBUG (1): NotifyParentMsg received from 4 !!! 
+0:11:50.600753806 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:11:50.600753806 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:11:56.409179697 DEBUG (1): SlotTimer.fired(): [33mTime to Send Data [0m
+0:11:56.409179707 DEBUG (1): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:11:56.409179727 DEBUG (1): sendNotifyTask(): mlen = 17  senderID= 1 
+0:11:56.409179727 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:11:56.416732784 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:11:56.416732784 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:11:56.416732794 DEBUG (0): ReceiveNotifyTask(): len=17 
+0:11:56.416732794 DEBUG (0): NotifyParentMsg received from 1 !!! 
+0:11:56.416900629 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:11:56.416900629 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:12:8.597656260 DEBUG (0): SlotTimer.fired(): [33mTime to Send Data [0m
+0:12:8.597656270 DEBUG (0): 
+0:12:8.597656270 DEBUG (0): rootResults(): [34m################################################### ROOT RESULTS FOR EPOCH 12 ###################################################s
+0:12:8.597656270 DEBUG (0): rootResults(): [34m############  SUM   : [35m165 [0m
+0:12:8.597656270 DEBUG (0): rootResults(): [34m############  COUNT : [35m5 [0m
+0:12:8.597656270 DEBUG (0): rootResults(): [34m############  AVG   : [35m33 [0m
+0:12:8.597656270 DEBUG (0): rootResults(): [34m############  MAX   : [35m43 [0m
+
+0:12:10.390625010 DEBUG (0): EpochTimer.fired(): [36m######################################################## EPOCH 13 [0m
+0:12:10.390625010 DEBUG (0): EpochTimer.fired(): [35mMeasured 7 [0m
+0:12:10.592773447 DEBUG (1): EpochTimer.fired(): [36m######################################################## EPOCH 13 [0m
+0:12:10.592773447 DEBUG (1): EpochTimer.fired(): [35mMeasured 15 [0m
+0:12:10.796875010 DEBUG (2): EpochTimer.fired(): [36m######################################################## EPOCH 13 [0m
+0:12:10.796875010 DEBUG (2): EpochTimer.fired(): [35mMeasured 36 [0m
+0:12:10.796875010 DEBUG (4): EpochTimer.fired(): [36m######################################################## EPOCH 13 [0m
+0:12:10.796875010 DEBUG (4): EpochTimer.fired(): [35mMeasured 15 [0m
+0:12:10.796875010 DEBUG (7): EpochTimer.fired(): [36m######################################################## EPOCH 13 [0m
+0:12:10.796875010 DEBUG (7): EpochTimer.fired(): [35mMeasured 2 [0m
+0:12:11.001953135 DEBUG (5): EpochTimer.fired(): [36m######################################################## EPOCH 13 [0m
+0:12:11.001953135 DEBUG (5): EpochTimer.fired(): [35mMeasured 23 [0m
+0:12:36.021484385 DEBUG (5): SlotTimer.fired(): [33mTime to Send Data [0m
+0:12:36.021484395 DEBUG (5): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:12:36.021484415 DEBUG (5): sendNotifyTask(): mlen = 17  senderID= 5 
+0:12:36.021484415 DEBUG (5): sendNotifyTask(): [32mSend Success!!![0m
+0:12:36.029342646 DEBUG (4): NotifyReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:12:36.029342646 DEBUG (4): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:12:36.029342656 DEBUG (4): ReceiveNotifyTask(): len=17 
+0:12:36.029342656 DEBUG (4): NotifyParentMsg received from 5 !!! 
+0:12:36.029510491 DEBUG (5): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:12:36.029510491 DEBUG (5): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:12:41.234375010 DEBUG (7): SlotTimer.fired(): [33mTime to Send Data [0m
+0:12:41.234375020 DEBUG (7): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:12:41.234375040 DEBUG (7): sendNotifyTask(): mlen = 17  senderID= 7 
+0:12:41.234375040 DEBUG (7): sendNotifyTask(): [32mSend Success!!![0m
+0:12:41.241592405 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 7 - Original source 7 
+0:12:41.241592405 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:12:41.241592415 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:12:41.241592415 DEBUG (1): NotifyParentMsg received from 7 !!! 
+0:12:41.241760251 DEBUG (7): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:12:41.241760251 DEBUG (7): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:12:43.625000010 DEBUG (2): SlotTimer.fired(): [33mTime to Send Data [0m
+0:12:43.625000020 DEBUG (2): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:12:43.625000040 DEBUG (2): sendNotifyTask(): mlen = 17  senderID= 2 
+0:12:43.625000040 DEBUG (2): sendNotifyTask(): [32mSend Success!!![0m
+0:12:43.634292588 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 2 - Original source 2 
+0:12:43.634292588 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:12:43.634292598 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:12:43.634292598 DEBUG (1): NotifyParentMsg received from 2 !!! 
+0:12:43.634460434 DEBUG (2): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:12:43.634460434 DEBUG (2): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:12:48.406250010 DEBUG (4): SlotTimer.fired(): [33mTime to Send Data [0m
+0:12:48.406250020 DEBUG (4): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:12:48.406250040 DEBUG (4): sendNotifyTask(): mlen = 17  senderID= 4 
+0:12:48.406250040 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:12:48.413848873 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:12:48.413848873 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:12:48.413848883 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:12:48.413848883 DEBUG (1): NotifyParentMsg received from 4 !!! 
+0:12:48.414016718 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:12:48.414016718 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:12:56.010742197 DEBUG (1): SlotTimer.fired(): [33mTime to Send Data [0m
+0:12:56.010742207 DEBUG (1): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:12:56.010742227 DEBUG (1): sendNotifyTask(): mlen = 17  senderID= 1 
+0:12:56.010742227 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:12:56.021743750 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:12:56.021743750 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:12:56.021743760 DEBUG (0): ReceiveNotifyTask(): len=17 
+0:12:56.021743760 DEBUG (0): NotifyParentMsg received from 1 !!! 
+0:12:56.021911596 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:12:56.021911596 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:13:8.398437510 DEBUG (0): SlotTimer.fired(): [33mTime to Send Data [0m
+0:13:8.398437520 DEBUG (0): 
+0:13:8.398437520 DEBUG (0): rootResults(): [34m################################################### ROOT RESULTS FOR EPOCH 13 ###################################################s
+0:13:8.398437520 DEBUG (0): rootResults(): [34m############  SUM   : [35m98 [0m
+0:13:8.398437520 DEBUG (0): rootResults(): [34m############  COUNT : [35m6 [0m
+0:13:8.398437520 DEBUG (0): rootResults(): [34m############  AVG   : [35m16 [0m
+0:13:8.398437520 DEBUG (0): rootResults(): [34m############  MAX   : [35m36 [0m
+
+0:13:10.390625010 DEBUG (0): EpochTimer.fired(): [36m######################################################## EPOCH 14 [0m
+0:13:10.390625010 DEBUG (0): EpochTimer.fired(): [35mMeasured 6 [0m
+0:13:10.592773447 DEBUG (1): EpochTimer.fired(): [36m######################################################## EPOCH 14 [0m
+0:13:10.592773447 DEBUG (1): EpochTimer.fired(): [35mMeasured 27 [0m
+0:13:10.796875010 DEBUG (2): EpochTimer.fired(): [36m######################################################## EPOCH 14 [0m
+0:13:10.796875010 DEBUG (2): EpochTimer.fired(): [35mMeasured 33 [0m
+0:13:10.796875010 DEBUG (4): EpochTimer.fired(): [36m######################################################## EPOCH 14 [0m
+0:13:10.796875010 DEBUG (4): EpochTimer.fired(): [35mMeasured 25 [0m
+0:13:10.796875010 DEBUG (7): EpochTimer.fired(): [36m######################################################## EPOCH 14 [0m
+0:13:10.796875010 DEBUG (7): EpochTimer.fired(): [35mMeasured 9 [0m
+0:13:11.001953135 DEBUG (5): EpochTimer.fired(): [36m######################################################## EPOCH 14 [0m
+0:13:11.001953135 DEBUG (5): EpochTimer.fired(): [35mMeasured 31 [0m
+0:13:32.236328135 DEBUG (5): SlotTimer.fired(): [33mTime to Send Data [0m
+0:13:32.236328145 DEBUG (5): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:13:32.236328165 DEBUG (5): sendNotifyTask(): mlen = 17  senderID= 5 
+0:13:32.236328165 DEBUG (5): sendNotifyTask(): [32mSend Success!!![0m
+0:13:32.242965700 DEBUG (4): NotifyReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:13:32.242965700 DEBUG (4): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:13:32.242965710 DEBUG (4): ReceiveNotifyTask(): len=17 
+0:13:32.242965710 DEBUG (4): NotifyParentMsg received from 5 !!! 
+0:13:32.243133545 DEBUG (5): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:13:32.243133545 DEBUG (5): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:13:41.433593760 DEBUG (2): SlotTimer.fired(): [33mTime to Send Data [0m
+0:13:41.433593770 DEBUG (2): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:13:41.433593790 DEBUG (2): sendNotifyTask(): mlen = 17  senderID= 2 
+0:13:41.433593790 DEBUG (2): sendNotifyTask(): [32mSend Success!!![0m
+0:13:41.442779527 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 2 - Original source 2 
+0:13:41.442779527 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:13:41.442779537 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:13:41.442779537 DEBUG (1): NotifyParentMsg received from 2 !!! 
+0:13:41.442947373 DEBUG (2): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:13:41.442947373 DEBUG (2): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:13:41.832031260 DEBUG (4): SlotTimer.fired(): [33mTime to Send Data [0m
+0:13:41.832031270 DEBUG (4): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:13:41.832031290 DEBUG (4): sendNotifyTask(): mlen = 17  senderID= 4 
+0:13:41.832031290 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:13:41.840332023 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:13:41.840332023 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:13:41.840332033 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:13:41.840332033 DEBUG (1): NotifyParentMsg received from 4 !!! 
+0:13:41.840499868 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:13:41.840499868 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:13:42.429687510 DEBUG (7): SlotTimer.fired(): [33mTime to Send Data [0m
+0:13:42.429687520 DEBUG (7): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:13:42.429687540 DEBUG (7): sendNotifyTask(): mlen = 17  senderID= 7 
+0:13:42.429687540 DEBUG (7): sendNotifyTask(): [32mSend Success!!![0m
+0:13:42.436050418 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 7 - Original source 7 
+0:13:42.436050418 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:13:42.436050428 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:13:42.436050428 DEBUG (1): NotifyParentMsg received from 7 !!! 
+0:13:42.436218264 DEBUG (7): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:13:42.436218264 DEBUG (7): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:13:51.030273447 DEBUG (1): SlotTimer.fired(): [33mTime to Send Data [0m
+0:13:51.030273457 DEBUG (1): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:13:51.030273477 DEBUG (1): sendNotifyTask(): mlen = 17  senderID= 1 
+0:13:51.030273477 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:13:51.033966083 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:13:51.033966083 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:14:0.628906260 DEBUG (0): SlotTimer.fired(): [33mTime to Send Data [0m
+0:14:0.628906270 DEBUG (0): 
+0:14:0.628906270 DEBUG (0): rootResults(): [34m################################################### ROOT RESULTS FOR EPOCH 14 ###################################################s
+0:14:0.628906270 DEBUG (0): rootResults(): [34m############  SUM   : [35m6 [0m
+0:14:0.628906270 DEBUG (0): rootResults(): [34m############  COUNT : [35m1 [0m
+0:14:0.628906270 DEBUG (0): rootResults(): [34m############  AVG   : [35m6 [0m
+0:14:0.628906270 DEBUG (0): rootResults(): [34m############  MAX   : [35m6 [0m
+
+0:14:10.390625010 DEBUG (0): EpochTimer.fired(): [36m######################################################## EPOCH 15 [0m
+0:14:10.390625010 DEBUG (0): EpochTimer.fired(): [35mMeasured 49 [0m
+0:14:10.592773447 DEBUG (1): EpochTimer.fired(): [36m######################################################## EPOCH 15 [0m
+0:14:10.592773447 DEBUG (1): EpochTimer.fired(): [35mMeasured 13 [0m
+0:14:10.796875010 DEBUG (2): EpochTimer.fired(): [36m######################################################## EPOCH 15 [0m
+0:14:10.796875010 DEBUG (2): EpochTimer.fired(): [35mMeasured 13 [0m
+0:14:10.796875010 DEBUG (4): EpochTimer.fired(): [36m######################################################## EPOCH 15 [0m
+0:14:10.796875010 DEBUG (4): EpochTimer.fired(): [35mMeasured 40 [0m
+0:14:10.796875010 DEBUG (7): EpochTimer.fired(): [36m######################################################## EPOCH 15 [0m
+0:14:10.796875010 DEBUG (7): EpochTimer.fired(): [35mMeasured 3 [0m
+0:14:11.001953135 DEBUG (5): EpochTimer.fired(): [36m######################################################## EPOCH 15 [0m
+0:14:11.001953135 DEBUG (5): EpochTimer.fired(): [35mMeasured 40 [0m
+0:14:40.603515635 DEBUG (5): SlotTimer.fired(): [33mTime to Send Data [0m
+0:14:40.603515645 DEBUG (5): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:14:40.603515665 DEBUG (5): sendNotifyTask(): mlen = 17  senderID= 5 
+0:14:40.603515665 DEBUG (5): sendNotifyTask(): [32mSend Success!!![0m
+0:14:40.609130867 DEBUG (4): NotifyReceive.receive(): Something received!!!  from 5 - Original source 5 
+0:14:40.609130867 DEBUG (4): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:14:40.609130877 DEBUG (4): ReceiveNotifyTask(): len=17 
+0:14:40.609130877 DEBUG (4): NotifyParentMsg received from 5 !!! 
+0:14:40.609298712 DEBUG (5): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:14:40.609298712 DEBUG (5): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:14:43.425781260 DEBUG (7): SlotTimer.fired(): [33mTime to Send Data [0m
+0:14:43.425781270 DEBUG (7): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:14:43.425781290 DEBUG (7): sendNotifyTask(): mlen = 17  senderID= 7 
+0:14:43.425781290 DEBUG (7): sendNotifyTask(): [32mSend Success!!![0m
+0:14:43.435195908 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 7 - Original source 7 
+0:14:43.435195908 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:14:43.435195918 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:14:43.435195918 DEBUG (1): NotifyParentMsg received from 7 !!! 
+0:14:43.435363754 DEBUG (7): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:14:43.435363754 DEBUG (7): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:14:43.625000010 DEBUG (4): SlotTimer.fired(): [33mTime to Send Data [0m
+0:14:43.625000020 DEBUG (4): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:14:43.625000040 DEBUG (4): sendNotifyTask(): mlen = 17  senderID= 4 
+0:14:43.625000040 DEBUG (4): sendNotifyTask(): [32mSend Success!!![0m
+0:14:43.633605947 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 4 - Original source 4 
+0:14:43.633605947 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:14:43.633605957 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:14:43.633605957 DEBUG (1): NotifyParentMsg received from 4 !!! 
+0:14:43.633773792 DEBUG (4): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:14:43.633773792 DEBUG (4): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:14:50.597656260 DEBUG (2): SlotTimer.fired(): [33mTime to Send Data [0m
+0:14:50.597656270 DEBUG (2): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:14:50.597656290 DEBUG (2): sendNotifyTask(): mlen = 17  senderID= 2 
+0:14:50.597656290 DEBUG (2): sendNotifyTask(): [32mSend Success!!![0m
+0:14:50.607467634 DEBUG (1): NotifyReceive.receive(): Something received!!!  from 2 - Original source 2 
+0:14:50.607467634 DEBUG (1): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:14:50.607467644 DEBUG (1): ReceiveNotifyTask(): len=17 
+0:14:50.607467644 DEBUG (1): NotifyParentMsg received from 2 !!! 
+0:14:50.607635480 DEBUG (2): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:14:50.607635480 DEBUG (2): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:14:54.217773447 DEBUG (1): SlotTimer.fired(): [33mTime to Send Data [0m
+0:14:54.217773457 DEBUG (1): enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!
+0:14:54.217773477 DEBUG (1): sendNotifyTask(): mlen = 17  senderID= 1 
+0:14:54.217773477 DEBUG (1): sendNotifyTask(): [32mSend Success!!![0m
+0:14:54.226455677 DEBUG (0): NotifyReceive.receive(): Something received!!!  from 1 - Original source 1 
+0:14:54.226455677 DEBUG (0): NotifyReceive.receive(): NotifyMsg enqueue [32mSuccessful!!! [0m
+0:14:54.226455687 DEBUG (0): ReceiveNotifyTask(): len=17 
+0:14:54.226455687 DEBUG (0): NotifyParentMsg received from 1 !!! 
+0:14:54.226623523 DEBUG (1): NotifyAMSend.sendDone(): A Notify package sent... [32mTrue [0m
+0:14:54.226623523 DEBUG (1): setNotifySendBusy(): NotifySendBusy = [32mFalse[0m
+0:15:7.203125010 DEBUG (0): SlotTimer.fired(): [33mTime to Send Data [0m
+0:15:7.203125020 DEBUG (0): 
+0:15:7.203125020 DEBUG (0): rootResults(): [34m################################################### ROOT RESULTS FOR EPOCH 15 ###################################################s
+0:15:7.203125020 DEBUG (0): rootResults(): [34m############  SUM   : [35m158 [0m
+0:15:7.203125020 DEBUG (0): rootResults(): [34m############  COUNT : [35m6 [0m
+0:15:7.203125020 DEBUG (0): rootResults(): [34m############  AVG   : [35m26 [0m
+0:15:7.203125020 DEBUG (0): rootResults(): [34m############  MAX   : [35m49 [0m
+

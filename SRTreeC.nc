@@ -39,6 +39,7 @@ module SRTreeC
 
 	uses interface PacketQueue as NotifySendQueue;
 	uses interface PacketQueue as NotifyReceiveQueue;
+	uses interface PacketQueue as NotifyReceiveLastQueue;
 
 	uses interface Random as RandomGenerator;
 	uses interface ParameterInit<uint16_t> as GeneratorSeed;
@@ -311,9 +312,7 @@ implementation {
 
 	}
 
-		// Timer for lost tasks TODO: Unused
-
-
+	// Timer for lost tasks TODO: Unused
 	event void SlotTimer.fired() {
 		dbg("Timing", "SlotTimer.fired(): %sTime to Send Data %s\n",KYEL,KNRM);
 		
@@ -529,62 +528,6 @@ implementation {
 				if (TOS_NODE_ID != 0) {
 					call RoutingMsgTimer.startOneShot(TIMER_FAST_PERIOD);
 				}
-
-
-			// If Node Not orphan see if new parent is better (closer, with more money, etc.)
-			}
-			// else if(curdepth > mpkt->depth + 1){
-			// 	dbg("Routing" , "receiveRoutingTask(): %sFound Better Parent%s\n" ,KBLU ,KNRM);
-			// 	oldparentID = parentID;
-
-			// 	// Sender is the parent
-			// 	parentID = call RoutingAMPacket.source(&radioRoutingRecPkt);
-			// 	// Calculate current depth
-			// 	curdepth = mpkt->depth + 1;
-
-			// 	dbg("Routing" , "receiveRoutingTask(): %sNode rerouted -> Parent = %d, Depth = %d%s\n",KBLU, parentID, curdepth, KNRM);
-
-			// 	// Notify New Parent About his adoption
-			// 	dbg("Routing" , "receiveRoutingTask(): NotifyParentMsg sending to node= %d... \n", oldparentID);
-			// 	if ( (oldparentID < 65535) || (oldparentID > 0) || (oldparentID == parentID)) {
-			// 		m = (NotifyParentMsg *) (call NotifyPacket.getPayload(&tmp, sizeof(NotifyParentMsg)));
-			// 		m->senderID = TOS_NODE_ID;
-			// 		m->depth = curdepth;
-			// 		m->parentID = parentID;
-
-			// 		call NotifyAMPacket.setDestination(&tmp, oldparentID);
-			// 		//call NotifyAMPacket.setType(&tmp,AM_NOTIFYPARENTMSG);
-			// 		call NotifyPacket.setPayloadLength(&tmp, sizeof(NotifyParentMsg));
-
-			// 		if (call NotifySendQueue.enqueue(tmp) == SUCCESS) {
-			// 			dbg("Routing", "receiveRoutingTask(): NotifyParentMsg enqueued in SendingQueue successfully!!!\n");
-			// 			if (call NotifySendQueue.size() == 1) {
-			// 				post sendNotifyTask();
-			// 			}
-			// 		}
-			// 	}
-
-			// 	// Notify Old Parent About your change
-			// 	m = (NotifyParentMsg *) (call NotifyPacket.getPayload(&tmp, sizeof(NotifyParentMsg)));
-			// 	m->senderID = TOS_NODE_ID;
-			// 	m->depth = curdepth;
-			// 	m->parentID = parentID;
-			// 	dbg("Routing" , "receiveRoutingTask(): NotifyParentMsg sending to node= %d... \n", parentID);
-			// 	call NotifyAMPacket.setDestination(&tmp, parentID);
-			// 	call NotifyPacket.setPayloadLength(&tmp, sizeof(NotifyParentMsg));
-
-			// 	if (call NotifySendQueue.enqueue(tmp) == SUCCESS) {
-			// 		dbg("Routing", "receiveRoutingTask(): NotifyParentMsg enqueued in SendingQueue successfully!!! \n");
-			// 		if (call NotifySendQueue.size() == 1) {
-			// 			post sendNotifyTask();
-			// 		}
-			// 	}
-
-			// 	// Reroute your childs
-			// 	if (TOS_NODE_ID != 0) {
-			// 		call RoutingMsgTimer.startOneShot(TIMER_FAST_PERIOD);
-			// 	}		
-			// }
 		} else {
 			dbg("Routing", "receiveRoutingTask(): %sEmpty message%s\n",KRED,KNRM);
 			setLostRoutingRecTask(TRUE);
@@ -613,34 +556,6 @@ implementation {
 				COUNT += mr-> COUNT;
 				MAX = ((mr->MAX) > MAX) ? mr->MAX : MAX  ;
 			}
-
-
-			// else {
-
-			// }
-			// if ( TOS_NODE_ID == 0) {
-
-			// } else {
-			// 	NotifyParentMsg* m;
-			// 	memcpy(&tmp, &radioNotifyRecPkt, sizeof(message_t));
-
-			// 	m = (NotifyParentMsg *) (call NotifyPacket.getPayload(&tmp, sizeof(NotifyParentMsg)));
-			// 	//m->senderID=mr->senderID;
-			// 	//m->depth = mr->depth;
-			// 	//m->parentID = mr->parentID;
-
-			// 	dbg("NotifyParentMsg" , "Forwarding NotifyParentMsg from senderID= %d  to parentID=%d \n" , m->senderID, parentID);
-			// 	call NotifyAMPacket.setDestination(&tmp, parentID);
-			// 	call NotifyPacket.setPayloadLength(&tmp, sizeof(NotifyParentMsg));
-
-			// 	if (call NotifySendQueue.enqueue(tmp) == SUCCESS) {
-			// 		dbg("NotifyParentMsg", "receiveNotifyTask(): NotifyParentMsg enqueued in SendingQueue successfully!!!\n");
-			// 		if (call NotifySendQueue.size() == 1) {
-			// 			post sendNotifyTask();
-			// 		}
-			// 	}
-
-			// }
 
 		} else {
 			dbg("NotifyParentMsg", "receiveNotifyTask():Empty message!!! \n");

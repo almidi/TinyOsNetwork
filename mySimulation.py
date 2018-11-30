@@ -11,12 +11,12 @@ SIM_END_TIME= 910 * t.ticksPerSecond()
 print "TicksPerSecond : ", t.ticksPerSecond(),"\n"
 
 t.addChannel("Boot",f)
-#t.addChannel("Routing",f)
-#t.addChannel("NotifyParentMsg",f)
-#t.addChannel("Radio",f)
-#t.addChannel("SRTreeC",f)
-#t.addChannel("PacketQueueC",f)
-t.addChannel("Timing",f)
+# t.addChannel("Routing",f)
+# t.addChannel("NotifyParentMsg",f)
+# t.addChannel("Radio",f)
+# t.addChannel("SRTreeC",f)
+# t.addChannel("PacketQueueC",f)
+# t.addChannel("Timing",f)
 t.addChannel("Measure",f)
 t.addChannel("Root",f)
 

@@ -39,7 +39,7 @@ module SRTreeC
 
 	uses interface PacketQueue as NotifySendQueue;
 	uses interface PacketQueue as NotifyReceiveQueue;
-	uses interface PacketQueue as NotifyReceiveLastQueue;
+	uses interface PacketQueue as DataQueue;
 
 	uses interface Random as RandomGenerator;
 	uses interface ParameterInit<uint16_t> as GeneratorSeed;
@@ -79,7 +79,9 @@ implementation {
 	task void receiveNotifyTask();
 	task void startEpoch();
 	task void enqueueData();
+	task void calculateData();
 	task void rootResults();
+
 
 	// Set States
 	void setLostRoutingSendTask(bool state) {
@@ -258,7 +260,7 @@ implementation {
 		call RoutingPacket.setPayloadLength(&tmp, sizeof(RoutingMsg));
 		//Add msg to RoutingMSG Queue
 		enqueueDone = call RoutingSendQueue.enqueue(tmp);
-		//Check if pachet enqueued successfully 
+		//Check if packet enqueued successfully 
 		if (enqueueDone == SUCCESS) {
 			dbg("Routing", "RoutingMsgTimer.fired(): %sRoutingMsg enqueued successfully in SendingQueue!!!%s\n",KGRN,KNRM);
 			if (call RoutingSendQueue.size() == 1) {
@@ -312,15 +314,11 @@ implementation {
 
 	}
 
-	// Timer for lost tasks TODO: Unused
+	// Timer to send data
 	event void SlotTimer.fired() {
 		dbg("Timing", "SlotTimer.fired(): %sTime to Send Data %s\n",KYEL,KNRM);
-		
-		if (TOS_NODE_ID == 0){
-			post rootResults();
-		} else{
-			post enqueueData();
-		}
+		//calculateData
+		post calculateData();
 	}
 
 
@@ -528,6 +526,8 @@ implementation {
 				if (TOS_NODE_ID != 0) {
 					call RoutingMsgTimer.startOneShot(TIMER_FAST_PERIOD);
 				}
+			}
+
 		} else {
 			dbg("Routing", "receiveRoutingTask(): %sEmpty message%s\n",KRED,KNRM);
 			setLostRoutingRecTask(TRUE);
@@ -537,9 +537,12 @@ implementation {
 
 	// dequeues a notification message and processes it
 	task void receiveNotifyTask() {
-		message_t tmp;
 		uint8_t len;
+		uint8_t i;
 		message_t radioNotifyRecPkt;
+		message_t tmp;
+		bool found = 0;
+		nx_uint16_t SID;
 
 		radioNotifyRecPkt = call NotifyReceiveQueue.dequeue();
 
@@ -552,9 +555,46 @@ implementation {
 			dbg("NotifyParentMsg" , "NotifyParentMsg received from %d !!! \n", mr->senderID);
 			// If packet is for me
 			if ( mr->parentID == TOS_NODE_ID) {
-				SUM += mr->SUM;
-				COUNT += mr-> COUNT;
-				MAX = ((mr->MAX) > MAX) ? mr->MAX : MAX  ;
+
+				// SUM += mr->SUM;
+				// COUNT += mr-> COUNT;
+				// MAX = ((mr->MAX) > MAX) ? mr->MAX : MAX  ;
+
+
+				//UPDATE DataQueue -------------------------------------------------------------------------------------
+				//Get Message Sender ID
+				SID = mr->senderID;
+
+				// Search for that sender in DataQueue
+				for(i=0;i< call DataQueue.size();i++){
+					tmp = call DataQueue.dequeue();
+
+					len = call NotifyPacket.payloadLength(&tmp);
+					mr = (NotifyParentMsg*) (call NotifyPacket.getPayload(&tmp, len));
+
+					//If message isnt from the same sender
+					if(mr->senderID != SID){
+						//Enqueue old message
+						call DataQueue.enqueue(tmp);
+					}
+					else{
+						//Enqueue new message
+						dbg("NotifyParentMsg", "receiveNotifyTask():Enqueued updated message in DataQueue \n");
+						call DataQueue.enqueue(radioNotifyRecPkt);
+						found = 1;
+						break;
+					}
+
+				}
+
+				//If there wasnt any message in DataQueue from the same sender, enqueue new message
+				if(!found){
+					call DataQueue.enqueue(radioNotifyRecPkt);
+					dbg("NotifyParentMsg", "receiveNotifyTask():Enqueued new message in DataQueue \n");
+				}
+
+
+				//------------------------------------------------------------------------------------------------------		
 			}
 
 		} else {
@@ -565,6 +605,9 @@ implementation {
 	}
 
 	task void startEpoch(){
+		message_t tmp;
+
+
 		//Start Epoch Timer
 		call EpochTimer.startOneShot(TIMER_FAST_PERIOD);
 		//Calculate offset milli (for sending measurements)
@@ -572,6 +615,40 @@ implementation {
 		offset_milli = offset_milli*(MAX_DEPTH - curdepth);
 
 		dbg("Timing", "startEpoch(): %sStarted Epoch Timer. Offset Milli = %d%s\n",KCYN,offset_milli, KNRM);
+	}
+
+	//Aggregates data from DataQueue
+	task void calculateData(){
+		uint8_t len;
+		uint8_t i;
+		message_t tmp;
+		NotifyParentMsg* mr;
+
+		// Iterate Data Queue
+		for(i=0;i< call DataQueue.size();i++){
+			//dequeue
+			tmp = call DataQueue.dequeue();
+
+			//get payload
+			len = call NotifyPacket.payloadLength(&tmp);
+			mr = (NotifyParentMsg*) (call NotifyPacket.getPayload(&tmp, len));
+
+			//aggregate data
+			SUM += mr->SUM;
+			COUNT += mr-> COUNT;
+			MAX = ((mr->MAX) > MAX) ? mr->MAX : MAX  ;
+
+			//enqueue back to DataQueue
+			call DataQueue.enqueue(tmp);
+		}
+
+		//Enqueue calculate data to be sended or just print them (if ROOT node)
+		if (TOS_NODE_ID == 0){
+			post rootResults();
+		} else{
+			post enqueueData();
+		}
+
 	}
 
 	// Enqueues data on a notification message Q and calls sendNotifyTask()
@@ -597,7 +674,6 @@ implementation {
 				post sendNotifyTask();
 			}
 		}
-	
 	}
 
 	//Makes final calculations and presents root data
@@ -610,7 +686,6 @@ implementation {
 		dbg("Root", "rootResults(): %s############  COUNT : %s%d %s\n",KBLU,KMAG,COUNT ,KNRM);
 		dbg("Root", "rootResults(): %s############  AVG   : %s%d %s\n",KBLU,KMAG,AVG ,KNRM);
 		dbg("Root", "rootResults(): %s############  MAX   : %s%d %s\n\n",KBLU,KMAG,MAX ,KNRM);
-
-
 	}
+
 }

@@ -23,6 +23,8 @@ implementation{
 	components new PacketQueueC(RECEIVER_QUEUE_SIZE) as RoutingReceiveQueueC;
 	components new PacketQueueC(SENDER_QUEUE_SIZE) as NotifySendQueueC;
 	components new PacketQueueC(RECEIVER_QUEUE_SIZE) as NotifyReceiveQueueC;
+	components new PacketQueueC(RECEIVER_QUEUE_SIZE) as DataQueueC;
+
 
 	components RandomMlcgC as RandomC;
 	
@@ -50,6 +52,7 @@ implementation{
 	SRTreeC.RoutingReceiveQueue->RoutingReceiveQueueC;
 	SRTreeC.NotifySendQueue->NotifySendQueueC;
 	SRTreeC.NotifyReceiveQueue->NotifyReceiveQueueC;
+	SRTreeC.DataQueue->DataQueueC;
 
 	SRTreeC.RandomGenerator -> RandomC;
 	SRTreeC.GeneratorSeed -> RandomC.SeedInit;

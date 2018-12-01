@@ -188,7 +188,7 @@ implementation {
 	event void RadioControl.stopDone(error_t err) {
 		dbg("Radio", "RadioControl.stopDone():%s Radio stopped!%s\n",KYEL,KNRM);	
 	}
-
+	
 	// Timer for lost tasks TODO: Unused
 	event void LostTaskTimer.fired() {
 		if (lostRoutingSendTask) {
@@ -485,9 +485,9 @@ implementation {
 		sendDone = call NotifyAMSend.send(mdest, &radioNotifySendPkt, mlen);
 
 		if ( sendDone == SUCCESS) {
-			dbg("Routing", "sendNotifyTask(): %sSend Success!!!%s\n",KGRN,KNRM);
+			dbg("SRTreeC", "sendNotifyTask(): %sSend Success!!!%s\n",KGRN,KNRM);
 		} else {
-			dbg("Routing", "sendNotifyTask(): %sSend Failed!!!%s\n",KRED,KNRM);
+			dbg("SRTreeC", "sendNotifyTask(): %sSend Failed!!!%s\n",KRED,KNRM);
 			//TODO: 
 			setNotifySendBusy(FALSE);
 		}

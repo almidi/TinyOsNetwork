@@ -40,22 +40,26 @@ if topo is None:
 r = t.radio()
 lines = topo.readlines()
 
+#find num of nodes
 for line in lines:
     s=line.split()
     if (len(s)>0 and s[0]=="-n"):
         nodes = int(s[1])
         lines[lines.index(line)] = ' '
 
+#print comments
 for line in lines:
     s=line.split()
     if (line[0] == "#"):
         print(line.replace("\n",""))
         lines[lines.index(line)]=' '
 
+#spawn nodes
 for i in range(0, nodes):
     m = t.getNode(i)
     m.bootAtTime(t.ticksPerSecond() + i)
 
+#route nodes
 for line in lines:
     s = line.split()
     if (len(s) > 0):
@@ -70,10 +74,10 @@ for line in lines:
     str1 = line.strip()
     if str1:
         val = int(str1)
-        for i in range(0, 10):
+        for i in range(0, nodes):
             t.getNode(i).addNoiseTraceReading(val)
 noiseF.close()
-for i in range(0, 10):
+for i in range(0, nodes):
     t.getNode(i).createNoiseModel()
 
 ok = False

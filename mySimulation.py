@@ -13,14 +13,15 @@ print
 
 # Debug Channels
 t.addChannel("Boot", f)
-# t.addChannel("Routing",f)
+#t.addChannel("Routing",f)
 # t.addChannel("NotifyParentMsg",f)
 # t.addChannel("Radio",f)
 # t.addChannel("SRTreeC",f)
 # t.addChannel("PacketQueueC",f)
 # t.addChannel("Timing",f)
 # t.addChannel("Measure", f)
-t.addChannel("Root", f)
+# t.addChannel("Root", f)
+t.addChannel("Query", f)
 
 #default file
 file = "topology.txt"
@@ -30,9 +31,9 @@ if(len(sys.argv)==2):
 
 print("Using Topology File: ",file)
 
-#open file
+#open topology file
 topo = open(file, "r")
-#check if file opened
+#check if topology file opened
 if topo is None:
     print
     "Topology file not found!!! \n"
@@ -47,7 +48,7 @@ for line in lines:
         nodes = int(s[1])
         lines[lines.index(line)] = ' '
 
-#print comments
+#print topology file comments
 for line in lines:
     s=line.split()
     if (line[0] == "#"):
@@ -57,13 +58,13 @@ for line in lines:
 #spawn nodes
 for i in range(0, nodes):
     m = t.getNode(i)
-    m.bootAtTime(t.ticksPerSecond() + i)
+    m.bootAtTime(10*t.ticksPerSecond() + i)
 
 #route nodes
 for line in lines:
     s = line.split()
     if (len(s) > 0):
-        print " ", s[0], " ", s[1], " ", s[2];
+        # print " ", s[0], " ", s[1], " ", s[2];
         r.add(int(s[0]), int(s[1]), float(s[2]))
 
 mTosdir = os.getenv("TINYOS_ROOT_DIR")

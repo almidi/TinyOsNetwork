@@ -2,15 +2,24 @@
 
 module SRTreeC
 
-#define KNRM  "\x1B[0m"
-#define KRED  "\x1B[31m"
-#define KGRN  "\x1B[32m"
-#define KYEL  "\x1B[33m"
-#define KBLU  "\x1B[34m"
-#define KMAG  "\x1B[35m"
-#define KCYN  "\x1B[36m"
-#define KWHT  "\x1B[37m"
-
+#ifdef COLORS
+	#define KNRM  "\x1B[0m"
+	#define KRED  "\x1B[31m"
+	#define KGRN  "\x1B[32m"
+	#define KYEL  "\x1B[33m"
+	#define KBLU  "\x1B[34m"
+	#define KMAG  "\x1B[35m"
+	#define KCYN  "\x1B[36m"
+#endif
+#ifndef COLORS
+	#define KNRM  ""
+	#define KRED  ""
+	#define KGRN  ""
+	#define KYEL  ""
+	#define KBLU  ""
+	#define KMAG  ""
+	#define KCYN  ""
+#endif
 // Define Interfaces
 
 {
@@ -54,6 +63,7 @@ implementation {
 	// Def Message Types
 	// Messages for routing the network
 	message_t radioRoutingSendPkt;
+	// Messages towards parents
 	message_t radioNotifySendPkt;
 
 	bool RoutingSendBusy = FALSE;
@@ -64,14 +74,38 @@ implementation {
 	bool lostNotifyRecTask = FALSE;
 
 	uint8_t curdepth;
+	uint8_t query1;
+	uint8_t query2;
+	uint8_t subquerys=0;
+	uint8_t numOfSubQ=0;
 	uint16_t parentID;
 	uint32_t offset_milli;
 
-
+	// Aggregated Data
 	uint32_t SUM;
 	uint32_t COUNT;
 	uint32_t MAX;
 
+	//Query Encoding Matrix
+	//Used to encode each query to 
+	//5 fundemental subquerys
+
+
+	uint8_t qem[6]={0b00001,  //Sum
+					0b00100,  //Count
+					0b01000,  //Max
+					0b10000,  //Min
+					0b00101,  //AVG
+					0b00110   //VAR
+				};
+
+	//Calculated Data Matrix
+	uint8_t cdm[5]={0, //Sum
+					0, //SqSum
+					0, //Count
+					0, //Max
+					0  //Min
+				};
 
 	task void sendRoutingTask();
 	task void sendNotifyTask();
@@ -81,6 +115,7 @@ implementation {
 	task void enqueueData();
 	task void calculateData();
 	task void rootResults();
+	task void calculateSubQ();
 
 
 	// Set States
@@ -135,6 +170,36 @@ implementation {
 		}
 	}
 
+	// Aggregate Data
+	void aggregate(uint8_t calc, uint32_t value){
+		switch(calc){
+			// SUM
+			case 0:
+				cdm[calc] += value;
+				break;
+			// SqSUM
+			case 1:
+				cdm[calc] += (value^2);
+				break;
+			// Count
+			case 2:
+				cdm[calc] += value;
+				break;
+			// MAX
+			case 3:
+				cdm[calc] = (cdm[calc] > value) ? cdm[calc] : value;
+				break;
+			// MIN
+			case 4:
+				cdm[calc] = (cdm[calc] < value) ? cdm[calc] : value;
+				break;
+			// Other
+			default:
+				break;
+		}
+		return;
+	}
+
 	// Boot of device
 	event void Boot.booted() {
 		// Start Radio
@@ -148,21 +213,29 @@ implementation {
 		COUNT = 1;
 		MAX = 0;
 
+		//Init RandomGenerator
+		call GeneratorSeed.init(TOS_NODE_ID);
+
 		// If Root Node
 		if (TOS_NODE_ID == 0) {
 			// Root Node = 0 Depth
 			curdepth = 0;
 			parentID = 0;
+			//calculate random querys
+			query1 = (call RandomGenerator.rand16() % 5)+1;
+			query2 = (call RandomGenerator.rand16() % 5)+1;
+			//delete query2 randomly or if query2 == query1
+			if(call RandomGenerator.rand16()%1 || query1 == query2){query2 = 0;}
+			dbg("Boot", "%sROOT Node Booted:%s curdepth = %03d  ,  parentID= %d, Query1 = %d, Query2 = %d\n",KYEL, KNRM, curdepth, parentID, query1, query2);
+
 		} else {
 			//-1 = Undefined Depth (will be calculated later)
 			curdepth = -1;
-			parentID = -1;		
-		}
-
-		//Init RandomGenerator
-		call GeneratorSeed.init(TOS_NODE_ID);
-
-		dbg("Boot", "%sNode Booted:%s curdepth = %03d  ,  parentID= %d\n",KYEL, KNRM, curdepth , parentID);
+			parentID = -1;
+			query1 = 0;	
+			query2 = 0;
+			dbg("Boot", "%sNode Booted:%s curdepth = %03d  ,  parentID= %d\n",KYEL, KNRM, curdepth , parentID);	
+		}		
 	}
 
 	// Radio Started
@@ -188,7 +261,7 @@ implementation {
 	event void RadioControl.stopDone(error_t err) {
 		dbg("Radio", "RadioControl.stopDone():%s Radio stopped!%s\n",KYEL,KNRM);	
 	}
-	
+
 	// Timer for lost tasks TODO: Unused
 	event void LostTaskTimer.fired() {
 		if (lostRoutingSendTask) {
@@ -217,6 +290,7 @@ implementation {
 		// temp message
 		message_t tmp;
 		error_t enqueueDone;
+		uint8_t query;
 
 		RoutingMsg* mrpkt;
 		dbg("Routing", "RoutingMsgTimer fired! -----------------------------------------------------------------\n");
@@ -245,10 +319,16 @@ implementation {
 			return;
 		}
 
+		// Calculate Query
+		query = query2 << 4;
+		query = query | query1;
+		dbg("Routing" , "RoutingMsgTimer.fired(): Calculated Query = %d\n",query);
+
 		// Fill package
 		atomic {
 			mrpkt->senderID = TOS_NODE_ID;
 			mrpkt->depth = curdepth;
+			mrpkt->query = query;
 		}
 
 		// Send Routing Package
@@ -285,8 +365,6 @@ implementation {
 		uint32_t measurement;
 
 
-
-
 		epochCounter++ ;
 		dbg("Timing", "EpochTimer.fired(): %s######################################################## EPOCH %d %s\n",KCYN,epochCounter,KNRM);
 
@@ -311,7 +389,6 @@ implementation {
 		SUM = measurement;
 		COUNT = 1;
 		MAX = measurement;
-
 	}
 
 	// Timer to send data
@@ -383,11 +460,11 @@ implementation {
 
 		dbg("Routing", "RoutingReceive.receive(): Something received!!!  from %u - Original source %u \n", ((RoutingMsg*) payload)->senderID ,  msource);
 
-		//if(len!=sizeof(RoutingMsg))
-		//{
-		//dbg("SRTreeC","\t\tUnknown message received!!!\n");
-		//return msg;
-		//}
+		if(len!=sizeof(RoutingMsg))
+		{
+		dbg("SRTreeC","RoutingReceive.receive() %sUnknown message received!!!%s\n",KRED,KNRM);
+		return msg;
+		}
 
 		atomic {
 			memcpy(&tmp, msg, sizeof(message_t));
@@ -406,8 +483,9 @@ implementation {
 		return msg;
 	}
 
-	////////////// Tasks implementations //////////////////////////////
-	// dequeues a routing message and sends it
+	//////////////////////////////////// Tasks implementations /////////////////////////////////
+
+	// Dequeues a routing message and sends it
 	task void sendRoutingTask() {
 		//uint8_t skip;
 		uint8_t mlen;
@@ -420,7 +498,7 @@ implementation {
 			return;
 		}
 
-		//Check Mutext
+		//Check Mutex
 		if (RoutingSendBusy) {
 			dbg("Routing", "sendRoutingTask(): %sRoutingSendBusy= TRUE%s\n",KRED,KNRM);
 			setLostRoutingSendTask(TRUE);
@@ -447,14 +525,12 @@ implementation {
 		dbg("Routing", "sendRoutingTask(): Send %s %s\n",(sendDone == SUCCESS) ? "\x1B[32mSuccessful" : "\x1B[31mFailed",KNRM);
 	}
 
-	// dequeues a notification message and sends it
+	// Dequeues a notification message and sends it
 	task void sendNotifyTask() {
-		uint8_t mlen;//, skip;
+		uint8_t mlen;
 		error_t sendDone;
 		uint16_t mdest;
 		NotifyParentMsg* mpayload;
-
-		//message_t radioNotifySendPkt;
 
 		if (call NotifySendQueue.empty()) {
 			dbg("SRTreeC", "sendNotifyTask(): Q is empty!\n");
@@ -473,6 +549,7 @@ implementation {
 
 		mpayload = call NotifyPacket.getPayload(&radioNotifySendPkt, mlen);
 
+		// check if message is known
 		if (mlen != sizeof(NotifyParentMsg)) {
 			dbg("SRTreeC", "\t\t sendNotifyTask(): Unknown message!!\n");
 			return;
@@ -481,7 +558,7 @@ implementation {
 		dbg("SRTreeC" , "sendNotifyTask(): mlen = %u  senderID= %u \n", mlen, mpayload->senderID);
 		mdest = call NotifyAMPacket.destination(&radioNotifySendPkt);
 
-
+		//send noti packet
 		sendDone = call NotifyAMSend.send(mdest, &radioNotifySendPkt, mlen);
 
 		if ( sendDone == SUCCESS) {
@@ -493,7 +570,7 @@ implementation {
 		}
 	}
 
-	// dequeues a routing message and processes it
+	// Dequeues a routing message and processes it
 	task void receiveRoutingTask() {
 		message_t tmp;
 		error_t enqueueDone;
@@ -513,14 +590,20 @@ implementation {
 			
 			RoutingMsg * mpkt = (RoutingMsg*) (call RoutingPacket.getPayload(&radioRoutingRecPkt, len));
 
-			dbg("Routing" , "receiveRoutingTask(): Routing Message Packet -> senderID= %d , senderDepth= %d \n",mpkt->senderID , mpkt->depth);
+			dbg("Routing" , "receiveRoutingTask(): Routing Message Packet -> senderID= %d , senderDepth= %d , size= %d \n",mpkt->senderID , mpkt->depth,sizeof(mpkt));
 			// Check if NODE is orphan
 			if ( (parentID < 0) || (parentID >= 65535)) {
 				// Sender is the parent
 				parentID = call RoutingAMPacket.source(&radioRoutingRecPkt);
 				// Calculate current depth
 				curdepth = mpkt->depth + 1;
-				dbg("Routing" , "receiveRoutingTask(): %sNode routed -> Parent = %d, Depth = %d%s\n",KBLU, parentID, curdepth, KNRM);
+				// Calculate Querys
+				query1= (mpkt->query) & 15;
+				query2= (mpkt->query) >> 4;
+				// Calculate SubQuerys
+				post calculateSubQ();
+				dbg("Routing" , "receiveRoutingTask(): %sNode routed -> Parent = %d, Depth = %d, Query1 = %d, Query2 = %d%s\n",KBLU, parentID, curdepth, query1, query2, KNRM);
+				dbg("Query" , "receiveRoutingTask(): %sQuery Requests Received: Query1 = %d, Query2 = %d%s\n",KBLU, query1, query2, KNRM);
 				// Route your children
 				dbg("Routing", "receiveRoutingTask(): Call RoutingMsgTimer to route children%s\n",KNRM);
 				if (TOS_NODE_ID != 0) {
@@ -544,22 +627,19 @@ implementation {
 		bool found = 0;
 		nx_uint16_t SID;
 
+		//dequeue message
 		radioNotifyRecPkt = call NotifyReceiveQueue.dequeue();
 
 		len = call NotifyPacket.payloadLength(&radioNotifyRecPkt);
 
 		dbg("NotifyParentMsg", "ReceiveNotifyTask(): len=%u \n", len);
+		// check if packet is correct
 		if (len == sizeof(NotifyParentMsg)) {
 			NotifyParentMsg* mr = (NotifyParentMsg*) (call NotifyPacket.getPayload(&radioNotifyRecPkt, len));
 
 			dbg("NotifyParentMsg" , "NotifyParentMsg received from %d !!! \n", mr->senderID);
 			// If packet is for me
 			if ( mr->parentID == TOS_NODE_ID) {
-
-				// SUM += mr->SUM;
-				// COUNT += mr-> COUNT;
-				// MAX = ((mr->MAX) > MAX) ? mr->MAX : MAX  ;
-
 
 				//UPDATE DataQueue -------------------------------------------------------------------------------------
 				//Get Message Sender ID
@@ -596,7 +676,7 @@ implementation {
 
 				//------------------------------------------------------------------------------------------------------		
 			}
-
+		// packet is not correct
 		} else {
 			dbg("NotifyParentMsg", "receiveNotifyTask():Empty message!!! \n");
 			setLostNotifyRecTask(TRUE);
@@ -604,10 +684,9 @@ implementation {
 		}
 	}
 
+    // Start The Epoch
 	task void startEpoch(){
 		message_t tmp;
-
-
 		//Start Epoch Timer
 		call EpochTimer.startOneShot(TIMER_FAST_PERIOD);
 		//Calculate offset milli (for sending measurements)
@@ -617,7 +696,7 @@ implementation {
 		dbg("Timing", "startEpoch(): %sStarted Epoch Timer. Offset Milli = %d%s\n",KCYN,offset_milli, KNRM);
 	}
 
-	//Aggregates data from DataQueue
+	// Aggregates data from DataQueue
 	task void calculateData(){
 		uint8_t len;
 		uint8_t i;
@@ -648,7 +727,6 @@ implementation {
 		} else{
 			post enqueueData();
 		}
-
 	}
 
 	// Enqueues data on a notification message Q and calls sendNotifyTask()
@@ -665,18 +743,20 @@ implementation {
 		m->MAX = MAX;
 
 		call NotifyAMPacket.setDestination(&tmp, parentID);
-		//call NotifyAMPacket.setType(&tmp,AM_NOTIFYPARENTMSG);
+		call NotifyAMPacket.setType(&tmp,AM_NOTIFYPARENTMSG);
 		call NotifyPacket.setPayloadLength(&tmp, sizeof(NotifyParentMsg));
 
+		// Enqueue packet to be sent
 		if (call NotifySendQueue.enqueue(tmp) == SUCCESS) {
 			dbg("NotifyParentMsg", "enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!\n");
 			if (call NotifySendQueue.size() == 1) {
+				// send the packet
 				post sendNotifyTask();
 			}
 		}
 	}
 
-	//Makes final calculations and presents root data
+	// Makes final calculations and presents root data
 	task void rootResults(){
 		uint32_t AVG = SUM/COUNT;
 
@@ -686,6 +766,27 @@ implementation {
 		dbg("Root", "rootResults(): %s############  COUNT : %s%d %s\n",KBLU,KMAG,COUNT ,KNRM);
 		dbg("Root", "rootResults(): %s############  AVG   : %s%d %s\n",KBLU,KMAG,AVG ,KNRM);
 		dbg("Root", "rootResults(): %s############  MAX   : %s%d %s\n\n",KBLU,KMAG,MAX ,KNRM);
+	}
+
+	// Calculates SubQuerys number from query1 and query2
+	task void calculateSubQ(){
+		uint8_t i;
+
+		// calculate subquerys
+		if (query1 > 6 || query2 > 6){
+			dbg("Query", "calculateSubQ(): %sUnknown Query %s\n",KRED,KNRM);
+			return;
+		}
+
+		subquerys = subquerys | qem[query1-1];
+		subquerys = subquerys | qem[query2-1];
+
+		// calculate number of subquery values
+		for(i=0;i<5;i++){
+			if(((subquerys >> i)&1) == 1){numOfSubQ++;}
+		}
+
+		dbg("Query", "calculateSubQ(): Calculcated subquerys= %d, numOfSubQ=%d\n",subquerys,numOfSubQ);
 	}
 
 }

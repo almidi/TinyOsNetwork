@@ -32,6 +32,7 @@ AdjList = []
 for i in range(0,d*d):
     AdjList.append([])
 
+#Calculate connections using pythagorean theorem
 r_p = r**2.0
 for i in range(0,d):
     for j in range(0,d):
@@ -47,18 +48,15 @@ for i in range(0,d):
                     if ((i-k)**2.0 + (j-l)**2.0 <= r_p ):
                         AdjList[grid[i][j]].append(grid[k][l])
 
+#Print Comments
+print("#Auto Generated Topology File")
+print("#Topology Matrix: ",d,"*",d," Nodes")
+print("#Radio Range: ",r)
 
-#
-# print("------------------------------------------------------------")
-# print("------------------------------------------------------------")
-# print("Grid")
-# printm(grid)
-# print("------------------------------------------------------------")
-# print("------------------------------------------------------------")
-# print("Connections")
-# printm(AdjList)
-# print("------------------------------------------------------------")
+#Print # of nodes
+print("-n",d*d,'\n')
 
+#Print node connections
 for i in range(0,len(AdjList)):
     for con in AdjList[i]:
         print(i," ",con," ",noise)

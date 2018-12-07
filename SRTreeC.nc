@@ -20,6 +20,7 @@ module SRTreeC
 	#define KMAG  ""
 	#define KCYN  ""
 #endif
+
 // Define Interfaces
 
 {
@@ -81,6 +82,9 @@ implementation {
 	uint16_t parentID;
 	uint32_t offset_milli;
 
+	//Pack/Unpack Buffer
+	uint32_t buffer[5];
+
 	// Aggregated Data
 	uint32_t SUM;
 	uint32_t COUNT;
@@ -89,8 +93,6 @@ implementation {
 	//Query Encoding Matrix
 	//Used to encode each query to 
 	//5 fundemental subquerys
-
-
 	uint8_t qem[6]={0b00001,  //Sum
 					0b00100,  //Count
 					0b01000,  //Max
@@ -100,11 +102,18 @@ implementation {
 				};
 
 	//Calculated Data Matrix
-	uint8_t cdm[5]={0, //Sum
+	uint32_t cdm[5]={0, //Sum
 					0, //SqSum
 					0, //Count
 					0, //Max
 					0  //Min
+				};
+	
+	//Message sizes
+	uint8_t ms[4]={sizeof(NotifyParentMsgSingle),
+				   sizeof(NotifyParentMsgDouble),
+				   sizeof(NotifyParentMsgTriple),
+				   sizeof(NotifyParentMsgQuad)
 				};
 
 	task void sendRoutingTask();
@@ -169,6 +178,120 @@ implementation {
 		} else {
 		}
 	}
+	//Message Data Seters
+	void setSenderID(void* m,nx_uint16_t SID){
+		switch (numOfSubQ){
+			case 1:
+				((NotifyParentMsgSingle*) m)->senderID = SID;
+				break;
+			case 2:
+				((NotifyParentMsgDouble*) m)->senderID = SID;
+				break;
+			case 3:
+				((NotifyParentMsgTriple*) m)->senderID = SID;
+				break;
+			case 4:
+				((NotifyParentMsgQuad*) m)->senderID = SID;
+				break;
+		}
+	}
+
+	void setParentID(void* m,nx_uint16_t PID){
+		switch (numOfSubQ){
+			case 1:
+				((NotifyParentMsgSingle*) m)->parentID = PID;
+				break;
+			case 2:
+				((NotifyParentMsgDouble*) m)->parentID = PID;
+				break;
+			case 3:
+				((NotifyParentMsgTriple*) m)->parentID = PID;
+				break;
+			case 4:
+				((NotifyParentMsgQuad*) m)->parentID = PID;
+				break;
+		}
+	}
+
+	void setDepth(void* m,nx_uint8_t dep){
+		switch (numOfSubQ){
+			case 1:
+				((NotifyParentMsgSingle*) m)->depth = dep;
+				break;
+			case 2:
+				((NotifyParentMsgDouble*) m)->depth = dep;
+				break;
+			case 3:
+				((NotifyParentMsgTriple*) m)->depth = dep;
+				break;
+			case 4:
+				((NotifyParentMsgQuad*) m)->depth = dep;
+				break;
+		}
+	}
+
+	//Message Data Geters
+
+	nx_uint16_t getSenderID(void* m){
+		switch (numOfSubQ){
+			case 1:
+				return(((NotifyParentMsgSingle*) m)->senderID);
+			case 2:
+				return(((NotifyParentMsgDouble*) m)->senderID);
+			case 3:
+				return(((NotifyParentMsgTriple*) m)->senderID);
+			case 4:
+				return(((NotifyParentMsgQuad*) m)->senderID);	
+		}
+	}
+
+	nx_uint16_t getParentID(void* m){
+		switch (numOfSubQ){
+			case 1:
+				return(((NotifyParentMsgSingle*) m)->parentID);
+			case 2:
+				return(((NotifyParentMsgDouble*) m)->parentID);
+			case 3:
+				return(((NotifyParentMsgTriple*) m)->parentID);
+			case 4:
+				return(((NotifyParentMsgQuad*) m)->parentID);
+		}
+	}
+
+	nx_uint8_t getDepth(void* m){
+		switch (numOfSubQ){
+			case 1:
+				return(((NotifyParentMsgSingle*) m)->depth);
+			case 2:
+				return(((NotifyParentMsgDouble*) m)->depth);
+			case 3:
+				return(((NotifyParentMsgTriple*) m)->depth);
+			case 4:
+				return(((NotifyParentMsgQuad*) m)->depth);
+		}
+	}
+
+	nx_uint32_t* getNumPtr(void* m){
+		switch (numOfSubQ){
+			case 1:
+				return (((NotifyParentMsgSingle*) m)->Num);
+			case 2:
+				return (((NotifyParentMsgDouble*) m)->Num);
+			case 3:
+				return (((NotifyParentMsgTriple*) m)->Num);
+			case 4:
+				return (((NotifyParentMsgQuad*) m)->Num);
+		}
+	}
+
+	// Init cdm
+	void initCdm(){
+		cdm[0]= 0; //Sum
+		cdm[1]=	0; //SqSum
+		cdm[2]=	1; //Count
+		cdm[3]=	0; //Max
+		cdm[4]=	0; //Min
+	}
 
 	// Aggregate Data
 	void aggregate(uint8_t calc, uint32_t value){
@@ -200,6 +323,21 @@ implementation {
 		return;
 	}
 
+	// Pack Message Array
+	void pack(nx_uint32_t* m_array,uint32_t* d_array){
+		uint8_t i;
+		uint8_t index=0;
+		uint8_t TempNumOfSubQ=numOfSubQ;
+
+		m_array[0]=1;
+
+		//  for(i=0;i<5;i++)
+		//  	if((TempNumOfSubQ>>i)&1==1){
+		//  		m_array[index]=d_array[i];
+		//  		index++;
+		//  	}
+	}
+
 	// Boot of device
 	event void Boot.booted() {
 		// Start Radio
@@ -212,6 +350,14 @@ implementation {
 		SUM = 0;
 		COUNT = 1;
 		MAX = 0;
+
+		//2.0
+		cdm[0]=0;
+		cdm[1]=0;
+		cdm[2]=0;
+		cdm[3]=0;
+		cdm[4]=0;
+
 
 		//Init RandomGenerator
 		call GeneratorSeed.init(TOS_NODE_ID);
@@ -355,6 +501,9 @@ implementation {
 			dbg("Routing", "RoutingMsgTimer.fired(): %sRoutingMsg failed to be enqueued in SendingQueue!!!%s\n",KRED,KNRM);
 		}
 
+		//calculate subquerys(for self)
+		post calculateSubQ();
+
 		//Start your epoch
 		post startEpoch();
 	}
@@ -363,7 +512,6 @@ implementation {
 	event void EpochTimer.fired() {
 		uint32_t rand_off;
 		uint32_t measurement;
-
 
 		epochCounter++ ;
 		dbg("Timing", "EpochTimer.fired(): %s######################################################## EPOCH %d %s\n",KCYN,epochCounter,KNRM);
@@ -385,10 +533,8 @@ implementation {
 		measurement = call RandomGenerator.rand16() % 50;
 		dbg("Measure", "EpochTimer.fired(): %sMeasured %d %s\n",KMAG,measurement,KNRM);
 
-		//initialize values
-		SUM = measurement;
-		COUNT = 1;
-		MAX = measurement;
+		//initialize internal values
+		initCdm();
 	}
 
 	// Timer to send data
@@ -397,7 +543,6 @@ implementation {
 		//calculateData
 		post calculateData();
 	}
-
 
 	// Routing Message Sent
 	event void RoutingAMSend.sendDone(message_t * msg , error_t err) {
@@ -530,7 +675,7 @@ implementation {
 		uint8_t mlen;
 		error_t sendDone;
 		uint16_t mdest;
-		NotifyParentMsg* mpayload;
+		void* mpayload;
 
 		if (call NotifySendQueue.empty()) {
 			dbg("SRTreeC", "sendNotifyTask(): Q is empty!\n");
@@ -543,22 +688,25 @@ implementation {
 			return;
 		}
 
+		//dequeue packet
 		radioNotifySendPkt = call NotifySendQueue.dequeue();
 
+		//get payload length
 		mlen = call NotifyPacket.payloadLength(&radioNotifySendPkt);
 
+		//get payload
 		mpayload = call NotifyPacket.getPayload(&radioNotifySendPkt, mlen);
 
 		// check if message is known
-		if (mlen != sizeof(NotifyParentMsg)) {
+		if (mlen != ms[numOfSubQ-1]) {
 			dbg("SRTreeC", "\t\t sendNotifyTask(): Unknown message!!\n");
 			return;
 		}
 
-		dbg("SRTreeC" , "sendNotifyTask(): mlen = %u  senderID= %u \n", mlen, mpayload->senderID);
+		dbg("SRTreeC" , "sendNotifyTask(): mlen = %u  senderID= %u \n", mlen, getSenderID(mpayload));
 		mdest = call NotifyAMPacket.destination(&radioNotifySendPkt);
 
-		//send noti packet
+		//send notification packet
 		sendDone = call NotifyAMSend.send(mdest, &radioNotifySendPkt, mlen);
 
 		if ( sendDone == SUCCESS) {
@@ -634,7 +782,7 @@ implementation {
 
 		dbg("NotifyParentMsg", "ReceiveNotifyTask(): len=%u \n", len);
 		// check if packet is correct
-		if (len == sizeof(NotifyParentMsg)) {
+		if (len == ms[numOfSubQ-1]) {
 			NotifyParentMsg* mr = (NotifyParentMsg*) (call NotifyPacket.getPayload(&radioNotifyRecPkt, len));
 
 			dbg("NotifyParentMsg" , "NotifyParentMsg received from %d !!! \n", mr->senderID);
@@ -678,7 +826,7 @@ implementation {
 			}
 		// packet is not correct
 		} else {
-			dbg("NotifyParentMsg", "receiveNotifyTask():Empty message!!! \n");
+			dbg("NotifyParentMsg", "receiveNotifyTask():%sEmpty message!!!%s \n",KRED,KNRM);
 			setLostNotifyRecTask(TRUE);
 			return;
 		}
@@ -701,7 +849,7 @@ implementation {
 		uint8_t len;
 		uint8_t i;
 		message_t tmp;
-		NotifyParentMsg* mr;
+		void* mr;
 
 		// Iterate Data Queue
 		for(i=0;i< call DataQueue.size();i++){
@@ -710,12 +858,10 @@ implementation {
 
 			//get payload
 			len = call NotifyPacket.payloadLength(&tmp);
-			mr = (NotifyParentMsg*) (call NotifyPacket.getPayload(&tmp, len));
+			mr = call NotifyPacket.getPayload(&tmp, len);
 
-			//aggregate data
-			SUM += mr->SUM;
-			COUNT += mr-> COUNT;
-			MAX = ((mr->MAX) > MAX) ? mr->MAX : MAX  ;
+			//unpack data
+			//TODO: UNPACK DATA
 
 			//enqueue back to DataQueue
 			call DataQueue.enqueue(tmp);
@@ -732,40 +878,43 @@ implementation {
 	// Enqueues data on a notification message Q and calls sendNotifyTask()
 	task void enqueueData(){
 		message_t tmp;
-		NotifyParentMsg* m;
+		
+		void* m;
+		int len;
 
-		m = (NotifyParentMsg *) (call NotifyPacket.getPayload(&tmp, sizeof(NotifyParentMsg)));
-		m->senderID = TOS_NODE_ID;
-		m->depth = curdepth;
-		m->parentID = parentID;
-		m->SUM = SUM;
-		m->COUNT = COUNT;
-		m->MAX = MAX;
+		m = call NotifyPacket.getPayload(&tmp,ms[numOfSubQ-1]); 
+		
+		// Populate message
+		setSenderID(m,TOS_NODE_ID);
+		setDepth(m,curdepth);
+		setParentID(m,parentID);
+		pack(getNumPtr(m),cdm);
 
-		call NotifyAMPacket.setDestination(&tmp, parentID);
-		call NotifyAMPacket.setType(&tmp,AM_NOTIFYPARENTMSG);
-		call NotifyPacket.setPayloadLength(&tmp, sizeof(NotifyParentMsg));
+		
 
-		// Enqueue packet to be sent
-		if (call NotifySendQueue.enqueue(tmp) == SUCCESS) {
-			dbg("NotifyParentMsg", "enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!\n");
-			if (call NotifySendQueue.size() == 1) {
-				// send the packet
-				post sendNotifyTask();
-			}
-		}
+		// call NotifyAMPacket.setDestination(&tmp, parentID);
+		// call NotifyAMPacket.setType(&tmp,AM_NOTIFYPARENTMSG);
+		// call NotifyPacket.setPayloadLength(&tmp, ms[numOfSubQ-1]);
+
+		// // Enqueue packet to be sent
+		// if (call NotifySendQueue.enqueue(tmp) == SUCCESS) {
+		// 	dbg("NotifyParentMsg", "enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!\n");
+		// 	if (call NotifySendQueue.size() == 1) {
+		// 		// send the packet
+		// 		post sendNotifyTask();
+		// 	}
+		// }
 	}
 
 	// Makes final calculations and presents root data
 	task void rootResults(){
-		uint32_t AVG = SUM/COUNT;
-
+ 
 		dbg("Root", "\n");
 		dbg("Root", "rootResults(): %s################################################### ROOT RESULTS FOR EPOCH %d ###################################################s\n",KBLU,epochCounter,KNRM);
-		dbg("Root", "rootResults(): %s############  SUM   : %s%d %s\n",KBLU,KMAG,SUM ,KNRM);
-		dbg("Root", "rootResults(): %s############  COUNT : %s%d %s\n",KBLU,KMAG,COUNT ,KNRM);
-		dbg("Root", "rootResults(): %s############  AVG   : %s%d %s\n",KBLU,KMAG,AVG ,KNRM);
-		dbg("Root", "rootResults(): %s############  MAX   : %s%d %s\n\n",KBLU,KMAG,MAX ,KNRM);
+		//dbg("Root", "rootResults(): %s############  SUM   : %s%d %s\n",KBLU,KMAG,SUM ,KNRM);
+		//dbg("Root", "rootResults(): %s############  COUNT : %s%d %s\n",KBLU,KMAG,COUNT ,KNRM);
+		//dbg("Root", "rootResults(): %s############  AVG   : %s%d %s\n",KBLU,KMAG,AVG ,KNRM);
+		//dbg("Root", "rootResults(): %s############  MAX   : %s%d %s\n\n",KBLU,KMAG,MAX ,KNRM);
 	}
 
 	// Calculates SubQuerys number from query1 and query2
@@ -788,5 +937,6 @@ implementation {
 
 		dbg("Query", "calculateSubQ(): Calculcated subquerys= %d, numOfSubQ=%d\n",subquerys,numOfSubQ);
 	}
+
 
 }

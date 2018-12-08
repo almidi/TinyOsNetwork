@@ -86,7 +86,6 @@ implementation {
 	//Query Encoding Matrix
 	//Used to encode each query to 
 	//5 fundemental subquerys
-
 	uint8_t sqem[7]={0b00000,  //None
 					 0b00001,  //Sum
 					 0b00100,  //Count
@@ -253,9 +252,7 @@ implementation {
 				Num = (((NotifyParentMsgQuad*) m)->Num);
 		}
 
-		for(i = 0;i<numOfSubQ; i++){
-			Num[i]=buffer[i];
-		}
+		memcpy(Num,buffer,sizeof(nx_uint32_t)*numOfSubQ);
 	}	
 
 	//Message Data Geters
@@ -313,9 +310,7 @@ implementation {
 				Num = (((NotifyParentMsgQuad*) m)->Num);
 		}
 
-		for(i = 0;i<numOfSubQ; i++){
-			buffer[i]=Num[i];
-		}
+		memcpy(buffer,Num,sizeof(nx_uint32_t)*numOfSubQ);
 	}	
 
 	// Init cdm
@@ -411,14 +406,6 @@ implementation {
 		return(0);
 	}
 
-	//Copies Data from one array to another
-	void arraycpy(uint32_t* dest,uint32_t* source, uint32_t len){
-		uint32_t i;
-		for(i=0;i<len;i++){
-			dest[i]=source[i];
-		}
-	}
-
 	// Boot of device
 	event void Boot.booted() {
 		uint8_t i ;
@@ -432,8 +419,8 @@ implementation {
 		//Initialize data
 		initCdm();
 
-		//Init RandomGenerator
-		call GeneratorSeed.init(TOS_NODE_ID);
+		//Init RandomGenerator, Use Time for seed
+		call GeneratorSeed.init(time(NULL)+TOS_NODE_ID);
 
 		// If Root Node
 		if (TOS_NODE_ID == 0) {
@@ -441,12 +428,12 @@ implementation {
 			curdepth = 0;
 			parentID = 0;
 			//decide randomly if TiNA
-			TiNA = (call RandomGenerator.rand32()%1);
+			TiNA = (call RandomGenerator.rand32()%2);
 			//calculate random querys
 			query1 = (call RandomGenerator.rand32() % 5)+1-(2*TiNA);
 			query2 = (call RandomGenerator.rand32() % 5)+1;
 			//delete query2 randomly or if query2 == query1 or if TiNA algorithm is enabled
-			if((call RandomGenerator.rand32()%1) || (query1 == query2 || TiNA)){query2 = 0;}
+			if((call RandomGenerator.rand32()%2) || (query1 == query2 || TiNA)){query2 = 0;}
 			dbg("Boot", "%sROOT Node Booted:%s curdepth = %s%03d%s  , parentID = %s%d%s\n",KYEL, KNRM, KYEL,curdepth, KNRM,KYEL,parentID, KNRM);
 			dbg("Boot", "%s                :%s Query1   = %s%s%s, Query2   = %s%s%s\n",KYEL, KNRM, KYEL, query_names[query1], KNRM, KYEL,query_names[query2], KNRM);
 			if(TiNA){dbg("Boot", "%s                : TiNA Mode %sEnabled%s\n",KYEL,KGRN,KNRM);}
@@ -905,7 +892,6 @@ implementation {
 
     // Start The Epoch
 	task void startEpoch(){
-		message_t tmp;
 		//Start Epoch Timer
 		call EpochTimer.startOneShot(TIMER_FAST_PERIOD);
 		//Calculate offset milli (for sending measurements)
@@ -968,7 +954,7 @@ implementation {
 		}
 
 		//If TiNA is enabled and data are worh sending, save data for next epoch checking
-		if(TiNA){arraycpy(tinacdm,cdm,5);}
+		if(TiNA){memcpy(tinacdm,cdm,sizeof(tinacdm));}
 
 
 		m = call NotifyPacket.getPayload(&tmp,ms[numOfSubQ-1]); 

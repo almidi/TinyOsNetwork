@@ -14,7 +14,7 @@ print
 # Debug Channels
 t.addChannel("Boot", f)
 # t.addChannel("Routing",f)
-t.addChannel("NotifyParentMsg",f)
+# t.addChannel("NotifyParentMsg",f)
 # t.addChannel("Radio",f)
 # t.addChannel("SRTreeC",f)
 # t.addChannel("PacketQueueC",f)

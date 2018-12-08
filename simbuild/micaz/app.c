@@ -813,7 +813,7 @@ extern void *malloc(size_t __size) __attribute((__leaf__)) __attribute((__nothro
 #line 483
 extern void free(void *__ptr) __attribute((__leaf__)) __attribute((__nothrow__)) ;
 #line 741
-typedef int (*__compar_fn_t)(const void *arg_0x7f299ff33cf8, const void *arg_0x7f299ff32020);
+typedef int (*__compar_fn_t)(const void *arg_0x7fdd594bdcf8, const void *arg_0x7fdd594bc020);
 #line 774
 extern int abs(int __x) __attribute((__leaf__)) __attribute((__nothrow__)) __attribute((const)) ;
 
@@ -839,7 +839,7 @@ extern double fabs(double __x) __attribute((__leaf__)) __attribute((__nothrow__)
 
 extern double floor(double __x) __attribute((__leaf__)) __attribute((__nothrow__)) __attribute((const)) ;
 #line 260
-extern double erfc(double arg_0x7f299feb2618) __attribute((__leaf__)) __attribute((__nothrow__)) ;
+extern double erfc(double arg_0x7fdd5943c618) __attribute((__leaf__)) __attribute((__nothrow__)) ;
 #line 336
 __extension__ 
 
@@ -1237,8 +1237,8 @@ typedef struct hashtable hashtable_t;
 #line 78
 struct hashtable *
 create_hashtable(unsigned int minsize, 
-unsigned int (*hashfunction)(void *arg_0x7f299fc69020), 
-int (*key_eq_fn)(void *arg_0x7f299fc69798, void *arg_0x7f299fc69a38));
+unsigned int (*hashfunction)(void *arg_0x7fdd591f3020), 
+int (*key_eq_fn)(void *arg_0x7fdd591f3798, void *arg_0x7fdd591f3a38));
 #line 103
 #line 102
 int 
@@ -1836,6 +1836,8 @@ struct itimerspec {
 
 
 struct sigevent;
+#line 192
+extern time_t time(time_t *__timer) __attribute((__leaf__)) __attribute((__nothrow__)) ;
 # 239 "/usr/include/time.h"
 struct tm;
 
@@ -1854,7 +1856,7 @@ struct tm;
 
 struct tm;
 # 46 "/home/tinyos/local/src/tinyos-2x/tos/lib/tossim/randomlib.h"
-static inline void RandomInitialise(int arg_0x7f299fa65610, int arg_0x7f299fa65878);
+static inline void RandomInitialise(int arg_0x7fdd58fef610, int arg_0x7fdd58fef878);
 static double RandomUniform(void );
 # 51 "/home/tinyos/local/src/tinyos-2x/tos/lib/tossim/sim_noise.c"
 int numCase1 = 0;
@@ -4232,11 +4234,11 @@ static error_t PlatformC__Init__init(void );
 # 67 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/TaskBasic.nc"
 static error_t SimSchedulerBasicP__TaskBasic__postTask(
 # 49 "/home/tinyos/local/src/tinyos-2x/tos/lib/tossim/SimSchedulerBasicP.nc"
-uint8_t arg_0x7f299f93f108);
+uint8_t arg_0x7fdd58ec9108);
 # 75 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/TaskBasic.nc"
 static void SimSchedulerBasicP__TaskBasic__default__runTask(
 # 49 "/home/tinyos/local/src/tinyos-2x/tos/lib/tossim/SimSchedulerBasicP.nc"
-uint8_t arg_0x7f299f93f108);
+uint8_t arg_0x7fdd58ec9108);
 # 57 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/Scheduler.nc"
 static void SimSchedulerBasicP__Scheduler__init(void );
 
@@ -4279,7 +4281,7 @@ static long long int SimMoteP__SimMote__getStartTime(void );
 # 80 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/AMSend.nc"
 static error_t TossimActiveMessageC__AMSend__send(
 # 47 "/home/tinyos/local/src/tinyos-2x/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0x7f299f5c8970, 
+am_id_t arg_0x7fdd58b55970, 
 # 80 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/AMSend.nc"
 am_addr_t addr, 
 #line 71
@@ -4302,7 +4304,7 @@ message_t *
 
 TossimActiveMessageC__Snoop__default__receive(
 # 49 "/home/tinyos/local/src/tinyos-2x/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0x7f299f5bf670, 
+am_id_t arg_0x7fdd58b4c670, 
 # 71 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -4349,7 +4351,7 @@ message_t *
 
 TossimActiveMessageC__Receive__default__receive(
 # 48 "/home/tinyos/local/src/tinyos-2x/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0x7f299f5c1a90, 
+am_id_t arg_0x7fdd58b4ea90, 
 # 71 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -4519,11 +4521,11 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__TimerFrom__f
 #line 83
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__default__fired(
 # 48 "/home/tinyos/local/src/tinyos-2x/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x7f299f10b2f8);
+uint8_t arg_0x7fdd586982f8);
 # 73 "/home/tinyos/local/src/tinyos-2x/tos/lib/timer/Timer.nc"
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startOneShot(
 # 48 "/home/tinyos/local/src/tinyos-2x/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x7f299f10b2f8, 
+uint8_t arg_0x7fdd586982f8, 
 # 73 "/home/tinyos/local/src/tinyos-2x/tos/lib/timer/Timer.nc"
 uint32_t dt);
 # 82 "/home/tinyos/local/src/tinyos-2x/tos/lib/timer/Counter.nc"
@@ -4552,7 +4554,7 @@ error_t error);
 # 110 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/AMSend.nc"
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__sendDone(
 # 48 "/home/tinyos/local/src/tinyos-2x/tos/system/AMQueueImplP.nc"
-am_id_t arg_0x7f299f061c70, 
+am_id_t arg_0x7fdd585eec70, 
 # 103 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/AMSend.nc"
 message_t * msg, 
 
@@ -4565,7 +4567,7 @@ error_t error);
 # 75 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/Send.nc"
 static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__send(
 # 46 "/home/tinyos/local/src/tinyos-2x/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x7f299f062990, 
+uint8_t arg_0x7fdd585f0990, 
 # 67 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -4579,7 +4581,7 @@ uint8_t len);
 #line 100
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__default__sendDone(
 # 46 "/home/tinyos/local/src/tinyos-2x/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x7f299f062990, 
+uint8_t arg_0x7fdd585f0990, 
 # 96 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -4840,54 +4842,54 @@ message_t * amsg,
 
 
 am_addr_t addr);
-# 140 "SRTreeC.nc"
+# 139 "SRTreeC.nc"
 enum SRTreeC____nesc_unnamed4330 {
-#line 140
+#line 139
   SRTreeC__sendRoutingTask = 0U
 };
-#line 140
+#line 139
 typedef int SRTreeC____nesc_sillytask_sendRoutingTask[SRTreeC__sendRoutingTask];
 enum SRTreeC____nesc_unnamed4331 {
-#line 141
+#line 140
   SRTreeC__sendNotifyTask = 1U
 };
-#line 141
+#line 140
 typedef int SRTreeC____nesc_sillytask_sendNotifyTask[SRTreeC__sendNotifyTask];
 enum SRTreeC____nesc_unnamed4332 {
-#line 142
+#line 141
   SRTreeC__receiveRoutingTask = 2U
 };
-#line 142
+#line 141
 typedef int SRTreeC____nesc_sillytask_receiveRoutingTask[SRTreeC__receiveRoutingTask];
 enum SRTreeC____nesc_unnamed4333 {
-#line 143
+#line 142
   SRTreeC__receiveNotifyTask = 3U
 };
-#line 143
+#line 142
 typedef int SRTreeC____nesc_sillytask_receiveNotifyTask[SRTreeC__receiveNotifyTask];
 enum SRTreeC____nesc_unnamed4334 {
-#line 144
+#line 143
   SRTreeC__startEpoch = 4U
 };
-#line 144
+#line 143
 typedef int SRTreeC____nesc_sillytask_startEpoch[SRTreeC__startEpoch];
 enum SRTreeC____nesc_unnamed4335 {
-#line 145
+#line 144
   SRTreeC__enqueueData = 5U
 };
-#line 145
+#line 144
 typedef int SRTreeC____nesc_sillytask_enqueueData[SRTreeC__enqueueData];
 enum SRTreeC____nesc_unnamed4336 {
-#line 146
+#line 145
   SRTreeC__calculateData = 6U
 };
-#line 146
+#line 145
 typedef int SRTreeC____nesc_sillytask_calculateData[SRTreeC__calculateData];
 enum SRTreeC____nesc_unnamed4337 {
-#line 147
+#line 146
   SRTreeC__rootResults = 7U
 };
-#line 147
+#line 146
 typedef int SRTreeC____nesc_sillytask_rootResults[SRTreeC__rootResults];
 #line 63
 uint16_t SRTreeC__epochCounter[1000];
@@ -4912,7 +4914,6 @@ uint16_t SRTreeC__parentID[1000];
 uint32_t SRTreeC__offset_milli[1000];
 
 bool SRTreeC__TiNA[1000];
-
 
 
 
@@ -4962,7 +4963,7 @@ char SRTreeC__query_names[1000][7][10];
 
 
 uint8_t SRTreeC__ms[1000][4];
-#line 150
+#line 149
 static void SRTreeC__setLostRoutingSendTask(bool state);
 
 
@@ -4992,21 +4993,21 @@ static void SRTreeC__setRoutingSendBusy(bool state);
 
 
 static void SRTreeC__setNotifySendBusy(bool state);
-#line 190
+#line 189
 static inline void SRTreeC__setSenderID(void *m, __nesc_nxbase_nx_uint16_t SID);
-#line 207
+#line 206
 static inline void SRTreeC__setParentID(void *m, __nesc_nxbase_nx_uint16_t PID);
-#line 224
+#line 223
 static inline void SRTreeC__setDepth(void *m, __nesc_nxbase_nx_uint8_t dep);
-#line 241
+#line 240
 static inline void SRTreeC__setNum(void *m, nx_uint32_t *buffer);
-#line 262
+#line 259
 static __nesc_nxbase_nx_uint16_t SRTreeC__getSenderID(void *m);
-#line 275
+#line 272
 static inline __nesc_nxbase_nx_uint16_t SRTreeC__getParentID(void *m);
-#line 301
+#line 298
 static inline void SRTreeC__getNum(void *m, nx_uint32_t *buffer);
-#line 322
+#line 317
 static void SRTreeC__initCdm(void );
 
 
@@ -5017,11 +5018,11 @@ static void SRTreeC__initCdm(void );
 
 
 static inline void SRTreeC__aggregate(uint32_t *aggr, uint32_t *data);
-#line 347
+#line 342
 static inline void SRTreeC__pack(nx_uint32_t *buffer, uint32_t *data);
-#line 359
+#line 354
 static inline void SRTreeC__unpack(nx_uint32_t *buffer, uint32_t *data);
-#line 371
+#line 366
 static inline void SRTreeC__calculateQ(void );
 
 
@@ -5033,7 +5034,7 @@ static inline void SRTreeC__calculateQ(void );
 
 
 static void SRTreeC__calculateSubQ(void );
-#line 404
+#line 399
 static inline bool SRTreeC__checkTiNA(void );
 
 
@@ -5045,29 +5046,21 @@ static inline bool SRTreeC__checkTiNA(void );
 
 
 
-static inline void SRTreeC__arraycpy(uint32_t *dest, uint32_t *source, uint32_t len);
-
-
-
-
-
-
-
 static inline void SRTreeC__Boot__booted(void );
-#line 465
+#line 452
 static inline void SRTreeC__RadioControl__startDone(error_t err);
-#line 484
+#line 471
 static inline void SRTreeC__RadioControl__stopDone(error_t err);
 
 
 
 
 static inline void SRTreeC__LostTaskTimer__fired(void );
-#line 502
+#line 489
 static inline void SRTreeC__RoutingMsgTimer__fired(void );
-#line 578
+#line 565
 static inline void SRTreeC__EpochTimer__fired(void );
-#line 614
+#line 601
 static inline void SRTreeC__SlotTimer__fired(void );
 
 
@@ -5096,23 +5089,32 @@ static void SRTreeC__NotifyAMSend__sendDone(message_t *msg, error_t err);
 
 
 static inline message_t *SRTreeC__NotifyReceive__receive(message_t *msg, void *payload, uint8_t len);
-#line 666
+#line 653
 static inline message_t *SRTreeC__RoutingReceive__receive(message_t *msg, void *payload, uint8_t len);
-#line 701
+#line 688
 static inline void SRTreeC__sendRoutingTask__runTask(void );
-#line 743
+#line 730
 static inline void SRTreeC__sendNotifyTask__runTask(void );
-#line 791
+#line 778
 static inline void SRTreeC__receiveRoutingTask__runTask(void );
-#line 844
+#line 831
 static inline void SRTreeC__receiveNotifyTask__runTask(void );
-#line 907
+#line 894
 static inline void SRTreeC__startEpoch__runTask(void );
-#line 919
+
+
+
+
+
+
+
+
+
+
 static inline void SRTreeC__calculateData__runTask(void );
-#line 958
+#line 944
 static inline void SRTreeC__enqueueData__runTask(void );
-#line 1002
+#line 988
 static inline void SRTreeC__rootResults__runTask(void );
 # 45 "/home/tinyos/local/src/tinyos-2x/tos/lib/tossim/PlatformC.nc"
 static inline error_t PlatformC__Init__init(void );
@@ -5137,7 +5139,7 @@ int sim_main_start_mote(void )   ;
 # 75 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/TaskBasic.nc"
 static void SimSchedulerBasicP__TaskBasic__runTask(
 # 49 "/home/tinyos/local/src/tinyos-2x/tos/lib/tossim/SimSchedulerBasicP.nc"
-uint8_t arg_0x7f299f93f108);
+uint8_t arg_0x7fdd58ec9108);
 
 
 
@@ -5325,7 +5327,7 @@ static am_addr_t TossimActiveMessageC__amAddress(void );
 # 110 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/AMSend.nc"
 static void TossimActiveMessageC__AMSend__sendDone(
 # 47 "/home/tinyos/local/src/tinyos-2x/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0x7f299f5c8970, 
+am_id_t arg_0x7fdd58b55970, 
 # 103 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/AMSend.nc"
 message_t * msg, 
 
@@ -5344,7 +5346,7 @@ message_t *
 
 TossimActiveMessageC__Snoop__receive(
 # 49 "/home/tinyos/local/src/tinyos-2x/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0x7f299f5bf670, 
+am_id_t arg_0x7fdd58b4c670, 
 # 71 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -5363,7 +5365,7 @@ message_t *
 
 TossimActiveMessageC__Receive__receive(
 # 48 "/home/tinyos/local/src/tinyos-2x/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0x7f299f5c1a90, 
+am_id_t arg_0x7fdd58b4ea90, 
 # 71 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -6076,7 +6078,7 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__TimerFrom__s
 
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__fired(
 # 48 "/home/tinyos/local/src/tinyos-2x/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x7f299f10b2f8);
+uint8_t arg_0x7fdd586982f8);
 #line 71
 enum /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0____nesc_unnamed4345 {
 #line 71
@@ -6185,7 +6187,7 @@ static inline void /*SRTreeAppC.RoutingSenderC.SenderC.AMQueueEntryP*/AMQueueEnt
 # 80 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/AMSend.nc"
 static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(
 # 48 "/home/tinyos/local/src/tinyos-2x/tos/system/AMQueueImplP.nc"
-am_id_t arg_0x7f299f061c70, 
+am_id_t arg_0x7fdd585eec70, 
 # 80 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/AMSend.nc"
 am_addr_t addr, 
 #line 71
@@ -6202,7 +6204,7 @@ uint8_t len);
 # 100 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/Send.nc"
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__sendDone(
 # 46 "/home/tinyos/local/src/tinyos-2x/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x7f299f062990, 
+uint8_t arg_0x7fdd585f0990, 
 # 96 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -6893,9 +6895,9 @@ inline static am_addr_t SRTreeC__RoutingAMPacket__source(message_t * amsg){
 #line 88
 }
 #line 88
-# 666 "SRTreeC.nc"
+# 653 "SRTreeC.nc"
 static inline message_t *SRTreeC__RoutingReceive__receive(message_t *msg, void *payload, uint8_t len)
-#line 666
+#line 653
 {
   error_t enqueueDone;
   message_t tmp;
@@ -6912,11 +6914,11 @@ static inline message_t *SRTreeC__RoutingReceive__receive(message_t *msg, void *
     }
 
   { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 681
+#line 668
     {
       memcpy(&tmp, msg, sizeof(message_t ));
     }
-#line 683
+#line 670
     __nesc_atomic_end(__nesc_atomic); }
 
   enqueueDone = SRTreeC__RoutingReceiveQueue__enqueue(tmp);
@@ -7025,9 +7027,9 @@ inline static am_addr_t SRTreeC__NotifyAMPacket__source(message_t * amsg){
 #line 88
 }
 #line 88
-# 641 "SRTreeC.nc"
+# 628 "SRTreeC.nc"
 static inline message_t *SRTreeC__NotifyReceive__receive(message_t *msg, void *payload, uint8_t len)
-#line 641
+#line 628
 {
   error_t enqueueDone;
   message_t tmp;
@@ -7038,11 +7040,11 @@ static inline message_t *SRTreeC__NotifyReceive__receive(message_t *msg, void *p
   sim_log_debug(75U, "NotifyParentMsg", "NotifyReceive.receive(): Something received!!!  from %u - Original source %u \n", SRTreeC__getSenderID(payload), msource);
 
   { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 650
+#line 637
     {
       memcpy(&tmp, msg, sizeof(message_t ));
     }
-#line 652
+#line 639
     __nesc_atomic_end(__nesc_atomic); }
 
   enqueueDone = SRTreeC__NotifyReceiveQueue__enqueue(tmp);
@@ -7064,13 +7066,13 @@ static inline message_t *TossimActiveMessageC__Receive__default__receive(am_id_t
 }
 
 # 78 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/Receive.nc"
-inline static message_t * TossimActiveMessageC__Receive__receive(am_id_t arg_0x7f299f5c1a90, message_t * msg, void * payload, uint8_t len){
+inline static message_t * TossimActiveMessageC__Receive__receive(am_id_t arg_0x7fdd58b4ea90, message_t * msg, void * payload, uint8_t len){
 #line 78
   nx_struct message_t *__nesc_result;
 #line 78
 
 #line 78
-  switch (arg_0x7f299f5c1a90) {
+  switch (arg_0x7fdd58b4ea90) {
 #line 78
     case 12:
 #line 78
@@ -7086,7 +7088,7 @@ inline static message_t * TossimActiveMessageC__Receive__receive(am_id_t arg_0x7
 #line 78
     default:
 #line 78
-      __nesc_result = TossimActiveMessageC__Receive__default__receive(arg_0x7f299f5c1a90, msg, payload, len);
+      __nesc_result = TossimActiveMessageC__Receive__default__receive(arg_0x7fdd58b4ea90, msg, payload, len);
 #line 78
       break;
 #line 78
@@ -7142,13 +7144,13 @@ static inline message_t *TossimActiveMessageC__Snoop__default__receive(am_id_t i
 }
 
 # 78 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/Receive.nc"
-inline static message_t * TossimActiveMessageC__Snoop__receive(am_id_t arg_0x7f299f5bf670, message_t * msg, void * payload, uint8_t len){
+inline static message_t * TossimActiveMessageC__Snoop__receive(am_id_t arg_0x7fdd58b4c670, message_t * msg, void * payload, uint8_t len){
 #line 78
   nx_struct message_t *__nesc_result;
 #line 78
 
 #line 78
-    __nesc_result = TossimActiveMessageC__Snoop__default__receive(arg_0x7f299f5bf670, msg, payload, len);
+    __nesc_result = TossimActiveMessageC__Snoop__default__receive(arg_0x7fdd58b4c670, msg, payload, len);
 #line 78
 
 #line 78
@@ -7432,9 +7434,9 @@ inline static bool SRTreeC__RoutingSendQueue__empty(void ){
 #line 3
 }
 #line 3
-# 701 "SRTreeC.nc"
+# 688 "SRTreeC.nc"
 static inline void SRTreeC__sendRoutingTask__runTask(void )
-#line 701
+#line 688
 {
 
   uint8_t mlen;
@@ -7657,9 +7659,9 @@ inline static bool SRTreeC__NotifySendQueue__empty(void ){
 #line 3
 }
 #line 3
-# 743 "SRTreeC.nc"
+# 730 "SRTreeC.nc"
 static inline void SRTreeC__sendNotifyTask__runTask(void )
-#line 743
+#line 730
 {
   uint8_t mlen;
   error_t sendDone;
@@ -7702,7 +7704,7 @@ static inline void SRTreeC__sendNotifyTask__runTask(void )
       sim_log_debug(88U, "SRTreeC", "sendNotifyTask(): %sSend Success!!!%s\n", "\x1B[32m", "\x1B[0m");
     }
   else 
-#line 783
+#line 770
     {
       sim_log_debug(89U, "SRTreeC", "sendNotifyTask(): %sSend Failed!!!%s\n", "\x1B[31m", "\x1B[0m");
 
@@ -7801,9 +7803,9 @@ inline static message_t SRTreeC__RoutingReceiveQueue__dequeue(void ){
 #line 8
 }
 #line 8
-# 791 "SRTreeC.nc"
+# 778 "SRTreeC.nc"
 static inline void SRTreeC__receiveRoutingTask__runTask(void )
-#line 791
+#line 778
 {
   message_t tmp;
   error_t enqueueDone;
@@ -7922,9 +7924,9 @@ inline static uint8_t SRTreeC__DataQueue__size(void ){
 #line 5
 }
 #line 5
-# 275 "SRTreeC.nc"
+# 272 "SRTreeC.nc"
 static inline __nesc_nxbase_nx_uint16_t SRTreeC__getParentID(void *m)
-#line 275
+#line 272
 {
   switch (SRTreeC__numOfSubQ[sim_node()]) {
       case 1: 
@@ -8007,9 +8009,9 @@ inline static message_t SRTreeC__NotifyReceiveQueue__dequeue(void ){
 #line 8
 }
 #line 8
-# 844 "SRTreeC.nc"
+# 831 "SRTreeC.nc"
 static inline void SRTreeC__receiveNotifyTask__runTask(void )
-#line 844
+#line 831
 {
   uint8_t len;
   uint8_t i;
@@ -8079,11 +8081,10 @@ inline static void SRTreeC__EpochTimer__startOneShot(uint32_t dt){
 #line 73
 }
 #line 73
-# 907 "SRTreeC.nc"
+# 894 "SRTreeC.nc"
 static inline void SRTreeC__startEpoch__runTask(void )
-#line 907
+#line 894
 {
-  message_t tmp;
 
   SRTreeC__EpochTimer__startOneShot(TIMER_FAST_PERIOD);
 
@@ -8247,34 +8248,9 @@ inline static void SRTreeC__NotifyAMPacket__setDestination(message_t * amsg, am_
 #line 103
 }
 #line 103
-# 340 "/home/tinyos/local/compilers/lib/ncc/nesc_nx.h"
-static __inline  uint32_t __nesc_ntoh_uint32(const void * source)
-#line 340
-{
-  const uint8_t *base = source;
-
-#line 342
-  return ((((uint32_t )base[0] << 24) | (
-  (uint32_t )base[1] << 16)) | (
-  (uint32_t )base[2] << 8)) | base[3];
-}
-
-static __inline  uint32_t __nesc_hton_uint32(void * target, uint32_t value)
-#line 347
-{
-  uint8_t *base = target;
-
-#line 349
-  base[3] = value;
-  base[2] = value >> 8;
-  base[1] = value >> 16;
-  base[0] = value >> 24;
-  return value;
-}
-
-# 241 "SRTreeC.nc"
+# 240 "SRTreeC.nc"
 static inline void SRTreeC__setNum(void *m, nx_uint32_t *buffer)
-#line 241
+#line 240
 {
   nx_uint32_t *Num;
   uint8_t i;
@@ -8290,14 +8266,26 @@ static inline void SRTreeC__setNum(void *m, nx_uint32_t *buffer)
         Num = ((NotifyParentMsgQuad *)m)->Num;
     }
 
-  for (i = 0; i < SRTreeC__numOfSubQ[sim_node()]; i++) {
-      __nesc_hton_uint32(Num[i].nxdata, __nesc_ntoh_uint32(buffer[i].nxdata));
-    }
+  memcpy(Num, buffer, sizeof(nx_uint32_t ) * SRTreeC__numOfSubQ[sim_node()]);
 }
 
+# 347 "/home/tinyos/local/compilers/lib/ncc/nesc_nx.h"
+static __inline  uint32_t __nesc_hton_uint32(void * target, uint32_t value)
 #line 347
+{
+  uint8_t *base = target;
+
+#line 349
+  base[3] = value;
+  base[2] = value >> 8;
+  base[1] = value >> 16;
+  base[0] = value >> 24;
+  return value;
+}
+
+# 342 "SRTreeC.nc"
 static inline void SRTreeC__pack(nx_uint32_t *buffer, uint32_t *data)
-#line 347
+#line 342
 {
   uint8_t i;
   uint8_t index = 0;
@@ -8309,9 +8297,9 @@ static inline void SRTreeC__pack(nx_uint32_t *buffer, uint32_t *data)
       }
 }
 
-#line 207
+#line 206
 static inline void SRTreeC__setParentID(void *m, __nesc_nxbase_nx_uint16_t PID)
-#line 207
+#line 206
 {
   switch (SRTreeC__numOfSubQ[sim_node()]) {
       case 1: 
@@ -8330,7 +8318,7 @@ static inline void SRTreeC__setParentID(void *m, __nesc_nxbase_nx_uint16_t PID)
 }
 
 static inline void SRTreeC__setDepth(void *m, __nesc_nxbase_nx_uint8_t dep)
-#line 224
+#line 223
 {
   switch (SRTreeC__numOfSubQ[sim_node()]) {
       case 1: 
@@ -8348,9 +8336,9 @@ static inline void SRTreeC__setDepth(void *m, __nesc_nxbase_nx_uint8_t dep)
     }
 }
 
-#line 190
+#line 189
 static inline void SRTreeC__setSenderID(void *m, __nesc_nxbase_nx_uint16_t SID)
-#line 190
+#line 189
 {
   switch (SRTreeC__numOfSubQ[sim_node()]) {
       case 1: 
@@ -8368,25 +8356,13 @@ static inline void SRTreeC__setSenderID(void *m, __nesc_nxbase_nx_uint16_t SID)
     }
 }
 
-#line 415
-static inline void SRTreeC__arraycpy(uint32_t *dest, uint32_t *source, uint32_t len)
-#line 415
-{
-  uint32_t i;
-
-#line 417
-  for (i = 0; i < len; i++) {
-      dest[i] = source[i];
-    }
-}
-
-#line 404
+#line 399
 static inline bool SRTreeC__checkTiNA(void )
-#line 404
+#line 399
 {
   uint8_t i;
 
-#line 406
+#line 401
   for (i = 0; i < 5; i++) {
       if (abs(SRTreeC__tinacdm[sim_node()][i] - SRTreeC__cdm[sim_node()][i]) > TiNA_THRESHOLD) {
           return 1;
@@ -8395,9 +8371,9 @@ static inline bool SRTreeC__checkTiNA(void )
   return 0;
 }
 
-#line 958
+#line 944
 static inline void SRTreeC__enqueueData__runTask(void )
-#line 958
+#line 944
 {
   message_t tmp;
   nx_uint32_t buffer[4];
@@ -8412,8 +8388,8 @@ static inline void SRTreeC__enqueueData__runTask(void )
 
 
   if (SRTreeC__TiNA[sim_node()]) {
-#line 971
-      SRTreeC__arraycpy(SRTreeC__tinacdm[sim_node()], SRTreeC__cdm[sim_node()], 5);
+#line 957
+      memcpy(SRTreeC__tinacdm[sim_node()], SRTreeC__cdm[sim_node()], sizeof SRTreeC__tinacdm[sim_node()]);
     }
 
   m = SRTreeC__NotifyPacket__getPayload(&tmp, SRTreeC__ms[sim_node()][SRTreeC__numOfSubQ[sim_node()] - 1]);
@@ -8472,9 +8448,9 @@ inline static error_t SRTreeC__rootResults__postTask(void ){
 #line 67
 }
 #line 67
-# 331 "SRTreeC.nc"
+# 326 "SRTreeC.nc"
 static inline void SRTreeC__aggregate(uint32_t *aggr, uint32_t *data)
-#line 331
+#line 326
 {
   uint8_t i;
 
@@ -8490,9 +8466,21 @@ static inline void SRTreeC__aggregate(uint32_t *aggr, uint32_t *data)
   aggr[4] = aggr[4] < data[4] ? aggr[4] : data[4];
 }
 
-#line 359
+# 340 "/home/tinyos/local/compilers/lib/ncc/nesc_nx.h"
+static __inline  uint32_t __nesc_ntoh_uint32(const void * source)
+#line 340
+{
+  const uint8_t *base = source;
+
+#line 342
+  return ((((uint32_t )base[0] << 24) | (
+  (uint32_t )base[1] << 16)) | (
+  (uint32_t )base[2] << 8)) | base[3];
+}
+
+# 354 "SRTreeC.nc"
 static inline void SRTreeC__unpack(nx_uint32_t *buffer, uint32_t *data)
-#line 359
+#line 354
 {
   uint8_t i;
   uint8_t index = 0;
@@ -8504,9 +8492,9 @@ static inline void SRTreeC__unpack(nx_uint32_t *buffer, uint32_t *data)
       }
 }
 
-#line 301
+#line 298
 static inline void SRTreeC__getNum(void *m, nx_uint32_t *buffer)
-#line 301
+#line 298
 {
   nx_uint32_t *Num;
   uint8_t i;
@@ -8522,14 +8510,12 @@ static inline void SRTreeC__getNum(void *m, nx_uint32_t *buffer)
         Num = ((NotifyParentMsgQuad *)m)->Num;
     }
 
-  for (i = 0; i < SRTreeC__numOfSubQ[sim_node()]; i++) {
-      __nesc_hton_uint32(buffer[i].nxdata, __nesc_ntoh_uint32(Num[i].nxdata));
-    }
+  memcpy(buffer, Num, sizeof(nx_uint32_t ) * SRTreeC__numOfSubQ[sim_node()]);
 }
 
-#line 919
+#line 905
 static inline void SRTreeC__calculateData__runTask(void )
-#line 919
+#line 905
 {
   uint8_t len;
   uint8_t i;
@@ -8565,15 +8551,15 @@ static inline void SRTreeC__calculateData__runTask(void )
       SRTreeC__rootResults__postTask();
     }
   else 
-#line 952
+#line 938
     {
       SRTreeC__enqueueData__postTask();
     }
 }
 
-#line 371
+#line 366
 static inline void SRTreeC__calculateQ(void )
-#line 371
+#line 366
 {
   SRTreeC__qdm[sim_node()][0] = SRTreeC__cdm[sim_node()][0];
   SRTreeC__qdm[sim_node()][1] = SRTreeC__cdm[sim_node()][2];
@@ -8583,9 +8569,9 @@ static inline void SRTreeC__calculateQ(void )
   SRTreeC__qdm[sim_node()][5] = (SRTreeC__cdm[sim_node()][1] / SRTreeC__cdm[sim_node()][2] - SRTreeC__cdm[sim_node()][0] / SRTreeC__cdm[sim_node()][2]) ^ 2;
 }
 
-#line 1002
+#line 988
 static inline void SRTreeC__rootResults__runTask(void )
-#line 1002
+#line 988
 {
   SRTreeC__calculateQ();
 
@@ -8593,7 +8579,7 @@ static inline void SRTreeC__rootResults__runTask(void )
   sim_log_debug(105U, "Root", "rootResults(): %s################################################### ROOT RESULTS FOR EPOCH %d ###################################################s\n", "\x1B[34m", SRTreeC__epochCounter[sim_node()], "\x1B[0m");
   sim_log_debug(106U, "Root", "rootResults(): %s## Query 1: %s%s%s -- Result: %s%d%s\n", "\x1B[34m", "\x1B[32m", SRTreeC__query_names[sim_node()][SRTreeC__query1[sim_node()]], "\x1B[34m", "\x1B[32m", SRTreeC__qdm[sim_node()][SRTreeC__query1[sim_node()] - 1], "\x1B[0m");
   if (SRTreeC__query2[sim_node()] > 0) {
-#line 1008
+#line 994
       sim_log_debug(107U, "Root", "rootResults(): %s## Query 2: %s%s%s -- Result: %s%d%s\n", "\x1B[34m", "\x1B[32m", SRTreeC__query_names[sim_node()][SRTreeC__query2[sim_node()]], "\x1B[34m", "\x1B[32m", SRTreeC__qdm[sim_node()][SRTreeC__query2[sim_node()] - 1], "\x1B[0m");
     }
 }
@@ -8613,9 +8599,9 @@ inline static error_t SRTreeC__RadioControl__start(void ){
 #line 104
 }
 #line 104
-# 465 "SRTreeC.nc"
+# 452 "SRTreeC.nc"
 static inline void SRTreeC__RadioControl__startDone(error_t err)
-#line 465
+#line 452
 {
   if (err == SUCCESS) {
       sim_log_debug(53U, "Radio", "RadioControl.StartDone():%s Radio initialized successfully!!!%s\n", "\x1B[33m", "\x1B[0m");
@@ -8630,7 +8616,7 @@ static inline void SRTreeC__RadioControl__startDone(error_t err)
         }
     }
   else 
-#line 477
+#line 464
     {
       sim_log_debug(54U, "Radio", "RadioControl.StartDone():%s Radio initialization failed! Retrying...%s\n", "\x1B[31m", "\x1B[0m");
       SRTreeC__RadioControl__start();
@@ -8652,9 +8638,9 @@ static inline void TossimPacketModelC__startDoneTask__runTask(void )
   TossimPacketModelC__Control__startDone(SUCCESS);
 }
 
-# 484 "SRTreeC.nc"
+# 471 "SRTreeC.nc"
 static inline void SRTreeC__RadioControl__stopDone(error_t err)
-#line 484
+#line 471
 {
   sim_log_debug(55U, "Radio", "RadioControl.stopDone():%s Radio stopped!%s\n", "\x1B[33m", "\x1B[0m");
 }
@@ -8685,9 +8671,9 @@ static __inline  int8_t __nesc_hton_int8(void * target, int8_t value)
 }
 
 # 110 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/AMSend.nc"
-inline static void TossimActiveMessageC__AMSend__sendDone(am_id_t arg_0x7f299f5c8970, message_t * msg, error_t error){
+inline static void TossimActiveMessageC__AMSend__sendDone(am_id_t arg_0x7fdd58b55970, message_t * msg, error_t error){
 #line 110
-  /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__sendDone(arg_0x7f299f5c8970, msg, error);
+  /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__sendDone(arg_0x7fdd58b55970, msg, error);
 #line 110
 }
 #line 110
@@ -9011,9 +8997,9 @@ static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__default__send
 }
 
 # 100 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/Send.nc"
-inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__sendDone(uint8_t arg_0x7f299f062990, message_t * msg, error_t error){
+inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__sendDone(uint8_t arg_0x7fdd585f0990, message_t * msg, error_t error){
 #line 100
-  switch (arg_0x7f299f062990) {
+  switch (arg_0x7fdd585f0990) {
 #line 100
     case 0U:
 #line 100
@@ -9029,7 +9015,7 @@ inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__sendDone(uint
 #line 100
     default:
 #line 100
-      /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__default__sendDone(arg_0x7f299f062990, msg, error);
+      /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__default__sendDone(arg_0x7fdd585f0990, msg, error);
 #line 100
       break;
 #line 100
@@ -9073,9 +9059,9 @@ static inline void SimSchedulerBasicP__TaskBasic__default__runTask(uint8_t id)
 }
 
 # 75 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/TaskBasic.nc"
-inline static void SimSchedulerBasicP__TaskBasic__runTask(uint8_t arg_0x7f299f93f108){
+inline static void SimSchedulerBasicP__TaskBasic__runTask(uint8_t arg_0x7fdd58ec9108){
 #line 75
-  switch (arg_0x7f299f93f108) {
+  switch (arg_0x7fdd58ec9108) {
 #line 75
     case SRTreeC__sendRoutingTask:
 #line 75
@@ -9175,7 +9161,7 @@ inline static void SimSchedulerBasicP__TaskBasic__runTask(uint8_t arg_0x7f299f93
 #line 75
     default:
 #line 75
-      SimSchedulerBasicP__TaskBasic__default__runTask(arg_0x7f299f93f108);
+      SimSchedulerBasicP__TaskBasic__default__runTask(arg_0x7fdd58ec9108);
 #line 75
       break;
 #line 75
@@ -9199,13 +9185,13 @@ inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__errorTask__postT
 }
 #line 67
 # 80 "/home/tinyos/local/src/tinyos-2x/tos/interfaces/AMSend.nc"
-inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(am_id_t arg_0x7f299f061c70, am_addr_t addr, message_t * msg, uint8_t len){
+inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(am_id_t arg_0x7fdd585eec70, am_addr_t addr, message_t * msg, uint8_t len){
 #line 80
   unsigned char __nesc_result;
 #line 80
 
 #line 80
-  __nesc_result = TossimActiveMessageC__AMSend__send(arg_0x7f299f061c70, addr, msg, len);
+  __nesc_result = TossimActiveMessageC__AMSend__send(arg_0x7fdd585eec70, addr, msg, len);
 #line 80
 
 #line 80
@@ -10178,9 +10164,9 @@ inline static bool SRTreeC__RoutingSendQueue__full(void ){
 #line 4
 }
 #line 4
-# 502 "SRTreeC.nc"
+# 489 "SRTreeC.nc"
 static inline void SRTreeC__RoutingMsgTimer__fired(void )
-#line 502
+#line 489
 {
 
   message_t tmp;
@@ -10189,7 +10175,7 @@ static inline void SRTreeC__RoutingMsgTimer__fired(void )
 
   RoutingMsg *mrpkt;
 
-#line 509
+#line 496
   sim_log_debug(56U, "Routing", "RoutingMsgTimer fired! -----------------------------------------------------------------\n");
   sim_log_debug(57U, "Routing", "RoutingMsgTimer.fired(): radioBusy = %s %s\n", SRTreeC__RoutingSendBusy[sim_node()] ? "\x1B[31mTrue" : "\x1B[32mFalse", "\x1B[0m");
 
@@ -10223,13 +10209,13 @@ static inline void SRTreeC__RoutingMsgTimer__fired(void )
 
 
   { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 541
+#line 528
     {
       __nesc_hton_uint8(mrpkt->senderID.nxdata, TOS_NODE_ID);
       __nesc_hton_uint8(mrpkt->depth.nxdata, SRTreeC__curdepth[sim_node()]);
       __nesc_hton_uint8(mrpkt->query.nxdata, query);
     }
-#line 545
+#line 532
     __nesc_atomic_end(__nesc_atomic); }
 
 
@@ -10253,7 +10239,7 @@ static inline void SRTreeC__RoutingMsgTimer__fired(void )
         }
     }
   else 
-#line 566
+#line 553
     {
       sim_log_debug(69U, "Routing", "RoutingMsgTimer.fired(): %sRoutingMsg failed to be enqueued in SendingQueue!!!%s\n", "\x1B[31m", "\x1B[0m");
     }
@@ -10265,9 +10251,9 @@ static inline void SRTreeC__RoutingMsgTimer__fired(void )
   SRTreeC__startEpoch__postTask();
 }
 
-#line 489
+#line 476
 static inline void SRTreeC__LostTaskTimer__fired(void )
-#line 489
+#line 476
 {
   if (SRTreeC__lostRoutingSendTask[sim_node()]) {
       SRTreeC__sendRoutingTask__postTask();
@@ -10324,9 +10310,9 @@ inline static uint32_t SRTreeC__RandomGenerator__rand32(void ){
 #line 46
 }
 #line 46
-# 578 "SRTreeC.nc"
+# 565 "SRTreeC.nc"
 static inline void SRTreeC__EpochTimer__fired(void )
-#line 578
+#line 565
 {
   uint32_t rand_off;
   uint32_t measurement;
@@ -10377,9 +10363,9 @@ inline static error_t SRTreeC__calculateData__postTask(void ){
 #line 67
 }
 #line 67
-# 614 "SRTreeC.nc"
+# 601 "SRTreeC.nc"
 static inline void SRTreeC__SlotTimer__fired(void )
-#line 614
+#line 601
 {
   sim_log_debug(72U, "Timing", "SlotTimer.fired(): %sTime to Send Data %s\n", "\x1B[33m", "\x1B[0m");
 
@@ -10392,9 +10378,9 @@ static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer
 }
 
 # 83 "/home/tinyos/local/src/tinyos-2x/tos/lib/timer/Timer.nc"
-inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__fired(uint8_t arg_0x7f299f10b2f8){
+inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__fired(uint8_t arg_0x7fdd586982f8){
 #line 83
-  switch (arg_0x7f299f10b2f8) {
+  switch (arg_0x7fdd586982f8) {
 #line 83
     case 0U:
 #line 83
@@ -10422,7 +10408,7 @@ inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer
 #line 83
     default:
 #line 83
-      /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__default__fired(arg_0x7f299f10b2f8);
+      /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__default__fired(arg_0x7fdd586982f8);
 #line 83
       break;
 #line 83
@@ -10989,9 +10975,9 @@ inline static error_t SRTreeC__GeneratorSeed__init(SRTreeC__GeneratorSeed__param
 #line 64
 }
 #line 64
-# 423 "SRTreeC.nc"
+# 410 "SRTreeC.nc"
 static inline void SRTreeC__Boot__booted(void )
-#line 423
+#line 410
 {
   uint8_t i;
 
@@ -11005,7 +10991,7 @@ static inline void SRTreeC__Boot__booted(void )
   SRTreeC__initCdm();
 
 
-  SRTreeC__GeneratorSeed__init(TOS_NODE_ID);
+  SRTreeC__GeneratorSeed__init(time((void *)0) + TOS_NODE_ID);
 
 
   if (TOS_NODE_ID == 0) {
@@ -11013,25 +10999,25 @@ static inline void SRTreeC__Boot__booted(void )
       SRTreeC__curdepth[sim_node()] = 0;
       SRTreeC__parentID[sim_node()] = 0;
 
-      SRTreeC__TiNA[sim_node()] = SRTreeC__RandomGenerator__rand32() % 1;
+      SRTreeC__TiNA[sim_node()] = SRTreeC__RandomGenerator__rand32() % 2;
 
       SRTreeC__query1[sim_node()] = SRTreeC__RandomGenerator__rand32() % 5 + 1 - 2 * SRTreeC__TiNA[sim_node()];
       SRTreeC__query2[sim_node()] = SRTreeC__RandomGenerator__rand32() % 5 + 1;
 
-      if (SRTreeC__RandomGenerator__rand32() % 1 || (SRTreeC__query1[sim_node()] == SRTreeC__query2[sim_node()] || SRTreeC__TiNA[sim_node()])) {
-#line 449
+      if (SRTreeC__RandomGenerator__rand32() % 2 || (SRTreeC__query1[sim_node()] == SRTreeC__query2[sim_node()] || SRTreeC__TiNA[sim_node()])) {
+#line 436
           SRTreeC__query2[sim_node()] = 0;
         }
-#line 450
+#line 437
       sim_log_debug(49U, "Boot", "%sROOT Node Booted:%s curdepth = %s%03d%s  , parentID = %s%d%s\n", "\x1B[33m", "\x1B[0m", "\x1B[33m", SRTreeC__curdepth[sim_node()], "\x1B[0m", "\x1B[33m", SRTreeC__parentID[sim_node()], "\x1B[0m");
       sim_log_debug(50U, "Boot", "%s                :%s Query1   = %s%s%s, Query2   = %s%s%s\n", "\x1B[33m", "\x1B[0m", "\x1B[33m", SRTreeC__query_names[sim_node()][SRTreeC__query1[sim_node()]], "\x1B[0m", "\x1B[33m", SRTreeC__query_names[sim_node()][SRTreeC__query2[sim_node()]], "\x1B[0m");
       if (SRTreeC__TiNA[sim_node()]) {
-#line 452
+#line 439
           sim_log_debug(51U, "Boot", "%s                : TiNA Mode %sEnabled%s\n", "\x1B[33m", "\x1B[32m", "\x1B[0m");
         }
     }
   else 
-#line 454
+#line 441
     {
 
       SRTreeC__curdepth[sim_node()] = -1;
@@ -12637,9 +12623,9 @@ static am_addr_t TossimActiveMessageC__AMPacket__source(message_t *amsg)
   return __nesc_ntoh_uint16(header->src.nxdata);
 }
 
-# 262 "SRTreeC.nc"
+# 259 "SRTreeC.nc"
 static __nesc_nxbase_nx_uint16_t SRTreeC__getSenderID(void *m)
-#line 262
+#line 259
 {
   switch (SRTreeC__numOfSubQ[sim_node()]) {
       case 1: 
@@ -12808,9 +12794,9 @@ static bool SimSchedulerBasicP__Scheduler__runNextTask(void )
   return TRUE;
 }
 
-# 631 "SRTreeC.nc"
+# 618 "SRTreeC.nc"
 static void SRTreeC__NotifyAMSend__sendDone(message_t *msg, error_t err)
-#line 631
+#line 618
 {
   sim_log_debug(74U, "SRTreeC", "NotifyAMSend.sendDone(): A Notify package sent... %s %s\n", err == SUCCESS ? "\x1B[32mTrue" : "\x1B[31mFalse", "\x1B[0m");
   SRTreeC__setNotifySendBusy(FALSE);
@@ -12820,23 +12806,23 @@ static void SRTreeC__NotifyAMSend__sendDone(message_t *msg, error_t err)
     }
 }
 
-#line 178
+#line 177
 static void SRTreeC__setNotifySendBusy(bool state)
-#line 178
+#line 177
 {
   { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 179
+#line 178
     {
       SRTreeC__NotifySendBusy[sim_node()] = state;
     }
-#line 181
+#line 180
     __nesc_atomic_end(__nesc_atomic); }
   sim_log_debug(46U, "SRTreeC", "setNotifySendBusy(): NotifySendBusy = %s%s\n", state == TRUE ? "\x1B[31mTrue" : "\x1B[32mFalse", "\x1B[0m");
 
   if (state == TRUE) {
     }
   else 
-#line 185
+#line 184
     {
     }
 }
@@ -12857,9 +12843,9 @@ static bool /*SRTreeAppC.NotifySendQueueC*/PacketQueueC__2__PacketQueue__empty(v
   return em;
 }
 
-# 621 "SRTreeC.nc"
+# 608 "SRTreeC.nc"
 static void SRTreeC__RoutingAMSend__sendDone(message_t *msg, error_t err)
-#line 621
+#line 608
 {
   sim_log_debug(73U, "Routing", "RoutingAMSend.sendDone(): A Routing package sent... %s %s\n", err == SUCCESS ? "\x1B[32mTrue" : "\x1B[31mFalse", "\x1B[0m");
   SRTreeC__setRoutingSendBusy(FALSE);
@@ -12869,21 +12855,21 @@ static void SRTreeC__RoutingAMSend__sendDone(message_t *msg, error_t err)
     }
 }
 
-#line 169
+#line 168
 static void SRTreeC__setRoutingSendBusy(bool state)
-#line 169
+#line 168
 {
   { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 170
+#line 169
     {
       SRTreeC__RoutingSendBusy[sim_node()] = state;
     }
-#line 172
+#line 171
     __nesc_atomic_end(__nesc_atomic); }
   if (state == TRUE) {
     }
   else 
-#line 174
+#line 173
     {
     }
 }
@@ -13305,9 +13291,9 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__start
   /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__startTimer(num, /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__TimerFrom__getNow(), dt, TRUE);
 }
 
-# 322 "SRTreeC.nc"
+# 317 "SRTreeC.nc"
 static void SRTreeC__initCdm(void )
-#line 322
+#line 317
 {
   SRTreeC__cdm[sim_node()][0] = 0;
   SRTreeC__cdm[sim_node()][1] = 0;
@@ -13316,16 +13302,16 @@ static void SRTreeC__initCdm(void )
   SRTreeC__cdm[sim_node()][4] = 0;
 }
 
-#line 150
+#line 149
 static void SRTreeC__setLostRoutingSendTask(bool state)
-#line 150
+#line 149
 {
   { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 151
+#line 150
     {
       SRTreeC__lostRoutingSendTask[sim_node()] = state;
     }
-#line 153
+#line 152
     __nesc_atomic_end(__nesc_atomic); }
   if (state == TRUE) {
       SRTreeC__RoutingMsgTimer__startOneShot(TIMER_FAST_PERIOD);
@@ -13333,14 +13319,14 @@ static void SRTreeC__setLostRoutingSendTask(bool state)
 }
 
 static void SRTreeC__setLostNotifySendTask(bool state)
-#line 159
+#line 158
 {
   { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 160
+#line 159
     {
       SRTreeC__lostNotifySendTask[sim_node()] = state;
     }
-#line 162
+#line 161
     __nesc_atomic_end(__nesc_atomic); }
 
   if (state == TRUE) {
@@ -13406,9 +13392,9 @@ static error_t /*SRTreeAppC.RoutingSendQueueC*/PacketQueueC__0__PacketQueue__enq
   return SUCCESS;
 }
 
-# 381 "SRTreeC.nc"
+# 376 "SRTreeC.nc"
 static void SRTreeC__calculateSubQ(void )
-#line 381
+#line 376
 {
   uint8_t i;
 
@@ -13426,7 +13412,7 @@ static void SRTreeC__calculateSubQ(void )
   SRTreeC__numOfSubQ[sim_node()] = 0;
   for (i = 0; i < 5; i++) {
       if (((SRTreeC__subquerys[sim_node()] >> i) & 1) == 1) {
-#line 397
+#line 392
           SRTreeC__numOfSubQ[sim_node()]++;
         }
     }

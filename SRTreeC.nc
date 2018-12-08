@@ -1,4 +1,5 @@
 #include "SimpleRoutingTree.h"
+#include <string.h>
 
 module SRTreeC
 
@@ -71,8 +72,6 @@ implementation {
 	bool NotifySendBusy = FALSE;
 	bool lostRoutingSendTask = FALSE;
 	bool lostNotifySendTask = FALSE;
-	bool lostRoutingRecTask = FALSE;
-	bool lostNotifyRecTask = FALSE;
 
 	uint8_t curdepth;
 	uint8_t query1;
@@ -82,32 +81,54 @@ implementation {
 	uint16_t parentID;
 	uint32_t offset_milli;
 
-	//Pack/Unpack Buffer
-	uint32_t buffer[5];
-
-	// Aggregated Data
-	uint32_t SUM;
-	uint32_t COUNT;
-	uint32_t MAX;
+	bool TiNA; 
 
 	//Query Encoding Matrix
 	//Used to encode each query to 
 	//5 fundemental subquerys
-	uint8_t qem[6]={0b00001,  //Sum
-					0b00100,  //Count
-					0b01000,  //Max
-					0b10000,  //Min
-					0b00101,  //AVG
-					0b00110   //VAR
+
+	uint8_t sqem[7]={0b00000,  //None
+					 0b00001,  //Sum
+					 0b00100,  //Count
+					 0b01000,  //Max
+					 0b10000,  //Min
+					 0b00101,  //AVG
+					 0b00110   //VAR
 				};
 
 	//Calculated Data Matrix
 	uint32_t cdm[5]={0, //Sum
-					0, //SqSum
-					0, //Count
-					0, //Max
-					0  //Min
+					 0, //SqSum
+					 0, //Count
+					 0, //Max
+					 0  //Min
 				};
+	//Calculated Data Matrix of last Epoch
+	uint32_t tinacdm[5]={0, //Sum
+				 		 0, //SqSum
+				 		 0, //Count
+				 		 0, //Max
+				 		 0  //Min
+				};
+
+	//Root Data
+	uint32_t qdm[6]={0, //Sum
+					 0, //Count
+					 0, //Max
+					 0, //Min
+					 0, //Avr
+					 0  //Var
+				};
+	//Query Names
+	char query_names[7][10] = {
+                         "None ",
+                         "SUM  ",
+                         "COUNT",
+                         "MAX  ",
+                         "MIN  ",
+                         "AVG  ",
+                         "VAR  "
+                     };
 	
 	//Message sizes
 	uint8_t ms[4]={sizeof(NotifyParentMsgSingle),
@@ -124,8 +145,6 @@ implementation {
 	task void enqueueData();
 	task void calculateData();
 	task void rootResults();
-	task void calculateSubQ();
-
 
 	// Set States
 	void setLostRoutingSendTask(bool state) {
@@ -133,7 +152,7 @@ implementation {
 			lostRoutingSendTask = state;
 		}
 		if (state == TRUE) {
-		} else {
+			call RoutingMsgTimer.startOneShot(TIMER_FAST_PERIOD);
 		}
 	}
 
@@ -143,19 +162,7 @@ implementation {
 		}
 
 		if (state == TRUE) {
-		} else {
-		}
-	}
-
-	void setLostNotifyRecTask(bool state) {
-		atomic {
-			lostNotifyRecTask = state;
-		}
-	}
-
-	void setLostRoutingRecTask(bool state) {
-		atomic {
-			lostRoutingRecTask = state;
+			call RoutingMsgTimer.startOneShot(TIMER_FAST_PERIOD);
 		}
 	}
 
@@ -178,6 +185,7 @@ implementation {
 		} else {
 		}
 	}
+
 	//Message Data Seters
 	void setSenderID(void* m,nx_uint16_t SID){
 		switch (numOfSubQ){
@@ -230,8 +238,27 @@ implementation {
 		}
 	}
 
-	//Message Data Geters
+	void setNum(void* m, nx_uint32_t* buffer){
+		nx_uint32_t* Num;
+		uint8_t i;
 
+		switch (numOfSubQ){
+			case 1:
+				Num = (((NotifyParentMsgSingle*) m)->Num);
+			case 2:
+				Num = (((NotifyParentMsgDouble*) m)->Num);
+			case 3:
+				Num = (((NotifyParentMsgTriple*) m)->Num);
+			case 4:
+				Num = (((NotifyParentMsgQuad*) m)->Num);
+		}
+
+		for(i = 0;i<numOfSubQ; i++){
+			Num[i]=buffer[i];
+		}
+	}	
+
+	//Message Data Geters
 	nx_uint16_t getSenderID(void* m){
 		switch (numOfSubQ){
 			case 1:
@@ -271,18 +298,25 @@ implementation {
 		}
 	}
 
-	nx_uint32_t* getNumPtr(void* m){
+	void getNum(void* m, nx_uint32_t* buffer){
+		nx_uint32_t* Num;
+		uint8_t i;
+
 		switch (numOfSubQ){
 			case 1:
-				return (((NotifyParentMsgSingle*) m)->Num);
+				Num = (((NotifyParentMsgSingle*) m)->Num);
 			case 2:
-				return (((NotifyParentMsgDouble*) m)->Num);
+				Num = (((NotifyParentMsgDouble*) m)->Num);
 			case 3:
-				return (((NotifyParentMsgTriple*) m)->Num);
+				Num = (((NotifyParentMsgTriple*) m)->Num);
 			case 4:
-				return (((NotifyParentMsgQuad*) m)->Num);
+				Num = (((NotifyParentMsgQuad*) m)->Num);
 		}
-	}
+
+		for(i = 0;i<numOfSubQ; i++){
+			buffer[i]=Num[i];
+		}
+	}	
 
 	// Init cdm
 	void initCdm(){
@@ -294,70 +328,109 @@ implementation {
 	}
 
 	// Aggregate Data
-	void aggregate(uint8_t calc, uint32_t value){
-		switch(calc){
-			// SUM
-			case 0:
-				cdm[calc] += value;
-				break;
-			// SqSUM
-			case 1:
-				cdm[calc] += (value^2);
-				break;
-			// Count
-			case 2:
-				cdm[calc] += value;
-				break;
-			// MAX
-			case 3:
-				cdm[calc] = (cdm[calc] > value) ? cdm[calc] : value;
-				break;
-			// MIN
-			case 4:
-				cdm[calc] = (cdm[calc] < value) ? cdm[calc] : value;
-				break;
-			// Other
-			default:
-				break;
-		}
-		return;
+	void aggregate(uint32_t* aggr, uint32_t* data){
+		uint8_t i;
+
+		// Sum
+		aggr[0] += data[0];
+		// SqSum
+		aggr[1] += (data[1])^2;
+		// Count
+		aggr[2] += data[2];
+		// Max
+		aggr[3] = (aggr[3] > data[3]) ? aggr[3] : data[3];
+		// Min
+		aggr[4] = (aggr[4] < data[4]) ? aggr[4] : data[4];
 	}
 
 	// Pack Message Array
-	void pack(nx_uint32_t* m_array,uint32_t* d_array){
+	void pack(nx_uint32_t* buffer,uint32_t* data){
 		uint8_t i;
 		uint8_t index=0;
-		uint8_t TempNumOfSubQ=numOfSubQ;
 
-		m_array[0]=1;
+		for(i=0;i<5;i++)
+			if((subquerys>>i)&1==1){
+				buffer[index]=data[i];
+		 		index++;
+		}
+	}
 
-		//  for(i=0;i<5;i++)
-		//  	if((TempNumOfSubQ>>i)&1==1){
-		//  		m_array[index]=d_array[i];
-		//  		index++;
-		//  	}
+	// Unpack Message Array
+	void unpack(nx_uint32_t* buffer,uint32_t* data){
+		uint8_t i;
+		uint8_t index=0;
+
+		for(i=0;i<5;i++)
+			if((subquerys>>i)&1==1){
+				data[i]=buffer[index];
+		 		index++;
+		}
+	}
+
+	// Calculate Root Querys
+	void calculateQ(){
+		qdm[0] = cdm[0]; 								//Sum
+		qdm[1] = cdm[2]; 								//Count
+		qdm[2] = cdm[3]; 								//Max
+		qdm[3] = cdm[4]; 								//Min
+		qdm[4] = cdm[0]/cdm[2];							//AVG
+		qdm[5] = (cdm[1]/cdm[2]) - (cdm[0]/cdm[2])^2; 	//VAR
+	}
+
+	// Calculates SubQuerys number from query1 and query2
+	void calculateSubQ(){
+		uint8_t i;
+
+		// calculate subquerys
+		if (query1 > 6 || query2 > 6){
+			dbg("Query", "calculateSubQ(): %sUnknown Query %s\n",KRED,KNRM);
+			return;
+		}
+
+		subquerys = 0;
+		subquerys = subquerys | sqem[query1];
+		subquerys = subquerys | sqem[query2];
+
+		// calculate number of subquery values
+		numOfSubQ = 0;
+		for(i=0;i<5;i++){
+			if(((subquerys >> i)&1) == 1){numOfSubQ++;}
+		}
+
+		dbg("Query", "calculateSubQ(): Calculcated subquerys=%s %d%s, numOfSubQ=%s %d%s\n",KYEL,subquerys,KNRM,KYEL, numOfSubQ,KNRM);
+	}
+
+	// Checks if Delta of data is big enough to be sent.
+	bool checkTiNA(){
+		uint8_t i;
+		for(i=0;i<5;i++){
+			if(abs(tinacdm[i]-cdm[i])>TiNA_THRESHOLD){
+				return (1);
+			}
+		}
+		return(0);
+	}
+
+	//Copies Data from one array to another
+	void arraycpy(uint32_t* dest,uint32_t* source, uint32_t len){
+		uint32_t i;
+		for(i=0;i<len;i++){
+			dest[i]=source[i];
+		}
 	}
 
 	// Boot of device
 	event void Boot.booted() {
+		uint8_t i ;
+		
 		// Start Radio
 		call RadioControl.start();
 
 		//epoch counter
 		epochCounter = 0;
 
-		//init values
-		SUM = 0;
-		COUNT = 1;
-		MAX = 0;
-
-		//2.0
-		cdm[0]=0;
-		cdm[1]=0;
-		cdm[2]=0;
-		cdm[3]=0;
-		cdm[4]=0;
-
+		//Initialize data
+		initCdm();
 
 		//Init RandomGenerator
 		call GeneratorSeed.init(TOS_NODE_ID);
@@ -367,12 +440,16 @@ implementation {
 			// Root Node = 0 Depth
 			curdepth = 0;
 			parentID = 0;
+			//decide randomly if TiNA
+			TiNA = (call RandomGenerator.rand32()%1);
 			//calculate random querys
-			query1 = (call RandomGenerator.rand16() % 5)+1;
-			query2 = (call RandomGenerator.rand16() % 5)+1;
-			//delete query2 randomly or if query2 == query1
-			if(call RandomGenerator.rand16()%1 || query1 == query2){query2 = 0;}
-			dbg("Boot", "%sROOT Node Booted:%s curdepth = %03d  ,  parentID= %d, Query1 = %d, Query2 = %d\n",KYEL, KNRM, curdepth, parentID, query1, query2);
+			query1 = (call RandomGenerator.rand32() % 5)+1-(2*TiNA);
+			query2 = (call RandomGenerator.rand32() % 5)+1;
+			//delete query2 randomly or if query2 == query1 or if TiNA algorithm is enabled
+			if((call RandomGenerator.rand32()%1) || (query1 == query2 || TiNA)){query2 = 0;}
+			dbg("Boot", "%sROOT Node Booted:%s curdepth = %s%03d%s  , parentID = %s%d%s\n",KYEL, KNRM, KYEL,curdepth, KNRM,KYEL,parentID, KNRM);
+			dbg("Boot", "%s                :%s Query1   = %s%s%s, Query2   = %s%s%s\n",KYEL, KNRM, KYEL, query_names[query1], KNRM, KYEL,query_names[query2], KNRM);
+			if(TiNA){dbg("Boot", "%s                : TiNA Mode %sEnabled%s\n",KYEL,KGRN,KNRM);}
 
 		} else {
 			//-1 = Undefined Depth (will be calculated later)
@@ -380,7 +457,7 @@ implementation {
 			parentID = -1;
 			query1 = 0;	
 			query2 = 0;
-			dbg("Boot", "%sNode Booted:%s curdepth = %03d  ,  parentID= %d\n",KYEL, KNRM, curdepth , parentID);	
+			dbg("Boot", "%s     Node Booted:%s curdepth = %03d  ,  parentID= %d\n",KYEL, KNRM, curdepth , parentID);	
 		}		
 	}
 
@@ -408,7 +485,7 @@ implementation {
 		dbg("Radio", "RadioControl.stopDone():%s Radio stopped!%s\n",KYEL,KNRM);	
 	}
 
-	// Timer for lost tasks TODO: Unused
+	// Timer for lost tasks
 	event void LostTaskTimer.fired() {
 		if (lostRoutingSendTask) {
 			post sendRoutingTask();
@@ -418,16 +495,6 @@ implementation {
 		if (lostNotifySendTask) {
 			post sendNotifyTask();
 			setLostNotifySendTask(FALSE);
-		}
-
-		if (lostRoutingRecTask) {
-			post receiveRoutingTask();
-			setLostRoutingRecTask(FALSE);
-		}
-
-		if (lostNotifyRecTask) {
-			post receiveNotifyTask();
-			setLostNotifyRecTask(FALSE);
 		}
 	}
 
@@ -445,11 +512,11 @@ implementation {
 		if (TOS_NODE_ID == 0) {
 
 			// add some color to your life
-			dbg("SRTreeC","%s\n",KCYN);
-			dbg("SRTreeC", "######################################################################################## \n");
-			dbg("SRTreeC", "################################   Initialize Routing   ################################ \n");
-			dbg("SRTreeC", "########################################################################################%s\n",KNRM);
-			dbg("SRTreeC","\n");
+			dbg("Routing","%s\n",KCYN);
+			dbg("Routing", "######################################################################################## \n");
+			dbg("Routing", "################################   Initialized Routing   ############################### \n");
+			dbg("Routing", "########################################################################################%s\n",KNRM);
+			dbg("Routing","\n");
 		}
 
 
@@ -465,10 +532,10 @@ implementation {
 			return;
 		}
 
-		// Calculate Query
-		query = query2 << 4;
+		// Encode Query
+		query = query2 << 3;
 		query = query | query1;
-		dbg("Routing" , "RoutingMsgTimer.fired(): Calculated Query = %d\n",query);
+		query = query | TiNA<<7;
 
 		// Fill package
 		atomic {
@@ -493,16 +560,15 @@ implementation {
 				dbg("Routing", "RoutingMsgTimer.fired(): %sSendTask() posted!!%s\n",KGRN,KNRM);
 				post sendRoutingTask();
 			}
-			// TODO: What is this ?!?
 			else{
-				dbg("Routing", "RoutingMsgTimer.fired(): %sRouting Queue != 1 %s\n",KRED,KNRM);
+				dbg("Routing", "RoutingMsgTimer.fired(): %sRouting Msg Queued Unsuccesfully %s\n",KRED,KNRM);
 			}
 		} else {
 			dbg("Routing", "RoutingMsgTimer.fired(): %sRoutingMsg failed to be enqueued in SendingQueue!!!%s\n",KRED,KNRM);
 		}
 
 		//calculate subquerys(for self)
-		post calculateSubQ();
+		calculateSubQ();
 
 		//Start your epoch
 		post startEpoch();
@@ -531,10 +597,17 @@ implementation {
 
 		//Produce new Measurement
 		measurement = call RandomGenerator.rand16() % 50;
-		dbg("Measure", "EpochTimer.fired(): %sMeasured %d %s\n",KMAG,measurement,KNRM);
+		dbg("Measure", "EpochTimer.fired(): %sMeasured %s%d%s\n",KMAG,KYEL,measurement, KNRM);
 
 		//initialize internal values
 		initCdm();
+
+		//Add Measurements to Values
+		cdm[0] = measurement; 	//Sum
+		cdm[1] = measurement; 	//SqSum
+		cdm[2] = 1; 			//Count
+		cdm[3] = measurement; 	//Max
+		cdm[4] = measurement; 	//Min
 	}
 
 	// Timer to send data
@@ -572,13 +645,7 @@ implementation {
 		//return the source address of the packet
 		msource = call NotifyAMPacket.source(msg);
 
-		dbg("NotifyParentMsg", "NotifyReceive.receive(): Something received!!!  from %u - Original source %u \n", ((NotifyParentMsg*) payload)->senderID, msource);
-
-		//if(len!=sizeof(NotifyParentMsg))
-		//{
-		//dbg("SRTreeC","\t\tUnknown message received!!!\n");
-		//return msg;http://courses.ece.tuc.gr/
-		//}
+		dbg("NotifyParentMsg", "NotifyReceive.receive(): Something received!!!  from %u - Original source %u \n", getSenderID(payload), msource);
 
 		atomic {
 			memcpy(&tmp, msg, sizeof(message_t));
@@ -628,7 +695,7 @@ implementation {
 		return msg;
 	}
 
-	//////////////////////////////////// Tasks implementations /////////////////////////////////
+	//////////////////////////////////// Tasks implementations ////////////////////////////////////
 
 	// Dequeues a routing message and sends it
 	task void sendRoutingTask() {
@@ -664,8 +731,10 @@ implementation {
 		sendDone = call RoutingAMSend.send(mdest, &radioRoutingSendPkt, mlen);
 
 		if ( sendDone != SUCCESS) {
-			setRoutingSendBusy(FALSE);
+			call RoutingSendQueue.enqueue(radioRoutingSendPkt);
+			setLostRoutingSendTask(TRUE);
 		}
+		setRoutingSendBusy(FALSE);
 
 		dbg("Routing", "sendRoutingTask(): Send %s %s\n",(sendDone == SUCCESS) ? "\x1B[32mSuccessful" : "\x1B[31mFailed",KNRM);
 	}
@@ -725,6 +794,7 @@ implementation {
 		uint8_t len;
 		uint16_t oldparentID;
 		message_t radioRoutingRecPkt;
+		uint8_t query;
 
 		// Dequeues the message
 		radioRoutingRecPkt = call RoutingReceiveQueue.dequeue();
@@ -745,13 +815,18 @@ implementation {
 				parentID = call RoutingAMPacket.source(&radioRoutingRecPkt);
 				// Calculate current depth
 				curdepth = mpkt->depth + 1;
-				// Calculate Querys
-				query1= (mpkt->query) & 15;
-				query2= (mpkt->query) >> 4;
+				//Take encoded query
+				query = mpkt->query; 
+				//Extract Tina
+				TiNA = query >>7;    
+				query = query &127;
+				//Decode remaining query
+				query1= query & 7;
+				query2= query >> 3;
 				// Calculate SubQuerys
-				post calculateSubQ();
-				dbg("Routing" , "receiveRoutingTask(): %sNode routed -> Parent = %d, Depth = %d, Query1 = %d, Query2 = %d%s\n",KBLU, parentID, curdepth, query1, query2, KNRM);
-				dbg("Query" , "receiveRoutingTask(): %sQuery Requests Received: Query1 = %d, Query2 = %d%s\n",KBLU, query1, query2, KNRM);
+				calculateSubQ();
+				dbg("Routing" , "receiveRoutingTask(): %sNode routed -> Parent = %s%d%s, Depth = %s%d%s\n",KBLU, KYEL, parentID, KBLU, KYEL, curdepth, KNRM);
+				dbg("Query" , "receiveRoutingTask(): %sQuery Requests Received: Query1 = %s%s%s, Query2 = %s%s%s,TiNA = %s%s%s\n",KBLU, KYEL,query_names[query1],KBLU,KYEL, query_names[query2],KBLU,KYEL, (TiNA == TRUE) ? "True" : "False", KNRM);
 				// Route your children
 				dbg("Routing", "receiveRoutingTask(): Call RoutingMsgTimer to route children%s\n",KNRM);
 				if (TOS_NODE_ID != 0) {
@@ -760,8 +835,7 @@ implementation {
 			}
 
 		} else {
-			dbg("Routing", "receiveRoutingTask(): %sEmpty message%s\n",KRED,KNRM);
-			setLostRoutingRecTask(TRUE);
+			dbg("Routing", "receiveRoutingTask(): %sWrong message%s\n",KRED,KNRM);
 			return;
 		}
 	}
@@ -774,6 +848,7 @@ implementation {
 		message_t tmp;
 		bool found = 0;
 		nx_uint16_t SID;
+		void* mr;
 
 		//dequeue message
 		radioNotifyRecPkt = call NotifyReceiveQueue.dequeue();
@@ -783,25 +858,25 @@ implementation {
 		dbg("NotifyParentMsg", "ReceiveNotifyTask(): len=%u \n", len);
 		// check if packet is correct
 		if (len == ms[numOfSubQ-1]) {
-			NotifyParentMsg* mr = (NotifyParentMsg*) (call NotifyPacket.getPayload(&radioNotifyRecPkt, len));
-
-			dbg("NotifyParentMsg" , "NotifyParentMsg received from %d !!! \n", mr->senderID);
+			mr = (call NotifyPacket.getPayload(&radioNotifyRecPkt, len));
+			dbg("NotifyParentMsg" , "NotifyParentMsg received from %d !!! \n", getSenderID(mr));
+			
 			// If packet is for me
-			if ( mr->parentID == TOS_NODE_ID) {
+			if ( getParentID(mr) == TOS_NODE_ID) {
 
 				//UPDATE DataQueue -------------------------------------------------------------------------------------
 				//Get Message Sender ID
-				SID = mr->senderID;
+				SID = getSenderID(mr);
 
 				// Search for that sender in DataQueue
 				for(i=0;i< call DataQueue.size();i++){
 					tmp = call DataQueue.dequeue();
 
 					len = call NotifyPacket.payloadLength(&tmp);
-					mr = (NotifyParentMsg*) (call NotifyPacket.getPayload(&tmp, len));
+					mr = call NotifyPacket.getPayload(&tmp, len);
 
 					//If message isnt from the same sender
-					if(mr->senderID != SID){
+					if(getSenderID(mr) != SID){
 						//Enqueue old message
 						call DataQueue.enqueue(tmp);
 					}
@@ -812,7 +887,6 @@ implementation {
 						found = 1;
 						break;
 					}
-
 				}
 
 				//If there wasnt any message in DataQueue from the same sender, enqueue new message
@@ -820,14 +894,11 @@ implementation {
 					call DataQueue.enqueue(radioNotifyRecPkt);
 					dbg("NotifyParentMsg", "receiveNotifyTask():Enqueued new message in DataQueue \n");
 				}
-
-
 				//------------------------------------------------------------------------------------------------------		
 			}
 		// packet is not correct
 		} else {
-			dbg("NotifyParentMsg", "receiveNotifyTask():%sEmpty message!!!%s \n",KRED,KNRM);
-			setLostNotifyRecTask(TRUE);
+			dbg("NotifyParentMsg", "receiveNotifyTask():%sWrong message!!!%s \n",KRED,KNRM);
 			return;
 		}
 	}
@@ -849,6 +920,9 @@ implementation {
 		uint8_t len;
 		uint8_t i;
 		message_t tmp;
+		nx_uint32_t buffer4[4];
+		nx_uint32_t buffer5[5];
+
 		void* mr;
 
 		// Iterate Data Queue
@@ -860,8 +934,13 @@ implementation {
 			len = call NotifyPacket.payloadLength(&tmp);
 			mr = call NotifyPacket.getPayload(&tmp, len);
 
+			//get data
+			getNum(mr, buffer4);
 			//unpack data
-			//TODO: UNPACK DATA
+			unpack(buffer4,buffer5);
+
+			//aggregate data
+			aggregate(cdm, buffer5);
 
 			//enqueue back to DataQueue
 			call DataQueue.enqueue(tmp);
@@ -878,9 +957,19 @@ implementation {
 	// Enqueues data on a notification message Q and calls sendNotifyTask()
 	task void enqueueData(){
 		message_t tmp;
-		
+		nx_uint32_t  buffer[4];
 		void* m;
 		int len;
+
+		//If TiNA protocol is enabled, and this is not the first epoch, check to see if data is worth sending
+		if(TiNA && !checkTiNA()&& (epochCounter>0)){
+			dbg("NotifyParentMsg", "enqueueData():%s TiNA - Not Sending Message\n%s",KRED,KNRM);
+			return;
+		}
+
+		//If TiNA is enabled and data are worh sending, save data for next epoch checking
+		if(TiNA){arraycpy(tinacdm,cdm,5);}
+
 
 		m = call NotifyPacket.getPayload(&tmp,ms[numOfSubQ-1]); 
 		
@@ -888,55 +977,36 @@ implementation {
 		setSenderID(m,TOS_NODE_ID);
 		setDepth(m,curdepth);
 		setParentID(m,parentID);
-		pack(getNumPtr(m),cdm);
+		// Pack Calculated Data
+		pack(buffer,cdm);
+		// Copy packed data to packet
+		setNum(m,buffer);
 
-		
+		call NotifyAMPacket.setDestination(&tmp, parentID);
+		call NotifyAMPacket.setType(&tmp,AM_NOTIFYPARENTMSG);
+		call NotifyPacket.setPayloadLength(&tmp, ms[numOfSubQ-1]);
 
-		// call NotifyAMPacket.setDestination(&tmp, parentID);
-		// call NotifyAMPacket.setType(&tmp,AM_NOTIFYPARENTMSG);
-		// call NotifyPacket.setPayloadLength(&tmp, ms[numOfSubQ-1]);
 
-		// // Enqueue packet to be sent
-		// if (call NotifySendQueue.enqueue(tmp) == SUCCESS) {
-		// 	dbg("NotifyParentMsg", "enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!\n");
-		// 	if (call NotifySendQueue.size() == 1) {
-		// 		// send the packet
-		// 		post sendNotifyTask();
-		// 	}
-		// }
+
+		// Enqueue packet to be sent
+		if (call NotifySendQueue.enqueue(tmp) == SUCCESS) {
+			dbg("NotifyParentMsg", "enqueueData(): NotifyParentMsg enqueued in SendingQueue successfully!!!\n");
+			if (call NotifySendQueue.size() == 1) {
+				// send the packet
+				post sendNotifyTask();
+			}
+		}
 	}
 
 	// Makes final calculations and presents root data
 	task void rootResults(){
- 
+		calculateQ();
+
 		dbg("Root", "\n");
 		dbg("Root", "rootResults(): %s################################################### ROOT RESULTS FOR EPOCH %d ###################################################s\n",KBLU,epochCounter,KNRM);
-		//dbg("Root", "rootResults(): %s############  SUM   : %s%d %s\n",KBLU,KMAG,SUM ,KNRM);
-		//dbg("Root", "rootResults(): %s############  COUNT : %s%d %s\n",KBLU,KMAG,COUNT ,KNRM);
-		//dbg("Root", "rootResults(): %s############  AVG   : %s%d %s\n",KBLU,KMAG,AVG ,KNRM);
-		//dbg("Root", "rootResults(): %s############  MAX   : %s%d %s\n\n",KBLU,KMAG,MAX ,KNRM);
+		dbg("Root", "rootResults(): %s## Query 1: %s%s%s -- Result: %s%d%s\n",KBLU,KGRN, query_names[query1],KBLU ,KGRN, qdm[query1-1],KNRM);
+		if(query2>0){dbg("Root", "rootResults(): %s## Query 2: %s%s%s -- Result: %s%d%s\n",KBLU,KGRN, query_names[query2],KBLU ,KGRN, qdm[query2-1],KNRM);}
+
 	}
-
-	// Calculates SubQuerys number from query1 and query2
-	task void calculateSubQ(){
-		uint8_t i;
-
-		// calculate subquerys
-		if (query1 > 6 || query2 > 6){
-			dbg("Query", "calculateSubQ(): %sUnknown Query %s\n",KRED,KNRM);
-			return;
-		}
-
-		subquerys = subquerys | qem[query1-1];
-		subquerys = subquerys | qem[query2-1];
-
-		// calculate number of subquery values
-		for(i=0;i<5;i++){
-			if(((subquerys >> i)&1) == 1){numOfSubQ++;}
-		}
-
-		dbg("Query", "calculateSubQ(): Calculcated subquerys= %d, numOfSubQ=%d\n",subquerys,numOfSubQ);
-	}
-
 
 }

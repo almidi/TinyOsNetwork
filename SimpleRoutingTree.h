@@ -12,57 +12,41 @@ enum{
 	SEND_CHECK_MILLIS=70000,
 	MAX_DEPTH=15,
 	EPOCH_PERIOD_MILLI= 61440,
-	TIMER_FAST_PERIOD=200,
+	TIMER_FAST_PERIOD=20,
+	LOST_TASK_PERIOD=5,
+	TiNA_THRESHOLD=20
 };
-/*uint16_t AM_ROUTINGMSG=AM_SIMPLEROUTINGTREEMSG;
-uint16_t AM_NOTIFYPARENTMSG=AM_SIMPLEROUTINGTREEMSG;
-*/
 
 // Routing Message Struct
-typedef nx_struct RoutingMsg
-{
+typedef nx_struct RoutingMsg{
 	nx_uint8_t senderID;
 	nx_uint8_t depth;
-	nx_uint8_t query ;
+	nx_uint8_t query;
 } RoutingMsg;
 
 // Notify Parent Message Struct
-typedef nx_struct NotifyParentMsg
-{
-	nx_uint16_t senderID;
-	nx_uint16_t parentID;
-	nx_uint8_t  depth;
-	nx_uint32_t SUM;
-	nx_uint32_t COUNT;
-	nx_uint32_t MAX;
-} NotifyParentMsg;
-
-typedef nx_struct NotifyParentMsgSingle
-{
+typedef nx_struct NotifyParentMsgSingle{
 	nx_uint16_t senderID;
 	nx_uint16_t parentID;
 	nx_uint8_t  depth;
 	nx_uint32_t Num[1];
 } NotifyParentMsgSingle;
 
-typedef nx_struct NotifyParentMsgDouble
-{
+typedef nx_struct NotifyParentMsgDouble{
 	nx_uint16_t senderID;
 	nx_uint16_t parentID;
 	nx_uint8_t  depth;
 	nx_uint32_t Num[2];
 } NotifyParentMsgDouble;
 
-typedef nx_struct NotifyParentMsgTriple
-{
+typedef nx_struct NotifyParentMsgTriple{
 	nx_uint16_t senderID;
 	nx_uint16_t parentID; 
 	nx_uint8_t  depth;
 	nx_uint32_t Num[3];
 } NotifyParentMsgTriple;
 
-typedef nx_struct NotifyParentMsgQuad
-{
+typedef nx_struct NotifyParentMsgQuad{
 	nx_uint16_t senderID;
 	nx_uint16_t parentID; 
 	nx_uint8_t  depth;

@@ -13,7 +13,7 @@ print
 
 # Debug Channels
 t.addChannel("Boot", f)
-t.addChannel("Routing",f)
+# t.addChannel("Routing",f)
 t.addChannel("NotifyParentMsg",f)
 # t.addChannel("Radio",f)
 # t.addChannel("SRTreeC",f)
@@ -55,8 +55,10 @@ for line in lines:
         print(line.replace("\n",""))
         lines[lines.index(line)]=' '
 
+nodes =range(0, nodes)
+
 #spawn nodes
-for i in range(0, nodes):
+for i in nodes:
     m = t.getNode(i)
     m.bootAtTime(10*t.ticksPerSecond() + i)
 
@@ -64,7 +66,6 @@ for i in range(0, nodes):
 for line in lines:
     s = line.split()
     if (len(s) > 0):
-        # print " ", s[0], " ", s[1], " ", s[2];
         r.add(int(s[0]), int(s[1]), float(s[2]))
 
 mTosdir = os.getenv("TINYOS_ROOT_DIR")
@@ -75,10 +76,10 @@ for line in lines:
     str1 = line.strip()
     if str1:
         val = int(str1)
-        for i in range(0, nodes):
+        for i in nodes:
             t.getNode(i).addNoiseTraceReading(val)
 noiseF.close()
-for i in range(0, nodes):
+for i in nodes:
     t.getNode(i).createNoiseModel()
 
 ok = False

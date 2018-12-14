@@ -38,7 +38,6 @@ module SRTreeC
 
 
 	uses interface Timer<TMilli> as RoutingMsgTimer;
-	uses interface Timer<TMilli> as LostTaskTimer;
 	uses interface Timer<TMilli> as EpochTimer;
 	uses interface Timer<TMilli> as SlotTimer;
 
@@ -70,15 +69,12 @@ implementation {
 
 	bool RoutingSendBusy = FALSE;
 	bool NotifySendBusy = FALSE;
-	bool lostRoutingSendTask = FALSE;
-	bool lostNotifySendTask = FALSE;
 
 	uint8_t curdepth;		//current depth
 	uint8_t query1;			//Query 1
 	uint8_t query2;			//Query 2
 	uint8_t subquerys=0;	//Encoding of subquerys
 	uint32_t subquery_b=0;	//Byte-Wise Encoding for Subquerys
-	uint8_t numOfSubQ=0;	//Number of subquerys enabled
 	uint8_t numOfSubQ_b=0;	//Number of total bytes of subquerys
 	uint8_t tct=0;			//Tina Threshlod
 	uint16_t parentID;		//Parent Node ID
@@ -153,31 +149,9 @@ implementation {
 	task void measureData();
 
 	// Set States
-	void setLostRoutingSendTask(bool state) {
-		atomic {
-			lostRoutingSendTask = state;
-		}
-		if (state == TRUE) {
-			call RoutingMsgTimer.startOneShot(TIMER_FAST_PERIOD);
-		}
-	}
-
-	void setLostNotifySendTask(bool state) {
-		atomic {
-			lostNotifySendTask = state;
-		}
-
-		if (state == TRUE) {
-			call RoutingMsgTimer.startOneShot(TIMER_FAST_PERIOD);
-		}
-	}
-
 	void setRoutingSendBusy(bool state) {
 		atomic {
 			RoutingSendBusy = state;
-		}
-		if (state == TRUE) {
-		} else {
 		}
 	}
 
@@ -186,10 +160,6 @@ implementation {
 			NotifySendBusy = state;
 		}
 		dbg("SRTreeC", "setNotifySendBusy(): NotifySendBusy = %s%s\n", (state == TRUE) ? "\x1B[31mTrue" : "\x1B[32mFalse",KNRM);
-
-		if (state == TRUE) {
-		} else {
-		}
 	}
 
 	// Init cdm
@@ -218,24 +188,24 @@ implementation {
 	}
 
 	// Pack Message Array
-	void pack(nx_uint32_t* buffer,uint32_t* data){
+	void pack_bytes(nx_uint8_t* buffer,uint8_t* data){
 		uint8_t i;
 		uint8_t index=0;
 
-		for(i=0;i<5;i++)
-			if((subquerys>>i)&1==1){
+		for(i=0;i<20;i++)
+			if((subquery_b>>i)&1==1){
 				buffer[index]=data[i];
 		 		index++;
 		}
 	}
 
 	// Unpack Message Array
-	void unpack(nx_uint32_t* buffer,uint32_t* data){
+	void unpack_bytes(nx_uint8_t* buffer,uint8_t* data){
 		uint8_t i;
 		uint8_t index=0;
 
-		for(i=0;i<5;i++)
-			if((subquerys>>i)&1==1){
+		for(i=0;i<20;i++)
+			if((subquery_b>>i)&1==1){
 				data[i]=buffer[index];
 		 		index++;
 			}
@@ -246,13 +216,12 @@ implementation {
 
 	// Calculate Root Querys
 	void calculateQ(){
-		qdm[0] = cdm[0]; 								//Sum
-		qdm[1] = cdm[2]; 								//Count
-		qdm[2] = cdm[3]; 								//Max
-		qdm[3] = cdm[4]; 								//Min
-		qdm[4] = cdm[0]/cdm[2];							//AVG
-		qdm[5] = (cdm[1]/cdm[2]) - (cdm[0]/cdm[2])^2; 	//VAR
-		dbg("dbg", "Sum %d SqSum %d Count %d\n",cdm[0],cdm[1],cdm[2]);
+		qdm[0] = cdm[0]; 									//Sum
+		qdm[1] = cdm[2]; 									//Count
+		qdm[2] = cdm[3]; 									//Max
+		qdm[3] = cdm[4]; 									//Min
+		qdm[4] = cdm[0]/cdm[2];								//AVG
+		qdm[5] = (cdm[1]/cdm[2]) - pow((cdm[0]/cdm[2]),2); 	//VAR
 	}
 
 	// Calculates SubQuerys number from query1 and query2
@@ -269,11 +238,6 @@ implementation {
 		subquerys = subquerys | sqem[query1];
 		subquerys = subquerys | sqem[query2];
 
-		// calculate number of subquery values
-		numOfSubQ = 0;
-		for(i=0;i<5;i++){
-			if(((subquerys >> i)&1) == 1){numOfSubQ++;}
-		}
 
 		//calculate subquerys byte encoding
 		for(i=0;i<5;i++){
@@ -288,18 +252,30 @@ implementation {
 			if(((subquery_b >> i)&1) == 1){numOfSubQ_b++;}
 		}
 
-		dbg("Query", "calculateSubQ(): Calculcated subquerys=%s %d%s, numOfSubQ=%s %d%s, subquery_b=%s %d%s, numOfSubQ_b=%s %d%s\n",KYEL,subquerys,KNRM,KYEL, numOfSubQ,KNRM,KYEL, subquery_b,KNRM,KYEL, numOfSubQ_b,KNRM);
+		dbg("Query", "calculateSubQ(): Calculcated subquerys=%s %d%s,  subquery_b=%s %d%s, numOfSubQ_b=%s %d%s\n",KYEL,subquerys,KNRM,KYEL, subquery_b,KNRM,KYEL, numOfSubQ_b,KNRM);
 	}
 
-	// Checks if Delta of data is big enough to be sent.
+	// Checks if Delta of subquery is big enough to be sent. (there MUST be only ONE subquery)
 	bool checkTiNA(){
 		uint8_t i;
+		uint8_t subq=0;
+		// find used subquery
 		for(i=0;i<5;i++){
-			if((abs((cdm[i]-tinacdm[i])/(tinacdm[i]+1))*100)>tct){
-				return (1);
+			if((subquerys>>i)&1==1){
+				subq=i;
+		 		break;
 			}
 		}
-		return(0);
+		if(tinacdm[i]==0 && cdm[i]>0)
+			return 1;
+
+		if(tinacdm[i]==0)
+			return 0;
+
+		if((abs((cdm[i]-tinacdm[i])/(tinacdm[i]))*100)>tct)
+			return 1;
+
+		return 0;
 	}
 
 	// Boot of device
@@ -354,11 +330,6 @@ implementation {
 	event void RadioControl.startDone(error_t err) {
 		if (err == SUCCESS) {
 			dbg("Radio" , "RadioControl.StartDone():%s Radio initialized successfully!!!%s\n",KYEL,KNRM);
-
-			//call RoutingMsgTimer.startOneShot(MAX_DEPTH);
-			//call RoutingMsgTimer.startPeriodic(MAX_DEPTH);
-			//call LostTaskTimer.startPeriodic(SEND_CHECK_MILLIS);
-
 			// Start Routing (on first epoch only)
 			if (TOS_NODE_ID == 0) {
 				call RoutingMsgTimer.startOneShot(TIMER_FAST_PERIOD);
@@ -372,19 +343,6 @@ implementation {
 	// Radio Stopped
 	event void RadioControl.stopDone(error_t err) {
 		dbg("Radio", "RadioControl.stopDone():%s Radio stopped!%s\n",KYEL,KNRM);	
-	}
-
-	// Timer for lost tasks
-	event void LostTaskTimer.fired() {
-		if (lostRoutingSendTask) {
-			post sendRoutingTask();
-			setLostRoutingSendTask(FALSE);
-		}
-
-		if (lostNotifySendTask) {
-			post sendNotifyTask();
-			setLostNotifySendTask(FALSE);
-		}
 	}
 
 	// Timer for Routing
@@ -610,7 +568,6 @@ implementation {
 		//Check Mutex
 		if (RoutingSendBusy) {
 			dbg("Routing", "sendRoutingTask(): %sRoutingSendBusy= TRUE%s\n",KRED,KNRM);
-			setLostRoutingSendTask(TRUE);
 			return;
 		}
 
@@ -629,7 +586,6 @@ implementation {
 
 		if ( sendDone != SUCCESS) {
 			call RoutingSendQueue.enqueue(radioRoutingSendPkt);
-			setLostRoutingSendTask(TRUE);
 		}
 		setRoutingSendBusy(FALSE);
 
@@ -650,7 +606,6 @@ implementation {
 
 		if (NotifySendBusy == TRUE) {
 			dbg("SRTreeC", "sendNotifyTask(): NotifySendBusy= TRUE!!!\n");
-			setLostNotifySendTask(TRUE);
 			return;
 		}
 
@@ -664,7 +619,7 @@ implementation {
 		mpayload = call NotifyPacket.getPayload(&radioNotifySendPkt, mlen);
 
 		// check if message is known
-		if (mlen != numOfSubQ) {
+		if (mlen != numOfSubQ_b) {
 			dbg("SRTreeC", "\t\t sendNotifyTask(): Unknown message!!\n");
 			return;
 		}
@@ -679,7 +634,6 @@ implementation {
 			dbg("SRTreeC", "sendNotifyTask(): %sSend Success!!!%s\n",KGRN,KNRM);
 		} else {
 			dbg("SRTreeC", "sendNotifyTask(): %sSend Failed!!!%s\n",KRED,KNRM);
-			//TODO: 
 			setNotifySendBusy(FALSE);
 		}
 	}
@@ -770,9 +724,8 @@ implementation {
 
 		dbg("NotifyParentMsg", "ReceiveNotifyTask(): len=%u \n", len);
 		// check if packet is correct
-		if (len == numOfSubQ) {
+		if (len == numOfSubQ_b) {
 			dbg("NotifyParentMsg" , "NotifyParentMsg received from %d !!! \n", call NotifyAMPacket.source(&radioNotifyRecPkt));
-			
 			// If packet is for me
 			if ( call NotifyAMPacket.destination(&radioNotifyRecPkt) == TOS_NODE_ID) {
 
@@ -846,8 +799,8 @@ implementation {
 		uint8_t i;
 		message_t tmp;
 		void* mr;
-		nx_uint32_t buffer4[4];
-		nx_uint32_t buffer5[5];
+		nx_uint32_t packet_data[4];
+		nx_uint32_t unpacked[5];
 
 		// Iterate Data Queue
 		for(i=0;i< call DataQueue.size();i++){
@@ -859,13 +812,13 @@ implementation {
 			mr = call NotifyPacket.getPayload(&tmp, len);
 
 			//get data
-			memcpy(buffer4,mr,len*sizeof(nx_uint32_t));
+			memcpy(packet_data,mr,len*sizeof(nx_uint8_t));
 
 			//unpack data
-			unpack(buffer4,buffer5);
+			unpack_bytes((uint8_t*) packet_data,(uint8_t*) unpacked);
 
 			//aggregate data
-			aggregate(cdm, buffer5);
+			aggregate(cdm, unpacked);
 
 			//enqueue back to DataQueue
 			call DataQueue.enqueue(tmp);
@@ -882,7 +835,7 @@ implementation {
 	// Enqueues data on a notification message Q and calls sendNotifyTask()
 	task void enqueueData(){
 		message_t tmp;
-		nx_uint32_t  buffer[4];
+		nx_uint8_t  byte_buffer[20];
 		void* m;
 		int len;
 
@@ -895,17 +848,16 @@ implementation {
 		//If TiNA is enabled and data are worh sending, save data for next epoch checking
 		if(TiNA){memcpy(tinacdm,cdm,sizeof(tinacdm));}
 
-
-		m = call NotifyPacket.getPayload(&tmp,numOfSubQ*sizeof(nx_uint32_t)); 
+		m = call NotifyPacket.getPayload(&tmp,numOfSubQ_b*sizeof(nx_uint8_t)); 
 		
 		// Pack Calculated Data
-		pack(buffer,cdm);
+		pack_bytes(byte_buffer,(uint8_t*) cdm);
 		// Copy packed data to packet
-		memcpy(m,buffer,numOfSubQ*sizeof(nx_uint32_t));
+		memcpy(m,byte_buffer,numOfSubQ_b*sizeof(nx_uint8_t));
 
 		call NotifyAMPacket.setDestination(&tmp, parentID);
 		call NotifyAMPacket.setType(&tmp,AM_NOTIFYPARENTMSG);
-		call NotifyPacket.setPayloadLength(&tmp, numOfSubQ);
+		call NotifyPacket.setPayloadLength(&tmp, numOfSubQ_b);
 
 
 
@@ -921,12 +873,15 @@ implementation {
 
 	// Makes final calculations and presents root data
 	task void rootResults(){
+		//calculate final querys
 		calculateQ();
-		
-		dbg("Root", "rootResults(): %s############################################## ROOT RESULTS FOR EPOCH %d ##############################################%s\n",KBLU,epochCounter,KNRM);
+
+		dbg("Root", "rootResults(): %s##################################### ROOT RESULTS FOR EPOCH %d ####%s\n",KBLU,epochCounter,KNRM);
 		dbg("Root", "rootResults(): %s## Query 1: %s%s%s -- Result: %s%d%s\n",KBLU,KGRN, query_names[query1],KBLU ,KGRN, qdm[query1-1],KNRM);
 		if(query2>0){dbg("Root", "rootResults(): %s## Query 2: %s%s%s -- Result: %s%d%s\n",KBLU,KGRN, query_names[query2],KBLU ,KGRN, qdm[query2-1],KNRM);}
 		dbg("Root", "\n");
+		
+		
 	}
 
 }

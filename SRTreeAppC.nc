@@ -10,7 +10,6 @@ implementation{
 
 	components MainC, ActiveMessageC;
 	components new TimerMilliC() as RoutingMsgTimerC;
-	components new TimerMilliC() as LostTaskTimerC;
 	components new TimerMilliC() as EpochTimerC;
 	components new TimerMilliC() as SlotTimerC;
 	
@@ -33,7 +32,6 @@ implementation{
 	SRTreeC.RadioControl -> ActiveMessageC;
 	
 	SRTreeC.RoutingMsgTimer->RoutingMsgTimerC;
-	SRTreeC.LostTaskTimer->LostTaskTimerC;
 	SRTreeC.EpochTimer->EpochTimerC;
 	SRTreeC.SlotTimer->SlotTimerC;
 

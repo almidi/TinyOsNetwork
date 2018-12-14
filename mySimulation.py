@@ -22,6 +22,7 @@ t.addChannel("Boot", f)
 t.addChannel("Measure", f)
 t.addChannel("Root", f)
 t.addChannel("Query", f)
+t.addChannel("dbg", f)
 
 #default file
 file = "topology.txt"
